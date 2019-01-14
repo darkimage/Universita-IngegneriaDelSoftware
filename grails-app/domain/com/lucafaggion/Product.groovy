@@ -6,6 +6,7 @@ class Product {
     Date creation_date
     int quantity
     String price
+    static belongsTo = [category: ProductCategory]
     static constraints = {
     }
 }

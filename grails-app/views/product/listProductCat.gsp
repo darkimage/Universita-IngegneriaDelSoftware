@@ -3,12 +3,11 @@
         <title>ShopOnline-Product List</title>
         <meta name="layout" content="main" />
         <asset:javascript src="jquery-3.3.1.min.js"/>
-
     </head>
     <body>
         <g:set var="current_cat" value="${(params.cat!= null) ? params.cat : 1}"/>
         <g:set var="maxPerPage" value="${(params.max!= null) ? params.max : 5}"/>
-        <div>${categories.asList()} ${productCount} ${params}</div>
+        <%-- <div>${categories.asList()} ${productCount} ${params}</div> --%>
         <div style="padding-left:25px" class="pagination">
         <g:form controller="Product" action="test" method="GET">
             <div style="display: inline-block;">
@@ -26,10 +25,14 @@
         <div id="list-Product" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="${[categories.get(current_cat.toInteger()-1).name]}" />
             </h1>
+            
+            
+
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table template="templates/_field/_table" collection="${productList}" />
+            <%-- <f:table template="templates/_field/_table" collection="${productList}" /> --%>
+           <f:table template="table_product" collection="${productList}" />
 
         <g:if test="${productCount > params.max.toInteger()}">
             <div class="pagination">

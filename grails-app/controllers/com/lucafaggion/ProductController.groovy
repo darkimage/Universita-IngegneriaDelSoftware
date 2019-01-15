@@ -1,10 +1,11 @@
 package com.lucafaggion
 import grails.validation.ValidationException
+import com.bertramlabs.plugins.selfie.AttachmentValueConverter
 
 class ProductController {
     static scaffold = Product
     ProductService productService
-    ProductLogicService productlogicService = new ProductLogicService()
+    ProductlogicService productlogicService
     def global = new Globals()
 
     def index(Integer max) {
@@ -20,8 +21,10 @@ class ProductController {
         render(view:"listProductCat",model:  
         [categories: category,productList:products,productCount: productsSize])
     }
-
+  
     def show(Long id) {
+        //global.printClass(productService.get(id).photo.inputStream)
+        println productService.get(id).photo.cloudFile
         respond productService.get(id)
     }
 
@@ -35,7 +38,7 @@ class ProductController {
 
         try {
             productService.save(product)
-            generateIdentifier(product)
+            productlogicService.generateIdentifier(product)
             productService.save(product)
         } catch (ValidationException e) {
             respond product.errors, view:'create'

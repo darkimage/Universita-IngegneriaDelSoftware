@@ -3,9 +3,9 @@ package com.lucafaggion
 import grails.gorm.transactions.Transactional
 
 @Transactional
-class ProductLogicService {
+class ProductlogicService {
+    def global = new Globals()
 
-    @Transactional
     def getProductsOfCategory(value,params){
         params.max = (params.max != null) ? params.max : 5;
         def sort = (params.sort ? "ORDER BY " + params.sort : "") 
@@ -14,13 +14,11 @@ class ProductLogicService {
         return (Product.findAll(query,[max: params.max.toInteger(), offset: params.offset]))
     }
 
-    @Transactional
     def getCategoryProductCount(value){
         def query = "FROM Product as P WHERE P.category = '" + value + "'"
         return (Product.findAll(query).size())
     }
     
-    @Transactional
     void generateIdentifier(Product product){
         def randChars = ""
         for(Integer i=0 ; i<3 ; i++) {

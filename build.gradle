@@ -47,7 +47,9 @@ dependencies {
     compile "org.hibernate:hibernate-core:5.1.16.Final"
     compile "org.grails.plugins:gsp"
     console "org.grails:grails-console"
+    compile 'org.grails.plugins:fields:2.2.10'
     profile "org.grails.profiles:web"
+    compile 'com.bertramlabs.plugins:selfie:1.2.8'
     runtime "org.glassfish.web:el-impl:2.1.2-b03"
     runtime "com.h2database:h2"
     runtime "org.apache.tomcat:tomcat-jdbc"

@@ -1,0 +1,352 @@
+2019-01-15 01:26:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "INSERT INTO PRODUCT(VERSION,CREATION_DATE,PRICE,NAME,QUANTITY,CATEGORY_ID,DESCRIPTION,IDENTIFIER,PHOTO_FILE_SIZE,PHOTO_CONTENT_TYPE,PHOTO_FILE_NAME)
+VALUES
+    (0,'2018-03-22',1099,'Giocattolo 1',110,1,'Giocattolo per bambini 1','GIO1TTT',11462,""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-04-06',9999,'Giocattolo 2',5,1,'Giocattolo per bambini 2','GIO2GAO',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-07-04',2099,'Giocattolo 3',1000,1,'Giocattolo per bambini 3','GIO3CAT',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-07-23',1345,'Giocattolo 4',600,1,'Giocattolo per bambini 4','GIO4OLO',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-08-13',1211,'Giocattolo 5',250,1,'Giocattolo per bambini 5','GIO5OOL',""image/jpeg"",""default-placeholder.jpg""),
+
+    (0,'2018-01-13',382364,'Computer 1',59,2,'Computer per Intrattenimento 1','COM6MPT',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-04-13',399091,'Computer 2',3,2,'Computer per Intrattenimento 2','COM7UTE',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-11-13',363636,'Computer 3',70,2,'Computer per Intrattenimento 3','COM8REU',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-12-13',199478,'Computer 4',16,2,'Computer per Intrattenimento 4','COM9CUO',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-06-13',159947,'Computer 5',0,2,'Computer per Intrattenimento 5','COM10UCM',""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-08-13',178792,'Computer 6',23,2,'Computer per Intrattenimento 6','COM11EER',""image/jpeg"",""default-placeholder.jpg""),
+
+    (0,'2018-03-20',3217,'Libri 1',600,3,'Libro per Intrattenimento 1','LIB12RIB'""image/jpeg""[*],""default-placeholder.jpg""),
+    (0,'2018-08-21',1347,'Libri 2',288,3,'Libro per Intrattenimento 1','LIB13LRR'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-09-28',1223,'Libri 3',250,3,'Libro per Intrattenimento 1','LIB14BBB'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-11-23',1393,'Libri 4',352,3,'Libro per Intrattenimento 1','LIB15ILR'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-12-19',3847,'Libri 5',947,3,'Libro per Intrattenimento 1','LIB16IIB'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2019-01-11',1988,'Libri 6',409,3,'Libro per Intrattenimento 1','LIB17RII'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-01-19',4648,'Libri 7',348,3,'Libro per Intrattenimento 1','LIB187RI'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-05-11',3217,'Libri 8',430,3,'Libro per Intrattenimento 1','LIB19ILB'""image/jpeg"",""default-placeholder.jpg""),
+
+    (0,'2018-03-20',433,'Componente 1',1328,4,'Componente Elettronico 1','ELE20COM'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-03-13',422,'Componente 2',741,4,'Componente Elettronico 1','ELE21ENT'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-05-24',130,'Componente 3',7926,4,'Componente Elettronico 1','ELE22EEC'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2019-01-09',72,'Componente 4',3935,4,'Componente Elettronico 1','ELE23PMN'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2019-01-14',450,'Componente 5',4565,4,'Componente Elettronico 1','ELE24TTE'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-02-02',258,'Componente 6',8718,4,'Componente Elettronico 1','ELE25PPT'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-07-03',355,'Componente 7',6375,4,'Componente Elettronico 1','ELE26MNP'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-10-19',329,'Componente 8',469,4,'Componente Elettronico 1','ELE27CON'""image/jpeg"",""default-placeholder.jpg""),
+    (0,'2018-12-05',415,'Componente 9',544,4,'Componente Elettronico 1','ELE28CPP'""image/jpeg"",""default-placeholder.jpg"") "; expected "[, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+INSERT INTO PRODUCT(version,creation_date,price,name,quantity,category_id,description,identifier,photo_file_size,photo_content_type,photo_file_name)
+VALUES
+    (0,'2018-03-22',1099,'Giocattolo 1',110,1,'Giocattolo per bambini 1','GIO1TTT',11462,"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-04-06',9999,'Giocattolo 2',5,1,'Giocattolo per bambini 2','GIO2GAO',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-07-04',2099,'Giocattolo 3',1000,1,'Giocattolo per bambini 3','GIO3CAT',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-07-23',1345,'Giocattolo 4',600,1,'Giocattolo per bambini 4','GIO4OLO',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-08-13',1211,'Giocattolo 5',250,1,'Giocattolo per bambini 5','GIO5OOL',"image/jpeg","default-placeholder.jpg"),
+
+    (0,'2018-01-13',382364,'Computer 1',59,2,'Computer per Intrattenimento 1','COM6MPT',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-04-13',399091,'Computer 2',3,2,'Computer per Intrattenimento 2','COM7UTE',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-11-13',363636,'Computer 3',70,2,'Computer per Intrattenimento 3','COM8REU',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-12-13',199478,'Computer 4',16,2,'Computer per Intrattenimento 4','COM9CUO',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-06-13',159947,'Computer 5',0,2,'Computer per Intrattenimento 5','COM10UCM',"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-08-13',178792,'Computer 6',23,2,'Computer per Intrattenimento 6','COM11EER',"image/jpeg","default-placeholder.jpg"),
+
+    (0,'2018-03-20',3217,'Libri 1',600,3,'Libro per Intrattenimento 1','LIB12RIB'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-08-21',1347,'Libri 2',288,3,'Libro per Intrattenimento 1','LIB13LRR'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-09-28',1223,'Libri 3',250,3,'Libro per Intrattenimento 1','LIB14BBB'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-11-23',1393,'Libri 4',352,3,'Libro per Intrattenimento 1','LIB15ILR'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-12-19',3847,'Libri 5',947,3,'Libro per Intrattenimento 1','LIB16IIB'"image/jpeg","default-placeholder.jpg"),
+    (0,'2019-01-11',1988,'Libri 6',409,3,'Libro per Intrattenimento 1','LIB17RII'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-01-19',4648,'Libri 7',348,3,'Libro per Intrattenimento 1','LIB187RI'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-05-11',3217,'Libri 8',430,3,'Libro per Intrattenimento 1','LIB19ILB'"image/jpeg","default-placeholder.jpg"),
+
+    (0,'2018-03-20',433,'Componente 1',1328,4,'Componente Elettronico 1','ELE20COM'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-03-13',422,'Componente 2',741,4,'Componente Elettronico 1','ELE21ENT'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-05-24',130,'Componente 3',7926,4,'Componente Elettronico 1','ELE22EEC'"image/jpeg","default-placeholder.jpg"),
+    (0,'2019-01-09',72,'Componente 4',3935,4,'Componente Elettronico 1','ELE23PMN'"image/jpeg","default-placeholder.jpg"),
+    (0,'2019-01-14',450,'Componente 5',4565,4,'Componente Elettronico 1','ELE24TTE'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-02-02',258,'Componente 6',8718,4,'Componente Elettronico 1','ELE25PPT'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-07-03',355,'Componente 7',6375,4,'Componente Elettronico 1','ELE26MNP'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-10-19',329,'Componente 8',469,4,'Componente Elettronico 1','ELE27CON'"image/jpeg","default-placeholder.jpg"),
+    (0,'2018-12-05',415,'Componente 9',544,4,'Componente Elettronico 1','ELE28CPP'"image/jpeg","default-placeholder.jpg") [42001-197]
+2019-01-15 01:27:33 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Column "image/jpeg" not found; SQL statement:
+INSERT INTO PRODUCT(version,creation_date,price,name,quantity,category_id,description,identifier,photo_file_size,photo_content_type,photo_file_name)
+VALUES
+    (0,'2018-03-22',1099,'Giocattolo 1',110,1,'Giocattolo per bambini 1','GIO1TTT',11462,"image/jpeg","default-placeholder.jpg") [42122-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:150)
+	at org.h2.command.dml.Insert.prepare(Insert.java:314)
+	at org.h2.command.Parser.prepareCommand(Parser.java:283)
+	at org.h2.engine.Session.prepareLocal(Session.java:611)
+	at org.h2.engine.Session.prepareCommand(Session.java:549)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:217)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:1077)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1386)
+	at org.h2.server.web.WebApp.query(WebApp.java:1060)
+	at org.h2.server.web.WebApp.query(WebApp.java:1036)
+	at org.h2.server.web.WebApp.process(WebApp.java:223)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebServlet.doGet(WebServlet.java:124)
+	at org.h2.server.web.WebServlet.doPost(WebServlet.java:161)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.web.filter.ApplicationContextHeaderFilter.doFilterInternal(ApplicationContextHeaderFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.trace.WebRequestTraceFilter.doFilterInternal(WebRequestTraceFilter.java:111)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.grails.web.servlet.mvc.GrailsWebRequestFilter.doFilterInternal(GrailsWebRequestFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.grails.web.filters.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:67)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.autoconfigure.MetricsFilter.doFilterInternal(MetricsFilter.java:103)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-01-15 01:32:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Column count does not match; SQL statement:
+INSERT INTO PRODUCT(version,creation_date,price,name,quantity,category_id,description,identifier,photo_file_size,photo_content_type,photo_file_name)
+VALUES
+    (0,'2018-03-22',1099,'Giocattolo 1',110,1,'Giocattolo per bambini 1','GIO1TTT',11462,'image/jpeg','default-placeholder.jpg'),
+    (0,'2018-04-06',9999,'Giocattolo 2',5,1,'Giocattolo per bambini 2','GIO2GAO','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-07-04',2099,'Giocattolo 3',1000,1,'Giocattolo per bambini 3','GIO3CAT','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-07-23',1345,'Giocattolo 4',600,1,'Giocattolo per bambini 4','GIO4OLO','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-08-13',1211,'Giocattolo 5',250,1,'Giocattolo per bambini 5','GIO5OOL','image/jpeg','default-placeholder.jpg'),
+
+    (0,'2018-01-13',382364,'Computer 1',59,2,'Computer per Intrattenimento 1','COM6MPT','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-04-13',399091,'Computer 2',3,2,'Computer per Intrattenimento 2','COM7UTE','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-11-13',363636,'Computer 3',70,2,'Computer per Intrattenimento 3','COM8REU','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-12-13',199478,'Computer 4',16,2,'Computer per Intrattenimento 4','COM9CUO','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-06-13',159947,'Computer 5',0,2,'Computer per Intrattenimento 5','COM10UCM','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-08-13',178792,'Computer 6',23,2,'Computer per Intrattenimento 6','COM11EER','image/jpeg','default-placeholder.jpg'),
+
+    (0,'2018-03-20',3217,'Libri 1',600,3,'Libro per Intrattenimento 1','LIB12RIB''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-08-21',1347,'Libri 2',288,3,'Libro per Intrattenimento 1','LIB13LRR''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-09-28',1223,'Libri 3',250,3,'Libro per Intrattenimento 1','LIB14BBB''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-11-23',1393,'Libri 4',352,3,'Libro per Intrattenimento 1','LIB15ILR''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-12-19',3847,'Libri 5',947,3,'Libro per Intrattenimento 1','LIB16IIB''image/jpeg','default-placeholder.jpg'),
+    (0,'2019-01-11',1988,'Libri 6',409,3,'Libro per Intrattenimento 1','LIB17RII''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-01-19',4648,'Libri 7',348,3,'Libro per Intrattenimento 1','LIB187RI''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-05-11',3217,'Libri 8',430,3,'Libro per Intrattenimento 1','LIB19ILB''image/jpeg','default-placeholder.jpg'),
+
+    (0,'2018-03-20',433,'Componente 1',1328,4,'Componente Elettronico 1','ELE20COM''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-03-13',422,'Componente 2',741,4,'Componente Elettronico 1','ELE21ENT''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-05-24',130,'Componente 3',7926,4,'Componente Elettronico 1','ELE22EEC''image/jpeg','default-placeholder.jpg'),
+    (0,'2019-01-09',72,'Componente 4',3935,4,'Componente Elettronico 1','ELE23PMN''image/jpeg','default-placeholder.jpg'),
+    (0,'2019-01-14',450,'Componente 5',4565,4,'Componente Elettronico 1','ELE24TTE''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-02-02',258,'Componente 6',8718,4,'Componente Elettronico 1','ELE25PPT''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-07-03',355,'Componente 7',6375,4,'Componente Elettronico 1','ELE26MNP''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-10-19',329,'Componente 8',469,4,'Componente Elettronico 1','ELE27CON''image/jpeg','default-placeholder.jpg'),
+    (0,'2018-12-05',415,'Componente 9',544,4,'Componente Elettronico 1','ELE28CPP''image/jpeg','default-placeholder.jpg') [21002-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.command.dml.Insert.prepare(Insert.java:306)
+	at org.h2.command.Parser.prepareCommand(Parser.java:283)
+	at org.h2.engine.Session.prepareLocal(Session.java:611)
+	at org.h2.engine.Session.prepareCommand(Session.java:549)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:217)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:1077)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1386)
+	at org.h2.server.web.WebApp.query(WebApp.java:1060)
+	at org.h2.server.web.WebApp.query(WebApp.java:1036)
+	at org.h2.server.web.WebApp.process(WebApp.java:223)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebServlet.doGet(WebServlet.java:124)
+	at org.h2.server.web.WebServlet.doPost(WebServlet.java:161)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.web.filter.ApplicationContextHeaderFilter.doFilterInternal(ApplicationContextHeaderFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.trace.WebRequestTraceFilter.doFilterInternal(WebRequestTraceFilter.java:111)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.grails.web.servlet.mvc.GrailsWebRequestFilter.doFilterInternal(GrailsWebRequestFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.grails.web.filters.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:67)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.autoconfigure.MetricsFilter.doFilterInternal(MetricsFilter.java:103)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-01-15 01:34:07 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Column count does not match; SQL statement:
+INSERT INTO PRODUCT(version,creation_date,price,name,quantity,category_id,description,identifier,photo_file_size,photo_content_type,photo_file_name)
+VALUES
+    (0,'2018-03-22',1099,'Giocattolo 1',110,1,'Giocattolo per bambini 1','GIO1TTT',11462,'image/jpeg','default-placeholder.jpg'),
+    (0,'2018-04-06',9999,'Giocattolo 2',5,1,'Giocattolo per bambini 2','GIO2GAO','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-07-04',2099,'Giocattolo 3',1000,1,'Giocattolo per bambini 3','GIO3CAT','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-07-23',1345,'Giocattolo 4',600,1,'Giocattolo per bambini 4','GIO4OLO','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-08-13',1211,'Giocattolo 5',250,1,'Giocattolo per bambini 5','GIO5OOL','image/jpeg','default-placeholder.jpg'),
+
+    (0,'2018-01-13',382364,'Computer 1',59,2,'Computer per Intrattenimento 1','COM6MPT','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-04-13',399091,'Computer 2',3,2,'Computer per Intrattenimento 2','COM7UTE','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-11-13',363636,'Computer 3',70,2,'Computer per Intrattenimento 3','COM8REU','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-12-13',199478,'Computer 4',16,2,'Computer per Intrattenimento 4','COM9CUO','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-06-13',159947,'Computer 5',0,2,'Computer per Intrattenimento 5','COM10UCM','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-08-13',178792,'Computer 6',23,2,'Computer per Intrattenimento 6','COM11EER','image/jpeg','default-placeholder.jpg'),
+
+    (0,'2018-03-20',3217,'Libri 1',600,3,'Libro per Intrattenimento 1','LIB12RIB','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-08-21',1347,'Libri 2',288,3,'Libro per Intrattenimento 1','LIB13LRR','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-09-28',1223,'Libri 3',250,3,'Libro per Intrattenimento 1','LIB14BBB','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-11-23',1393,'Libri 4',352,3,'Libro per Intrattenimento 1','LIB15ILR','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-12-19',3847,'Libri 5',947,3,'Libro per Intrattenimento 1','LIB16IIB','image/jpeg','default-placeholder.jpg'),
+    (0,'2019-01-11',1988,'Libri 6',409,3,'Libro per Intrattenimento 1','LIB17RII','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-01-19',4648,'Libri 7',348,3,'Libro per Intrattenimento 1','LIB187RI','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-05-11',3217,'Libri 8',430,3,'Libro per Intrattenimento 1','LIB19ILB','image/jpeg','default-placeholder.jpg'),
+
+    (0,'2018-03-20',433,'Componente 1',1328,4,'Componente Elettronico 1','ELE20COM','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-03-13',422,'Componente 2',741,4,'Componente Elettronico 1','ELE21ENT','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-05-24',130,'Componente 3',7926,4,'Componente Elettronico 1','ELE22EEC','image/jpeg','default-placeholder.jpg'),
+    (0,'2019-01-09',72,'Componente 4',3935,4,'Componente Elettronico 1','ELE23PMN','image/jpeg','default-placeholder.jpg'),
+    (0,'2019-01-14',450,'Componente 5',4565,4,'Componente Elettronico 1','ELE24TTE','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-02-02',258,'Componente 6',8718,4,'Componente Elettronico 1','ELE25PPT','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-07-03',355,'Componente 7',6375,4,'Componente Elettronico 1','ELE26MNP','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-10-19',329,'Componente 8',469,4,'Componente Elettronico 1','ELE27CON','image/jpeg','default-placeholder.jpg'),
+    (0,'2018-12-05',415,'Componente 9',544,4,'Componente Elettronico 1','ELE28CPP','image/jpeg','default-placeholder.jpg') [21002-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.command.dml.Insert.prepare(Insert.java:306)
+	at org.h2.command.Parser.prepareCommand(Parser.java:283)
+	at org.h2.engine.Session.prepareLocal(Session.java:611)
+	at org.h2.engine.Session.prepareCommand(Session.java:549)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:217)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:1077)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1386)
+	at org.h2.server.web.WebApp.query(WebApp.java:1060)
+	at org.h2.server.web.WebApp.query(WebApp.java:1036)
+	at org.h2.server.web.WebApp.process(WebApp.java:223)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:170)
+	at org.h2.server.web.WebServlet.doGet(WebServlet.java:124)
+	at org.h2.server.web.WebServlet.doPost(WebServlet.java:161)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.web.filter.ApplicationContextHeaderFilter.doFilterInternal(ApplicationContextHeaderFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.trace.WebRequestTraceFilter.doFilterInternal(WebRequestTraceFilter.java:111)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.grails.web.servlet.mvc.GrailsWebRequestFilter.doFilterInternal(GrailsWebRequestFilter.java:77)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.grails.web.filters.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:67)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:197)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.autoconfigure.MetricsFilter.doFilterInternal(MetricsFilter.java:103)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:806)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1498)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2019-01-15 01:35:14 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "PRODUCT[*]"; expected "PREPARE, {"; SQL statement:
+PRODUCT [42001-197]

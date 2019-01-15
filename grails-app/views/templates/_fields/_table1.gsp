@@ -3,7 +3,7 @@
          <tr>
             <g:each in="${domainProperties}" var="p" status="i">
                 <g:sortableColumn property="${p.property}" title="${p.label}" params="${params}" />
-            </g:each>
+            </g:each> 
         </tr>
     </thead>
     <tbody>

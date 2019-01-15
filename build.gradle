@@ -73,3 +73,9 @@ assets {
     minifyJs = true
     minifyCss = true
 }
+
+apply plugin : 'java'
+
+test {
+    testLogging.showStandardStreams = true
+}

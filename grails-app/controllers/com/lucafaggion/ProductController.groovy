@@ -14,6 +14,7 @@ class ProductController {
     }
 
     def test = {
+        session['org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE'] = new Locale("en","US")
         def category = ProductCategory.list()
         def currentCat = (params.cat != null) ? params.cat : category[0].id
         def productsSize = productlogicService.getCategoryProductCount(currentCat)
@@ -21,7 +22,7 @@ class ProductController {
         render(view:"listProductCat",model:  
         [categories: category,productList:products,productCount: productsSize])
     }
-  
+
     def show(Long id) {
         //global.printClass(productService.get(id).photo.inputStream)
         println productService.get(id).photo.cloudFile
@@ -34,11 +35,15 @@ class ProductController {
             return
         }
         product.creation_date = new Date()
-        product.identifier = "PLACEHOLDER"
+        if(!params.hasIdentifier){
+            product.identifier = "PLACEHOLDER"
+        }
 
         try {
             productService.save(product)
-            productlogicService.generateIdentifier(product)
+            if(!params.hasIdentifier){
+                productlogicService.generateIdentifier(product)
+            }
             productService.save(product)
         } catch (ValidationException e) {
             respond product.errors, view:'create'

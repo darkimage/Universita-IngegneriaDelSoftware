@@ -7,7 +7,7 @@ grails {
         providerOptions {
           provider = 'local' // Switch to s3 if you wish to use s3 and install the karman-aws plugin
           basePath = 'storage'
-          baseUrl  = 'http://localhost:8080/image-test/storage'
+          baseUrl  = 'http://localhost:8080/storage'
           //accessKey = "KEY" //Used for S3 Provider
           //secretKey = "KEY" //Used for S3 Provider
         }

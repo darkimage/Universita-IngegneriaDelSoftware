@@ -3,7 +3,7 @@ package com.lucafaggion
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class ProductLogicServiceSpec extends Specification implements ServiceUnitTest<ProductLogicService>{
+class ProductLogicServiceSpec extends Specification implements ServiceUnitTest<ProductlogicService>{
 
     def setup() {
     }

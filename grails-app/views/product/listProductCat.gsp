@@ -25,13 +25,9 @@
         <div id="list-Product" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="${[categories.get(current_cat.toInteger()-1).name]}" />
             </h1>
-            
-            
-
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <%-- <f:table template="templates/_field/_table" collection="${productList}" /> --%>
            <f:table template="table_product" collection="${productList}" />
 
         <g:if test="${productCount > params.max.toInteger()}">

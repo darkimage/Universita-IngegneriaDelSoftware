@@ -1,9 +1,9 @@
 package com.lucafaggion
 
-import grails.testing.web.controllers.ControllerUnitTest
+import grails.testing.web.taglib.TagLibUnitTest
 import spock.lang.Specification
 
-class ListProjControllerSpec extends Specification implements ControllerUnitTest<ProductController> {
+class PriceFormatterTagLibSpec extends Specification implements TagLibUnitTest<PriceFormatterTagLib> {
 
     def setup() {
     }

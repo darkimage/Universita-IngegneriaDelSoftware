@@ -21,9 +21,17 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
+        
+           <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IT<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="#"><asset:image src="/locale/it_flag.png" width="32" height="32"/><span style="padding-left:10px">IT</span></a></li>
+                        <li class="dropdown-item"><a href="#"><asset:image src="/locale/en_flag.png" width="32" height="32"/><span style="padding-left:10px">EN</span></a></li>
+                    </ul>
+            </li>
+
             <g:pageProperty name="page.nav"/>
         </ul>
     </div>

@@ -26,15 +26,20 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.product}" method="PUT">
+            <g:uploadForm resource="${this.product}" method="POST">
                 <g:hiddenField name="version" value="${this.product?.version}" />
+                 <g:hiddenField name="hasIdentifier" value="${true}" />
                 <fieldset class="form">
-                    <f:all bean="product"/>
+                    <f:all bean="product" except="['identifier','creation_date','photo']"/>
+                    <div class="fieldcontain">
+                    <label for="photo">Choose Image:</label>
+                    <input type="file" name="photo" accept="image/*" />
+                    </div>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
-            </g:form>
+            </g:uploadForm>
         </div>
     </body>
 </html>

@@ -32,6 +32,7 @@ class Product {
         price()
         quantity()
         description()
+        identifier()
         photo contentType: ['png','jpg'], fileSize:1024*1024 // 1mb
     }
 

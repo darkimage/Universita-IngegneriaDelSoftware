@@ -3,7 +3,7 @@ package com.lucafaggion
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class OrderControllerSpec extends Specification implements ControllerUnitTest<OrderController> {
+class OrdersControllerSpec extends Specification implements ControllerUnitTest<OrdersController> {
 
     def setup() {
     }

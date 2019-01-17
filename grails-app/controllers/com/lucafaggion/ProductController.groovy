@@ -14,13 +14,12 @@ class ProductController {
     }
 
     def test = {
-        session['org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE'] = new Locale("en","US")
         def category = ProductCategory.list()
         def currentCat = (params.cat != null) ? params.cat : category[0].id
         def productsSize = productlogicService.getCategoryProductCount(currentCat)
         def products = productlogicService.getProductsOfCategory(currentCat,params)
         render(view:"listProductCat",model:  
-        [categories: category,productList:products,productCount: productsSize])
+        [categories: category,productList:products,productCount: productsSize,params:params])
     }
 
     def show(Long id) {

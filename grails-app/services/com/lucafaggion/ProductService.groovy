@@ -1,5 +1,4 @@
 package com.lucafaggion
-
 import grails.gorm.services.Service
 
 @Service(Product)

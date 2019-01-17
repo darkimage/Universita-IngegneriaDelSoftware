@@ -15,7 +15,6 @@
 </head>
 
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
     <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,12 +22,12 @@
     </button>
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
-        
+
            <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IT<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:currentLocaleIcon withText="true" request="${request}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href="#"><asset:image src="/locale/it_flag.png" width="32" height="32"/><span style="padding-left:10px">IT</span></a></li>
-                        <li class="dropdown-item"><a href="#"><asset:image src="/locale/en_flag.png" width="32" height="32"/><span style="padding-left:10px">EN</span></a></li>
+                        <li class="dropdown-item"><g:localeLink locale="it" region="IT"><g:localeIcon withText="true" locale="it"/></g:localeLink></li>
+                        <li class="dropdown-item"><g:localeLink locale="en" region="US"><g:localeIcon withText="true" locale="en"/></g:localeLink></>
                     </ul>
             </li>
 

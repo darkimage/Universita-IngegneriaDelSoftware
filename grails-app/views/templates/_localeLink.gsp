@@ -1,0 +1,1 @@
+<g:link action="${actionName}" params="${params}">${raw(body)}</g:link>

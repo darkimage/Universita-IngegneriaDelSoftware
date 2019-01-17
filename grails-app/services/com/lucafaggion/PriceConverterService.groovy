@@ -13,4 +13,8 @@ class PriceConverterService{
         return BigDecimal.valueOf(new BigDecimal(val)).movePointLeft(2) 
     }
 
+    def getUSDollar(val){
+        return BigDecimal.valueOf(new BigDecimal(val)*new BigDecimal(1.14)).movePointLeft(2)  
+    }
+
 }

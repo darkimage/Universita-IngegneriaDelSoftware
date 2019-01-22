@@ -4,6 +4,7 @@ import java.text.*
 
 class PriceFormatterTagLib {
     PriceConverterService priceConverterService
+    UtilityService utilityService
     static defaultEncodeAs = [taglib:'html']
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
 
@@ -11,7 +12,7 @@ class PriceFormatterTagLib {
         def locale = RequestContextUtils.getLocale(request)
         def value = attribs['value']
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale)
-        String moneyString = formatter.format(priceConverterService.getEuro(value))
+        String moneyString = formatter.format(priceConverterService.convertPrice(value,request))
         out << moneyString
     }
 

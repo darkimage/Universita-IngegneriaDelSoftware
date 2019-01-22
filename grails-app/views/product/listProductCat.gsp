@@ -5,7 +5,6 @@
         <asset:javascript src="jquery-3.3.1.min.js"/>
     </head>
     <body>
-        <input type="numb/er" min="0.00" max="10000.00" step="0.01" />
         <g:set var="current_cat" value="${(params.cat!= null) ? params.cat : 1}"/>
         <g:set var="maxPerPage" value="${(params.max!= null) ? params.max : 5}"/>
         <%-- <div>${categories.asList()} ${productCount} ${params}</div> --%>

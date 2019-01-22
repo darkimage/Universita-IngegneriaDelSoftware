@@ -5,6 +5,8 @@ class LineItem {
     int price
     static belongsTo = [subProduct: Product, orderid:Orders]
     static constraints = {
-
+        subProduct()
+        price()
+        quantity()
     }
 }

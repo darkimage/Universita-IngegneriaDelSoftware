@@ -2,9 +2,11 @@ package com.lucafaggion
 
 import grails.gorm.transactions.Transactional
 
+
 @Transactional
 class ProductlogicService {
-    def global = new Globals()
+    UtilityService utilityService
+    PriceConverterService priceConverterService
 
     def getProductsOfCategory(value,params){
         params.max = (params.max != null) ? params.max : 5;
@@ -22,8 +24,17 @@ class ProductlogicService {
     void generateIdentifier(Product product){
         def randChars = ""
         for(Integer i=0 ; i<3 ; i++) {
-            randChars+= product.name.trim()[global.getRandomNumber(product.name.size())]
+            randChars+= product.name.trim()[utilityService.getRandomNumber(product.name.size())]
         }
         product.identifier = ProductCategory.findAll("SELECT name FROM ProductCategory Where id="+product.category.id)[0].substring(0,3).toUpperCase()+product.id+randChars.toUpperCase()
+    }
+
+    Product setUpProduct(Product product,request,params){
+        product.creation_date = new Date()
+        if(!params.hasIdentifier){
+            product.identifier = "PLACEHOLDER"
+        }
+        product.price = priceConverterService.convertPriceToStore(params.price,request)
+        return product
     }
 }

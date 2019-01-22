@@ -1,8 +1,11 @@
 package com.lucafaggion
 
-class Globals {
+import grails.gorm.transactions.Transactional
+
+@Transactional
+class UtilityService {
     private Random random = new Random()
-    Integer test = 1
+    
     def getRandomNumber(Integer num){
         return random.nextInt(num);
     }

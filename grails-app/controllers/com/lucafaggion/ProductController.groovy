@@ -1,19 +1,27 @@
 package com.lucafaggion
 import grails.validation.ValidationException
 import com.bertramlabs.plugins.selfie.AttachmentValueConverter
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured('permitAll')
 class ProductController {
     static scaffold = Product
+    UtilityService utilityService
     ProductService productService
     ProductlogicService productlogicService
-    def global = new Globals()
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond productService.list(params), model:[productCount: productService.count()]
+        redirect(action:'listProductCompact')
     }
 
-    def test = {
+    @Secured('permitAll') // change to @Secured('ROLE_DIPENDENTE')
+    def listProductCompact(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        //respond productService.list(params), model:[productCount: productService.count()]
+        render(view:"index",model:[productList:productService.list(params),productCount: productService.count()])
+    }
+
+    def listProducts = {
         def category = ProductCategory.list()
         def currentCat = (params.cat != null) ? params.cat : category[0].id
         def productsSize = productlogicService.getCategoryProductCount(currentCat)
@@ -23,7 +31,7 @@ class ProductController {
     }
 
     def show(Long id) {
-        //global.printClass(productService.get(id).photo.inputStream)
+        //utilityService.printClass(productService.get(id).photo.inputStream)
         println productService.get(id).photo.cloudFile
         respond productService.get(id)
     }
@@ -33,10 +41,7 @@ class ProductController {
             notFound()
             return
         }
-        product.creation_date = new Date()
-        if(!params.hasIdentifier){
-            product.identifier = "PLACEHOLDER"
-        }
+        product = productlogicService.setUpProduct(product,request,params)
 
         try {
             productService.save(product)

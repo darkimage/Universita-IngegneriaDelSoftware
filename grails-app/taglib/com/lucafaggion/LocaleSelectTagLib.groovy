@@ -3,7 +3,7 @@ import org.springframework.web.servlet.support.RequestContextUtils
 
 class LocaleSelectTagLib {
     LocaleManagerService localeManagerService
-    def global = new Globals()
+    UtilityService utilityService
     static defaultEncodeAs = [taglib:'none']
     //static encodeAsForTags = [localeLink: [taglib:'html']]
 

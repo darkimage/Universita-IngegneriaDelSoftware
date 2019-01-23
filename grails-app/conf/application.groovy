@@ -54,6 +54,7 @@ grails {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.lucafaggion.auth.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.lucafaggion.auth.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.lucafaggion.auth.Role'
+grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
@@ -66,7 +67,10 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/**/favicon.ico', access: ['permitAll']],
   [pattern: '/storage/**',     access: ['permitAll']],
-  [pattern: '/dbconsole/**',   access: ['permitAll']]
+  [pattern: '/dbconsole/**',   access: ['permitAll']],
+  [pattern: '/login/**',       access: ['permitAll']],
+  [pattern: '/logout/**',      access: ['permitAll']],
+  [pattern: '/register/**',    access: ['permitAll']]
 ]
 
 grails.plugin.springsecurity.filterChain.chainMap = [

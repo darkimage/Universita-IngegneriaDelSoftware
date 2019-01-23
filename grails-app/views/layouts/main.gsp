@@ -23,6 +23,14 @@
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
 
+            <sec:ifLoggedIn>
+                <li class="dropdown">
+                    <div style="padding-top: 10px;position: relative;">
+                    <g:link controller='shoppingCart' action="index"><g:img dir="asset/images" file="shopping-cart.png" width="40" height="40"/></g:link>
+                    </div>
+                </li>
+            </sec:ifLoggedIn>
+
            <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:currentLocaleIcon withText="true" request="${request}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -30,10 +38,16 @@
                         <li class="dropdown-item"><g:localeLink locale="en" region="US"><g:localeIcon withText="true" locale="en"/></g:localeLink></>
                     </ul>
             </li>
-            <li class="dropdown">
-            <a href="#" class="dropdown-item" style="padding-top: 25px;
-    padding-bottom: 25px;" role="button" aria-haspopup="true" aria-expanded="false"> asddad</a>
-            </li>
+            
+            <sec:ifLoggedIn>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 25px;padding-bottom: 25px;" role="button" aria-haspopup="true" aria-expanded="false"><sec:loggedInUserInfo field='username'/></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><g:link controller='logout'>Logout</g:link></li>
+                    </ul>
+                </li>
+            </sec:ifLoggedIn>
             <g:pageProperty name="page.nav"/>
         </ul>
     </div>

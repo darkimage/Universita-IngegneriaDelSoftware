@@ -17,6 +17,26 @@
             font-weight: bold;
             color: #a7a7a7
         }
+
+        .responsive-row
+        {
+            display: table-row;
+        }
+        .responsive-row > *
+        {
+            display: table-cell;
+        }
+        @media screen and (max-width: 500px) {
+            .responsive-row
+            {
+                display: block;
+                float: left;
+            }
+            .responsive-row > *
+            {
+                display: block;
+            }
+}
         </style>
     </head>
     <body>
@@ -32,29 +52,26 @@
             <div class="message" role="status">${flash.message}</div>
             </g:if>
             <g:if test="${itemsCount != 0}">
-            <table style="border-top: 0px">
-            <tr>
-            <td>
-            <f:table collection="${cartItems}" template="table_shoppingcart" except="['orderid','id']"/>
-            <td>
-            <td>
-                <g:form controller="${params.controller}" action="updateCart" method="POST">
-                <fieldset class="buttons" style="padding: 0.3em 1.8em 1.25em;">
-                   <b><g:message code="com.lucafaggion.ShoppingCart.total"/>: <b><g:formatPrice value="${totalprice}"/></b></b><br>
-                    <div style="margin-top: 2em;">
-                    <g:submitButton name="placeorder" value="${message(code:'com.lucafaggion.ShoppingCart.placeorder')}"/>
-                    <g:submitButton name="cancelorder" value="${message(code:'com.lucafaggion.ShoppingCart.cancelorder')}"/>
-                    </div>
-                </fieldset>
-                </g:form>
-            </td>
-            </tr>
-            </table>
-            </span>
-            <g:if test="${itemsCount > params.max.toInteger()}">
-            <div class="pagination">
-                <g:paginate controller="ShoppingCart" action="index" total="${itemsCount}" params="${params}" />
+            <div class="responsive-row">
+                <div style="width:100%;">
+                    <f:table collection="${cartItems}" template="table_shoppingcart" except="['orderid','id']"/>
+                </div>
+                <div style="padding-left: 1em;">
+                    <g:form controller="${params.controller}" action="updateCart" method="POST">
+                    <fieldset class="buttons" style="padding: 0.3em 1.8em 1.25em; margin-right: 1em;">
+                        <div style="padding-right:2em;margin-top:1em"><b><g:message code="com.lucafaggion.ShoppingCart.total"/>: <g:formatPrice value="${totalprice}"/></b><div><br>
+                        <div style="margin-top: 2em;">
+                        <g:submitButton name="placeorder" value="${message(code:'com.lucafaggion.ShoppingCart.placeorder')}"/>
+                        <g:submitButton name="cancelorder" value="${message(code:'com.lucafaggion.ShoppingCart.cancelorder')}"/>
+                        </div>
+                    </fieldset>
+                    </g:form>
+                </div>
             </div>
+            <g:if test="${itemsCount > params.max.toInteger()}">
+                <div class="pagination">
+                    <g:paginate controller="ShoppingCart" action="index" total="${itemsCount}" params="${params}" />
+                </div>
             </g:if>
         </g:if>
         <g:else>

@@ -8,6 +8,13 @@ class OrderslogicService {
     LineitemService lineitemService
     OrdersService ordersService
 
+    private def getUserShoppingCartOrder(){
+        def user = springSecurityService.getCurrentUser()
+        def query = "FROM Orders o WHERE o.state='cart'"
+        def cart = Orders.findAll(query,[max:1])[0]
+        return cart
+    }
+
     def getUserShoppingCart(params) {
         def user = springSecurityService.getCurrentUser()
         def query = "FROM LineItem l inner join fetch l.orderid as o WHERE o.user = " + user.id + " AND o.state='cart'"
@@ -36,11 +43,19 @@ class OrderslogicService {
     }
 
     def placeUserOrder(){
-        def user = springSecurityService.getCurrentUser()
-        def query = "FROM Orders o WHERE o.state='cart'"
-        def cart = Orders.findAll(query,[max:1])[0]
+        def cart = getUserShoppingCartOrder()
         cart.state = "placed"
         ordersService.save(cart)
         return cart
+    }
+
+    def deleteShoppingCart(){
+        def cart = getUserShoppingCartOrder()
+        def query = "FROM LineItem l WHERE l.orderid =" + cart.id
+        def lineitems = LineItem.findAll(query)
+        for (lineitem in lineitems) {
+            lineitemService.delete(lineitem.id)
+        }
+        ordersService.delete(cart.id)
     }
 }

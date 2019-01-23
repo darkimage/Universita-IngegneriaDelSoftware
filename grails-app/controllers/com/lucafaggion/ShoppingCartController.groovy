@@ -48,7 +48,14 @@ class ShoppingCartController {
                 '*' { respond userorder, [status: CREATED] }
             }
         }else{
-
+            orderslogicService.deleteShoppingCart()
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'com.lucafaggion.ShoppingCart.orderclear')
+                    redirect action:"index", method:"GET"
+                }
+                '*'{ render status: NO_CONTENT }
+            }
         }
     }
 }

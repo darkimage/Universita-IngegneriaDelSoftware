@@ -1,3 +1,12 @@
+<style>
+    .deletebtnIcon.input, button, submit { 
+        border:none;
+        background:transparent;
+    }
+    .hiddenSubmit{
+        display:none;
+    }
+</style>
 <table>
     <thead>
          <tr>
@@ -17,8 +26,8 @@
                         style="display:inline;margin-left:10px">
                                 <input type='number' name='value' id='value' min='1' value="${bean[p.property]}"/>
                                 <input type='hidden' name='id' id='id' value="${bean['id']}"/>
-                                <%-- <input type="submit" name="update" value="${message(code:'com.lucafaggion.ShoppingCart.updatequantity')}"/> --%>
-                                <g:submitButton name="update" value="${message(code:'com.lucafaggion.ShoppingCart.updatequantity')}"/>
+                                <g:formButtonImg dir="asset/images" image="update-icon.png" name="update" value="${message(code:'com.lucafaggion.ShoppingCart.updatequantity')}"/>
+                                <g:formButtonImg dir="asset/images" image="delete-icon.png" name="delete" id="delete"/>
                         </g:form>
                         </td>
                     </g:if>

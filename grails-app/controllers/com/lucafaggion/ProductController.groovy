@@ -5,7 +5,7 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Secured('permitAll')
 class ProductController {
-    static scaffold = Product
+    //static scaffold = Product
     UtilityService utilityService
     ProductService productService
     ProductlogicService productlogicService
@@ -14,7 +14,7 @@ class ProductController {
         redirect(action:'listProductCompact')
     }
 
-    @Secured('permitAll') // change to @Secured('ROLE_DIPENDENTE')
+    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
     def listProductCompact(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         //respond productService.list(params), model:[productCount: productService.count()]
@@ -36,6 +36,12 @@ class ProductController {
         respond productService.get(id)
     }
 
+    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
+    def create(){
+        respond new Product(params)
+    }
+
+    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def save(Product product) {
         if (product == null) {
             notFound()

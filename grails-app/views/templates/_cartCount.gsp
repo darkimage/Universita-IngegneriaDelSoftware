@@ -1,0 +1,1 @@
+<div class="shoppingcart_count">${count}</div>

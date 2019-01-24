@@ -16,7 +16,11 @@ class ShoppingCartController {
 
     def update(Integer id,Integer value){
         try{
-            orderslogicService.updateCartProduct(id,value)
+            if(params.delete){
+                orderslogicService.deleteLineItem(id)
+            }else{
+                orderslogicService.updateCartProduct(id,value)
+            }
         }catch (ValidationException e) {
             respond e, view:'index'
             return

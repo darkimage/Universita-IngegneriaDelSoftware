@@ -26,7 +26,7 @@
             <sec:ifLoggedIn>
                 <li class="dropdown">
                     <div style="padding-top: 10px;position: relative;">
-                    <g:link controller='shoppingCart' action="index"><g:img dir="asset/images" file="shopping-cart.png" width="40" height="40"/></g:link>
+                    <g:link controller='shoppingCart' action="index"><g:img dir="asset/images" file="shopping-cart.png" width="40" height="40"/><g:cartCount /></g:link>
                     </div>
                 </li>
             </sec:ifLoggedIn>

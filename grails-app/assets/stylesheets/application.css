@@ -13,3 +13,54 @@
 *= require mobile
 *= require_self
 */
+
+/* SHOP ONLINE */
+
+/* Form Button image style*/
+.noStyle.input, button, submit { 
+    border:none;
+    background:transparent;
+}
+.hiddenButton{
+    display:none;
+}
+
+/* SHOPPING CART*/
+.shoppingcart_count{
+    position: absolute;
+    top: 0.4em;
+    /* left: 0; */
+    right: 0.3em;
+    background: #f73131;
+    /* padding: 0.1em 0.3em; */
+    overflow: hidden;
+    border-radius: 50%;
+    font-size: small;
+    font-weight: 900;
+    width: 24px;
+    text-align: center;
+    height: 24px;
+    opacity: 0.95;
+    /* vertical-align: middle; */
+}
+
+
+/* PRODUCT */
+
+.product_name_link{
+    font-weight:600;
+    padding-bottom:20px;
+    font-size: 17px;
+}
+
+.product_list_row{
+    -webkit-box-shadow: 0 5px 5px -5px #AAAAAA;
+    box-shadow: 0 5px 5px -5px #AAAAAA;
+    padding-top:20px;
+    padding-bottom:20px
+}
+
+.product_list_container{
+    float:left;
+    padding-left:30px;
+}

@@ -25,6 +25,7 @@
         .responsive-row > *
         {
             display: table-cell;
+            padding-bottom: 1em;
         }
         @media screen and (max-width: 500px) {
             .responsive-row
@@ -48,26 +49,30 @@
         </div>
         <div id="show-cart" class="content scaffold-show" role="main">
             <h1><g:message code="com.lucafaggion.ShoppingCart.shoppingcart" /></h1>
+            
+             <%-- DISPLAY FLASH MESSAGE --%>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
+
             <g:if test="${itemsCount != 0}">
-            <div class="responsive-row">
-                <div style="width:100%;">
-                    <f:table collection="${cartItems}" template="table_shoppingcart" except="['orderid','id']"/>
-                </div>
-                <div style="padding-left: 1em;">
-                    <g:form controller="${params.controller}" action="updateCart" method="POST">
+            <%-- SHOPPING CART DISPLAY --%>
+            <div class="responsive-row" style="margin-left:1em">
+                <g:form controller="${params.controller}" action="updateCart" method="POST" style="min-width: 30vw;">
                     <fieldset class="buttons" style="padding: 0.3em 1.8em 1.25em; margin-right: 1em;">
-                        <div style="padding-right:2em;margin-top:1em"><b><g:message code="com.lucafaggion.ShoppingCart.total"/>: <g:formatPrice value="${totalprice}"/></b><div><br>
+                        <div style="padding-right:2em;margin-top:1em"><b><g:message code="com.lucafaggion.ShoppingCart.total"/>: <g:formatPrice value="${totalprice}"/></b><br>
+                        <b><g:message code="com.lucafaggion.ShoppingCart.articlecount" args="${[itemsCount]}"/></b><div><br>
                         <div style="margin-top: 2em;">
                         <g:submitButton name="placeorder" value="${message(code:'com.lucafaggion.ShoppingCart.placeorder')}"/>
                         <g:submitButton name="cancelorder" value="${message(code:'com.lucafaggion.ShoppingCart.cancelorder')}"/>
                         </div>
                     </fieldset>
-                    </g:form>
+                </g:form>
+                <div style="width:100%">
+                    <f:table collection="${cartItems}" template="table_shoppingcart" except="['orderid','id']"/>
                 </div>
             </div>
+            <%-- PAGINATION --%>
             <g:if test="${itemsCount > params.max.toInteger()}">
                 <div class="pagination">
                     <g:paginate controller="ShoppingCart" action="index" total="${itemsCount}" params="${params}" />
@@ -75,6 +80,7 @@
             </g:if>
         </g:if>
         <g:else>
+            <%-- SHOPPING CART EMPTY --%>
             <div style="width:100%;padding:2em;text-align:center">
                 <div class="container"><g:message code="com.lucafaggiob.ShoppingCart.empty"/></div>
             </div>

@@ -9,7 +9,7 @@
         <g:set var="maxPerPage" value="${(params.max!= null) ? params.max : 5}"/>
         <%-- <div>${categories.asList()} ${productCount} ${params}</div> --%>
         <div style="padding-left:25px" class="pagination">
-        <g:form controller="Product" action="test" method="GET">
+        <g:form controller="${controllerName}" action="${actionName}" method="GET">
             <div style="display: inline-block;">
                 <label><g:message code="com.lucafaggion.Product.SelectCategory"/>:</label>
                 <g:select name="cat" from="${categories}" value="${current_cat}" optionKey="id" optionValue="name" default = "1" />
@@ -32,7 +32,7 @@
 
         <g:if test="${productCount > params.max.toInteger()}">
             <div class="pagination">
-                <g:paginate controller="Product" action="test" total="${productCount}" params="${params}" />
+                <g:paginate controller="${controllerName}" action="${actionName}" total="${productCount}" params="${params}" />
             </div>
         </g:if>
         </div>

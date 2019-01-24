@@ -4,7 +4,7 @@ environments {
       plugin {
         selfie {
           storage {
-            path = 'uploads/:class/:id/:propertyName/' //This configures the storage path of the files being uploaded by domain class name and property name and identifier in GORM
+            path = ':class/:id/:propertyName/' //This configures the storage path of the files being uploaded by domain class name and property name and identifier in GORM
             bucket = 'uploads'
             providerOptions {
               provider = 'local' // Switch to s3 if you wish to use s3 and install the karman-aws plugin
@@ -23,7 +23,7 @@ environments {
       plugin {
         selfie {
           storage {
-            path = 'uploads/:class/:id/:propertyName/' //This configures the storage path of the files being uploaded by domain class name and property name and identifier in GORM
+            path = ':class/:id/:propertyName/' //This configures the storage path of the files being uploaded by domain class name and property name and identifier in GORM
             bucket = 'uploads'
             providerOptions {
               provider = 'local' // Switch to s3 if you wish to use s3 and install the karman-aws plugin
@@ -66,7 +66,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/**/favicon.ico', access: ['permitAll']],
-  [pattern: '/storage/**',     access: ['permitAll']],
+  [pattern: '/**/storage/**/', access: ['permitAll']],
   [pattern: '/dbconsole/**',   access: ['permitAll']],
   [pattern: '/login/**',       access: ['permitAll']],
   [pattern: '/logout/**',      access: ['permitAll']],
@@ -79,6 +79,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**/css/**',      filters: 'none'],
 	[pattern: '/**/images/**',   filters: 'none'],
 	[pattern: '/**/favicon.ico', filters: 'none'],
+  [pattern: '/**/storage/**/', filters: 'none'],
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 

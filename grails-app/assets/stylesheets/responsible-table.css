@@ -1,0 +1,101 @@
+#responsible-table table{
+    border:0;
+}
+
+#responsible-table th{
+    z-index: 2;
+    background-color: #007bff;
+    border-color: #007bff;
+    background-image: none;
+}
+
+#responsible-table th a{
+    color: #fff
+}
+
+#responsible-table th a:hover{
+    text-shadow: 1px 1px 3px #333333;
+}
+
+#responsible-table th:hover{
+    background-color: rgba(0,102,255,0.7);
+    border-color: rgba(0,102,255,0.7);
+    background-image: none;
+}
+
+#responsible-table th:hover a{
+    color: #fff;
+    text-shadow: 0.2px 1px 1px #333333;
+}
+
+#responsible-table .header{
+    border-top-left-radius: 5px;
+}
+
+#responsible-table .lastheader{
+    border-top-right-radius: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    /* Force table to not be like tables anymore */
+    #responsible-table table,
+    #responsible-table thead,
+    #responsible-table tbody,
+    #responsible-table th,
+    #responsible-table td,
+    #responsible-table tr {
+        display: block;
+    }
+    
+    #responsible-table tr{
+        margin-top: 1rem !important;
+    }
+
+    #responsible-table .first{
+        z-index: 2;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        overflow:hidden
+    }
+
+    #responsible-table .first a{
+        color: #fff;
+    }
+
+    #responsible-table thead tr {
+        display:none;
+    }
+     
+    #responsible-table tr { border: 0px; }
+      
+    #responsible-table td {
+        /* Behave like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align:left;
+    }
+     
+    #responsible-table td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+     
+    /*
+    Label the data
+    */
+    #responsible-table td:before { content: attr(data-title); }
+}

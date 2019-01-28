@@ -4,41 +4,6 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'com.lucafaggion.ShoppingCart.shoppingcart')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
-        <style>
-        .container{
-            background-color: #efefef;
-            overflow: hidden;
-            -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-            -webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-            box-shadow: 0 0 3px 1px #aaaaaa;
-            border-radius:1em;
-            padding: 2em 6em;
-            font-size: large;
-            font-weight: bold;
-            color: #a7a7a7
-        }
-
-        .responsive-row
-        {
-            display: table-row;
-        }
-        .responsive-row > *
-        {
-            display: table-cell;
-            padding-bottom: 1em;
-        }
-        @media screen and (max-width: 500px) {
-            .responsive-row
-            {
-                display: block;
-                float: left;
-            }
-            .responsive-row > *
-            {
-                display: block;
-            }
-}
-        </style>
     </head>
     <body>
         <a href="#show-cart" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -54,24 +19,37 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-
-            <g:if test="${itemsCount != 0}">
+            
             <%-- SHOPPING CART DISPLAY --%>
-            <div class="responsive-row" style="margin-left:1em">
-                <g:form controller="${params.controller}" action="updateCart" method="POST" style="min-width: 30vw;">
-                    <fieldset class="buttons" style="padding: 0.3em 1.8em 1.25em; margin-right: 1em;">
-                        <div style="padding-right:2em;margin-top:1em"><b><g:message code="com.lucafaggion.ShoppingCart.total"/>: <g:formatPrice value="${totalprice}"/></b><br>
-                        <b><g:message code="com.lucafaggion.ShoppingCart.articlecount" args="${[itemsCount]}"/></b><div><br>
-                        <div style="margin-top: 2em;">
-                        <g:submitButton name="placeorder" value="${message(code:'com.lucafaggion.ShoppingCart.placeorder')}"/>
-                        <g:submitButton name="cancelorder" value="${message(code:'com.lucafaggion.ShoppingCart.cancelorder')}"/>
-                        </div>
-                    </fieldset>
-                </g:form>
-                <div style="width:100%">
-                    <f:table collection="${cartItems}" template="table_shoppingcart" except="['orderid','id']"/>
+            <g:if test="${itemsCount != 0}">
+
+            <div class="container-fluid">
+                <div class="row pt-2">
+                    <div class="col-sm-6"> 
+                        <ul class="list-group">
+                            <li class="list-group-item active"><g:message code="com.lucafaggion.ShoppingCart.summary"/></li>
+                            <li class="list-group-item"><b><g:message code="com.lucafaggion.ShoppingCart.total"/>: <g:formatPrice value="${totalprice}"/></b></li>
+                            <li class="list-group-item"><b><g:message code="com.lucafaggion.ShoppingCart.articlecount" args="${[itemsCount]}"/></b></li>
+                            <li class="list-group-item">
+                                <g:form controller="${params.controller}" action="updateCart" method="POST">
+                                <div class="row ">
+                                    <div class="col-sm text-center shopping_cart_action  pt-2">
+                                        <input class="btn btn-primary place_order" type="submit" name="placeorder" id="placeorder" value="${message(code:'com.lucafaggion.ShoppingCart.placeorder')}">
+                                    </div>
+                                    <div class="col-sm text-center shopping_cart_action  pt-2">
+                                        <input class="btn btn-primary clean_order" type="submit" name="cancelorder" id="cancelorder" value="${message(code:'com.lucafaggion.ShoppingCart.cancelorder')}">
+                                    </div>
+                                </div>
+                                </g:form>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 pt-2 product_show_nopadding"> 
+                        <f:table collection="${cartItems}" headers="com.lucafaggion.LineItem.Fields." template="table_shoppingcart" except="['orderid','id']"/>
+                    </div>
                 </div>
             </div>
+        
             <%-- PAGINATION --%>
             <g:if test="${itemsCount > params.max.toInteger()}">
                 <div class="pagination">
@@ -82,7 +60,7 @@
         <g:else>
             <%-- SHOPPING CART EMPTY --%>
             <div style="width:100%;padding:2em;text-align:center">
-                <div class="container"><g:message code="com.lucafaggiob.ShoppingCart.empty"/></div>
+                <div class="shoppingcart_container"><g:message code="com.lucafaggiob.ShoppingCart.empty"/></div>
             </div>
         </g:else>
         </div>

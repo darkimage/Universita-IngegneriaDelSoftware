@@ -18,6 +18,11 @@ class OrderslogicService {
     def getUserShoppingCart(params) {
         def user = springSecurityService.getCurrentUser()
         def query = "FROM LineItem l inner join fetch l.orderid as o WHERE o.user = " + user.id + " AND o.state='cart'"
+        def cartItems = LineItem.findAll(query)
+        //Update items
+        for (item in cartItems) {
+            updateCartProduct(item.id.toInteger(),item.quantity)
+        }
         return LineItem.findAll(query)
         //Product.findAll(query,[max: params.max.toInteger(), offset: params.offset]))
     }
@@ -50,6 +55,8 @@ class OrderslogicService {
         def cart = getUserShoppingCartOrder()
         cart.state = "placed"
         ordersService.save(cart)
+        //TODO
+        //rimuovere la quantita' di ogni lineitem da ogni prodotto
         return cart
     }
 

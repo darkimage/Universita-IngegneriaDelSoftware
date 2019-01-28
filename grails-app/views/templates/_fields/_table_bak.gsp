@@ -15,12 +15,7 @@
                         <td data-title="${message(code:'com.lucafaggion.Product.Fields.'+ p.label.toLowerCase())} " class="first"><g:link method="GET" resource="${bean}"><f:display bean="${bean}" property="${p.property}" displayStyle="${displayStyle?:'table'}" theme="${theme}"/></g:link></td>
                     </g:if>
                     <g:else>
-                        <g:if test="${p.property!='price'}">
-                            <td data-title="${message(code:'com.lucafaggion.Product.Fields.'+ p.label.toLowerCase())} "><f:display bean="${bean}" property="${p.property}"  displayStyle="${displayStyle?:'table'}" theme="${theme}"/></td>
-                        </g:if>
-                        <g:else>
-                            <td data-title="${message(code:'com.lucafaggion.Product.Fields.'+ p.label.toLowerCase())} "><g:formatPrice value="${bean[p.property]}"/></td>
-                        </g:else>
+                        <td data-title="${message(code:'com.lucafaggion.Product.Fields.'+ p.label.toLowerCase())}"><f:display bean="${bean}" property="${p.property}"  displayStyle="${displayStyle?:'table'}" theme="${theme}"/></td>
                     </g:else>
                 </g:each>
             </tr>

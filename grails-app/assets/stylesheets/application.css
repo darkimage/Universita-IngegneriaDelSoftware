@@ -8,6 +8,7 @@
 * compiled file, but it's generally better to create a new file per style scope.
 *
 *= require bootstrap
+*= require responsible-table
 *= require grails
 *= require main
 *= require mobile
@@ -17,22 +18,23 @@
 /* SHOP ONLINE */
 
 /* Form Button image style*/
+
 .noStyle.input, button, submit { 
     border:none;
     background:transparent;
 }
+
 .hiddenButton{
     display:none;
 }
 
 /* SHOPPING CART*/
+
 .shoppingcart_count{
-    position: absolute;
     top: 0.4em;
-    /* left: 0; */
     right: 0.3em;
+    position: absolute;
     background: #f73131;
-    /* padding: 0.1em 0.3em; */
     overflow: hidden;
     border-radius: 50%;
     font-size: small;
@@ -41,11 +43,49 @@
     text-align: center;
     height: 24px;
     opacity: 0.95;
-    /* vertical-align: middle; */
 }
 
+.shopping_cart_action input{
+    background-repeat: no-repeat;
+    background-position: 5px;
+    background-size: 32px 32px;
+    padding-left: 40px;
+    overflow: hidden;
+}
+
+.place_order{
+    background-image: url('/assets/delivery-icon.png');
+}
+
+.clean_order{
+    background-image: url('/assets/clean-icon.png');
+}
+
+@media screen and (max-width: 990px){
+    .shoppingcart_count{
+        left: 3em;
+    }
+}
 
 /* PRODUCT */
+
+#product_list_options {
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5em;
+    -webkit-box-shadow: 0 5px 5px -5px #AAAAAA;
+    box-shadow: 0 5px 5px -5px #AAAAAA;
+}
+
+@media screen and (max-width: 768px){
+    #product_list_options{
+        display:block;
+    }
+}
+
+.product_list_padding{
+    margin-right: 1em;
+    margin-left: 1em;
+}
 
 .product_name_link{
     font-weight:600;
@@ -63,4 +103,190 @@
 .product_list_container{
     float:left;
     padding-left:30px;
+}
+
+.product_path_separator{
+    text-shadow: 0px 1px 2px #676767;
+    font-size: 10px;
+    vertical-align: 10%;
+}
+
+.product_show_path{
+    font-size: 12px;
+    color: #949494
+}
+
+.product_show_nopadding{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.product_image_medium{
+    overflow:hidden;
+    /*border-radius: 20px;*/
+    display: none;
+}
+
+.product_image_large{
+    overflow:hidden;
+    /*border-radius: 20px;*/
+    display: block;
+}
+
+.product_list_image img{
+    border-radius: 20px;
+}
+
+.product_show_image{
+    display:inline-block;
+    border-radius: 20px;
+    overflow:hidden;
+}
+
+.product_show_image img{
+    transition: transform .6s;
+}
+
+.product_show_image img:hover {
+    transform: scale(1.2); 
+}
+
+.product_show_title{
+    font-size:larger;
+    font-weight: 900;
+    padding-bottom: 0.5em;
+}
+
+.product_show_title_top{
+    display: none;
+}
+
+.product_show_first_field{
+    padding-top: 2em; 
+}
+
+.product_show_right{
+    padding-top: 1em;
+}
+
+.product_image_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+
+    .product_show_first_field{
+        padding-top: 1em; 
+    }
+}
+
+@media screen and (max-width: 500px){
+
+    .product_show_image_container{
+        border-bottom: 1px solid #afafaf;
+        padding-bottom: 1em;
+        -webkit-box-shadow: 0 5px 5px -5px #AAAAAA;
+        box-shadow: 0 5px 5px -5px #AAAAAA;
+    }
+}
+
+@media screen and (min-width: 1200px){
+
+    .product_image_large{
+        display: block;
+       /* margin: auto;*/
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+    .product_show_title_top{
+        display: block !important;
+    }
+
+    .product_show_image {
+        padding-left:0;
+    }
+
+    .product_show_title{
+        display: none;
+    }
+
+
+    .product_image_medium{
+        display: block;
+        margin: auto;
+    }
+
+    .product_image_large{
+        display: none;
+    }
+}
+
+
+/* PRODUCT STATUS TAGLIB */
+
+.product_show_disponibility{
+    padding: 0.2em 1em;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.product_status_ok{
+    background: #91efa0;
+    border: 2px solid #3ab74e;
+    color: #24a723;
+}
+
+.product_status_ok_quantity{
+    color: #676767;
+    text-align: right;
+}
+
+.product_status_notok{
+    background: #ef9191;
+    border: 2px solid #b73a3a;
+    color: #a72323;
+}
+
+/* PRODUCT TOSHOPPING CART */
+.product_addtocart input{
+    background-image: url('/assets/shopping-cart-white.png');
+    background-repeat: no-repeat;
+    background-position: 5px;
+    background-size: 32px 32px;
+    padding-left: 40px;
+    overflow: hidden;
+    float: right;
+}
+
+.product_addtocart_quantity{
+    flex-wrap: nowrap;
+}
+
+.product_addtocart_quantity input{
+    width: 100%;
+}
+
+
+/* FORM INPUT CLASSES*/
+
+.form_input_prepend{
+    width: 25%;
+}
+.form_input_label{
+    color: #666666;
+    padding-left: 25%;
+}
+
+@media screen and (max-width: 800px){
+    .form_input_prepend{
+        width: 10%;
+    }
+    .form_input_label{
+        padding-left: 10%;
+    }
 }

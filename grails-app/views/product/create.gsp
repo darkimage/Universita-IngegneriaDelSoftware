@@ -2,29 +2,16 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'product.label', default: 'Product')}" />
+        <g:set var="entityName" value="${message(code: 'com.lucafaggion.Product.DomainName', default: 'Product')}" />
+        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.Product.DomainNamePlural', default: 'Product')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
-        <style>
-            .input-group-addon {
-                padding: 6px 12px;
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 1;
-                color: #555;
-                text-align: center;
-                background-color: #eee;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-        </style>
     </head>
     <body>
-
         <a href="#create-product" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityNamePlural]" /></g:link></li>
             </ul>
         </div>
         <div id="create-product" class="content scaffold-create" role="main">
@@ -40,26 +27,53 @@
             </ul>
             </g:hasErrors>
             <g:uploadForm resource="${this.product}" method="POST">
-                <fieldset class="form">
-                    <f:all bean="product" except="['identifier','creation_date','photo','price','description']"/>
-                    <div class="fieldcontain required">
-                        <label for="Description"><g:message code="com.lucafaggion.Product.Fields.description"/>
-                        <span class="required-indicator">*</span></label>
-                        <textarea rows="4" cols="50" name="description" id="Description" required="" placeholder="${message(code: 'com.lucafaggion.Product.Fields.description.placeholder')}"></textarea>
+                <!--flex-nowrap-->
+                <div class="container-fluid">
+                    <div class="col-md-8">
+                    <div class="row ">
+                        <label for="name" class="form_input_label"> <g:message code='com.lucafaggion.Product.Fields.name'/>:</label>
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="name">
+                            <input type="text" class="form-control" name="name" id="name" required/>
+                        </g:formInput>
                     </div>
-                    <div class="fieldcontain required">
-                        <label for="price"><g:message code="com.lucafaggion.Product.Fields.price"/>
-                        <span class="required-indicator">*</span></label>
-                        <input type="number" placeholder="9.99" min="0" step="0.01" data-number-to-fixed="2"  data-number-stepfactor="100" class="currency" name="price" required="" id="price" />
-                        <span class="input-group-addon"><g:message code="com.lucafaggion.Product.Fields.currency"/></span>
+                    <div class="row">
+                        <label for="quantity" class="form_input_label" style="white-space:nowrap;"><g:message code='com.lucafaggion.Product.Fields.quantity'/>:</label>
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend"  spanclass="ml-auto" required="true" id="quantity">
+                            <input type="number" min="0" value="0" class="form-control" name="quantity" id="quantity" required/>
+                        </g:formInput>
                     </div>
-                    <div class="fieldcontain">
-                        <label for="photo"><g:message code="com.lucafaggion.Product.Fields.imageinput"/>
-                        <span class="required-indicator">*</span></label>
-                        <input type="file" name="photo" accept="image/*" />
 
+                    <div class="row ">
+                        <label for="category" class="form_input_label"> <g:message code='com.lucafaggion.Product.Fields.category'/>:</label>
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description">
+                            <g:selectFormInput domain="com.lucafaggion.ProductCategory" property="name" name="category" id="category"/>
+                        </g:formInput>
                     </div>
-                </fieldset>
+
+                    <div class="row ">
+                        <label for="description" class="form_input_label"> <g:message code='com.lucafaggion.Product.Fields.description'/>:</label>
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description">
+                            <textarea rows="4" cols="50" name="description" id="Description" required="" placeholder="${message(code: 'com.lucafaggion.Product.Fields.description.placeholder')}" class="form-control"></textarea>
+                        </g:formInput>
+                    </div>
+
+                    <div class="row ">
+                        <label for="price" class="form_input_label"><g:message code="com.lucafaggion.Product.Fields.price"/>:</label>
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" append="${message(code:'com.lucafaggion.Product.Fields.currency')}" required="true" id="description">
+                            <input type="number" placeholder="9.99" min="0" step="0.01" data-number-to-fixed="2"  data-number-stepfactor="100" class="form-control" name="price" required id="price" />
+                        </g:formInput>
+                    </div>
+
+                    <div class="row ">
+                        <g:formInput type="file" class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description">
+                            <input type="file" name="photo" accept="image/*" id="photo" class="custom-file-input" />
+                            <label for="photo" class="custom-file-label"><g:message code="com.lucafaggion.Product.Fields.imageinput"/></label>
+                        </g:formInput>
+                    </div>
+                    </div>
+                    <%-- <div class="col-sm-4">
+                    </div>  --%>
+                </div>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>

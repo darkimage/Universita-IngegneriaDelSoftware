@@ -19,7 +19,7 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${productList}" template="table_product_back" except="['photo','id']" />
+            <f:table collection="${productList}" template="table_product_back" except="['photo','description','id']" /> <%--template="table_product_back"--%>
 
             <div class="pagination">
                 <g:paginate total="${productCount ?: 0}" />

@@ -7,20 +7,21 @@
     <body>
         <g:set var="current_cat" value="${(params.cat!= null) ? params.cat : 1}"/>
         <g:set var="maxPerPage" value="${(params.max!= null) ? params.max : 5}"/>
-        <%-- <div>${categories.asList()} ${productCount} ${params}</div> --%>
-        <div style="padding-left:25px" class="pagination">
+        
         <g:form controller="${controllerName}" action="${actionName}" method="GET">
-            <div style="display: inline-block;">
-                <label><g:message code="com.lucafaggion.Product.SelectCategory"/>:</label>
-                <g:select name="cat" from="${categories}" value="${current_cat}" optionKey="id" optionValue="name" default = "1" />
+        <div class="d-flex justify-content-end m-2 align-items-center" id="product_list_options">
+            <div class="p-2 flex-nowrap">
+                <label ><g:message code="com.lucafaggion.Product.SelectCategory"/>:</label>
+                <g:select name="cat" from="${categories}" value="${current_cat}" optionKey="id" optionValue="name" default = "1"/>
             </div>
-            <div style="display: inline-block;">
-                <label style="margin-left:10px"><g:message code="com.lucafaggion.Product.maxPerPage"/>:</label> <!-- ${message(code:'my.localized.content')} -->
-                <g:select name="max" from="${[5,10,50,100]}" value="${maxPerPage}" />
+            <div class="p-2 flex-nowrap">
+                <label ><g:message code="com.lucafaggion.Product.maxPerPage"/>:</label>
+                <g:select name="max" from="${[5,10,50,100]}" value="${maxPerPage}" /></div>
+            <div class="p-2 pr-3 flex-nowrap">
+                <input type="submit" value="${message(code:'com.lucafaggion.Product.Submit')}" class="btn btn-primary"/>
             </div>
-            <input type="submit" value="${message(code:'com.lucafaggion.Product.Submit')}">
-        </g:form>
         </div>
+        </g:form>
 
         <div id="list-Product" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="${[categories.get(current_cat.toInteger()-1).name]}" />

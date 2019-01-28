@@ -29,7 +29,7 @@ class UserController {
             notFound()
             return
         }
-
+        
         try {
             userService.save(user)
         } catch (ValidationException e) {

@@ -1,0 +1,1 @@
+<g:select name="${name}" from="${list}" value="${list[property][0]}" optionKey="id" optionValue="${property}" default = "1" class="form-control"/>

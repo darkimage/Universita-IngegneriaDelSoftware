@@ -14,13 +14,21 @@ class ShoppingCartController {
         render(view:'index',model:[cartItems:cartItems,itemsCount:cartItems.size(),totalprice:orderprice, params:params])
     }
 
+    def add(Integer id,Integer quantity){
+        render "productid=" + id + "quantity="+ quantity
+    }
+
     def update(Integer id,Integer value){
+        println params.delete
         try{
             if(params.delete){
+                println "adadadadadad"
                 orderslogicService.deleteLineItem(id)
             }else{
+                println "a"
                 orderslogicService.updateCartProduct(id,value)
             }
+            println "tttttttt"
         }catch (ValidationException e) {
             respond e, view:'index'
             return

@@ -45,6 +45,19 @@
     opacity: 0.95;
 }
 
+#shopping_cart_message{
+    width:100%;
+    padding:2em 4em;
+    text-align:center;
+
+}
+
+#shopping_cart_message > div{
+    font-size: x-large;
+    -webkit-box-shadow: 0 5px 5px -5px #AAAAAA;
+    box-shadow: 0 5px 5px -5px #AAAAAA;
+}
+
 .shopping_cart_action input{
     background-repeat: no-repeat;
     background-position: 5px;

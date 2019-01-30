@@ -19,7 +19,7 @@
                 </g:each>
                 <g:each in="${columnProperties}" var="o" status="k">
                     <g:if test="${o.name=="name"}">
-                    <div class="col-sm pt-3">
+                    <div class="col-sm-5 pt-3">
                         <div class="product_name_link">
                             <g:link method="GET" resource="${bean}"><f:display bean="${bean}" property="${o.property}" displayStyle="${displayStyle?:'table'}" theme="${theme}"/></g:link>
                         </div>
@@ -47,7 +47,7 @@
                         </g:if>
                 </g:each>
                 
-                <div class="col-sm-3 pt-3"> 
+                <div class="col-lg-auto pt-3"> 
                     <g:showProductStatus product="${bean}"/>
                     <g:toShoppingCart controller="ShoppingCart" action="add" product="${bean}"/>
                 </div>

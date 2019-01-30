@@ -1,13 +1,3 @@
-<style>
-    .deletebtnIcon.input, button, submit { 
-        border:none;
-        background:transparent;
-    }
-    .hiddenSubmit{
-        display:none;
-    }
-</style>
-
 <div id="responsible-table">
 <table class="col-sm-12 table-striped table-condensed cf">
     <thead class="cf">
@@ -26,7 +16,7 @@
                             <g:form controller="${params.controller}" action="update" method="POST" 
                             style="display:inline;margin-left:10px">
                                     <div class="input-group flex-nowrap">
-                                        <input type='number' name='value' id='value' min='1' value="${bean[p.property]}" class="form-control"/>
+                                        <input type='number' name='value' id='value' min='1' max="${bean['subProduct'].quantity}" value="${bean[p.property]}" class="form-control"/>
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <input type='hidden' name='id' id='id' value="${bean['id']}"/>

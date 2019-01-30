@@ -10,7 +10,6 @@ class PriceConverterService{
     def convertPriceToStore(price,request){ 
         def locale = RequestContextUtils.getLocale(request)
         def money = (new BigDecimal(price)).movePointRight(2)
-        println money
         if(locale.language == "en"){
             return toEuro(money).setScale(0,BigDecimal.ROUND_DOWN).intValueExact()
         }else{

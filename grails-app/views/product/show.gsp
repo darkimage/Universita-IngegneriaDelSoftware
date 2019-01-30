@@ -17,10 +17,10 @@
             </ul>
         </div>
         <div id="show-product" class="content scaffold-show" role="main">
-            <h1 class="product_show_path"><g:productCategoryPath productid="${this.product.id}" separator="&gt;" /></h1><br>
-
-            <div class="product_show_title product_show_title_top " style="padding: 0 2em 2em 2em;">${this.product.name}<hr></div>
-            <div class="container-fluid pb-3">
+            <h1 class="product_show_path"><g:productCategoryPath productid="${this.product.id}" separator="&gt;" /></h1>
+            <g:displayFlashMsg flash="${flash}"/>
+            <div class="product_show_title product_show_title_top" style="padding: 0 2em 2em 2em;">${this.product.name}<hr></div>
+            <div class="container-fluid py-3">
                 <!-- IMAGES -->
                 <div class="row product_show_nopadding">
                     <div class="col-sm-4 product_show_image_container product_show_nopadding">                      <div class="product_image_container">

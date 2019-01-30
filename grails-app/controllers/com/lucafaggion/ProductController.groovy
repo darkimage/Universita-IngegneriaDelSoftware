@@ -11,14 +11,13 @@ class ProductController {
     ProductlogicService productlogicService
 
     def index(Integer max) {
-        redirect(action:'listProductCompact')
+        redirect(action:'listProductCompact',params:[flash:flash.message])
     }
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
     def listProductCompact(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        //respond productService.list(params), model:[productCount: productService.count()]
-        render(view:"index",model:[productList:productService.list(params),productCount: productService.count()])
+        render(view:"index",model:[productList:productService.list(params),productCount: productService.count(),flash:[message:params.flash]])
     }
 
     def listProducts = {
@@ -31,14 +30,29 @@ class ProductController {
     }
 
     def show(Long id) {
-        //utilityService.printClass(productService.get(id).photo.inputStream)
-        println productService.get(id).photo.cloudFile
         respond productService.get(id)
     }
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def create(){
         respond new Product(params)
+    }
+
+    def delete(Long id) {
+        if (id == null) {
+            notFound()
+            return
+        }
+
+        productService.delete(id)
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'product.label', default: 'Product'), id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
     }
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])

@@ -7,30 +7,62 @@ class OrderslogicService {
     def springSecurityService
     LineitemService lineitemService
     OrdersService ordersService
+    ProductService productService
 
     private def getUserShoppingCartOrder(){
         def user = springSecurityService.getCurrentUser()
         def query = "FROM Orders o WHERE o.state='cart'"
         def cart = Orders.findAll(query,[max:1])[0]
+        if(cart == null){
+           cart = new Orders(user:user,price:0,state:'cart');
+           ordersService.save(cart)
+        }
         return cart
     }
 
     def getUserShoppingCart(params) {
-        def user = springSecurityService.getCurrentUser()
-        def query = "FROM LineItem l inner join fetch l.orderid as o WHERE o.user = " + user.id + " AND o.state='cart'"
-        def cartItems = LineItem.findAll(query)
+        def cartorder = getUserShoppingCartOrder()
+        def query = "FROM LineItem l inner join fetch l.orderid as o WHERE o.id=:orderID"
+        def cartItems
+        if(params.sort != null && params.order != null){
+                query += " ORDER BY l." + params.sort + " " + params.order
+                cartItems = LineItem.findAll(query,[orderID:cartorder.id])
+        }else{
+            cartItems = LineItem.findAll(query,[orderID:cartorder.id])
+        }
         //Update items
-        for (item in cartItems) {
+        for (item in cartItems) { 
             updateCartProduct(item.id.toInteger(),item.quantity)
         }
-        return LineItem.findAll(query)
-        //Product.findAll(query,[max: params.max.toInteger(), offset: params.offset]))
+        return cartItems
     }
 
+    def addToUserCart(Integer id,Integer quantity) {
+        def user = springSecurityService.getCurrentUser()
+        def cart = getUserShoppingCartOrder()
+        def item = checkIteminOrder(cart,id)
+        if(item){
+            item.quantity += quantity;
+        }else{
+            item = new LineItem(subProduct:Product.get(id),quantity:quantity,orderid:cart)
+        }
+        lineitemService.save(item)
+        return item
+    }
+
+    def checkIteminOrder(Orders order,Integer id){
+        for(item in order.lineItem){
+            if(item.subProduct.id == id){
+                return item
+            }
+        }
+        return null
+    }
+ 
     def calculateLineItemPrice(Product product,Integer quantity){
         return product.price * quantity
     }
-
+ 
     def deleteLineItem(Integer id){
         lineitemService.delete(id);
     }
@@ -55,8 +87,16 @@ class OrderslogicService {
         def cart = getUserShoppingCartOrder()
         cart.state = "placed"
         ordersService.save(cart)
-        //TODO
-        //rimuovere la quantita' di ogni lineitem da ogni prodotto
+        for (lineitem in getUserShoppingCart()) {
+            int quantity = lineitem.quantity
+            Product product = lineitem.subProduct
+            if(product.quantity < quantity){
+                throw new RuntimeException(message(code:'com.lucafaggion.ShoppingCart.productunavaible',args:[product.name]))
+            }else{
+                product.quantity -=  quantity
+                productService.save(product)
+            }
+        }
         return cart
     }
 

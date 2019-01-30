@@ -16,10 +16,7 @@
         </div>
         <div id="show-orders" class="content scaffold-show" role="main">
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:display bean="orders" />
+            <g:displayFlashMsg flash="${flash}"/>
             <g:form resource="${this.orders}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${this.orders}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

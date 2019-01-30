@@ -19,6 +19,16 @@ class UtilityTagLib {
         out << g.render(template:'/templates/formButtonImg',model:[data:button,image:imageAttribs])
     }
 
+    def displayErrors = { attribs ->
+        def domain = attribs['domain']
+        out << g.render(template:'/templates/displayErrors',model:[domain:domain])
+    }
+
+    def displayFlashMsg = { attribs ->
+        def flash = attribs['flash']
+        out << g.render(template:'/templates/displayFlashMsg',model:[flash:flash])
+    }
+
     def selectFormInput = { attribs->
         def domain = attribs['domain']
         def property = attribs['property']
@@ -42,7 +52,7 @@ class UtilityTagLib {
     }
 
     def cartCount = {
-        def count = orderslogicService.getUserShoppingCart().size()
+        def count = orderslogicService.getUserShoppingCart(params).size()
         count = (count <= 9) ? count : "+9"
         out << g.render(template:'/templates/cartCount',model:[count:count])
     }

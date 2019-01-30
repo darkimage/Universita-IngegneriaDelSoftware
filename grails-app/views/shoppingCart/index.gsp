@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head> 
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'com.lucafaggion.ShoppingCart.shoppingcart')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
@@ -16,9 +16,7 @@
             <h1><g:message code="com.lucafaggion.ShoppingCart.shoppingcart" /></h1>
             
              <%-- DISPLAY FLASH MESSAGE --%>
-            <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-            </g:if>
+            <g:displayFlashMsg flash="${flash}"/>
             
             <%-- SHOPPING CART DISPLAY --%>
             <g:if test="${itemsCount != 0}">
@@ -59,8 +57,8 @@
         </g:if>
         <g:else>
             <%-- SHOPPING CART EMPTY --%>
-            <div style="width:100%;padding:2em;text-align:center">
-                <div class="shoppingcart_container"><g:message code="com.lucafaggiob.ShoppingCart.empty"/></div>
+            <div id="shopping_cart_message">
+                <div class="alert alert-info" role="alert"><g:message code="com.lucafaggiob.ShoppingCart.empty"/></div>
             </div>
         </g:else>
         </div>

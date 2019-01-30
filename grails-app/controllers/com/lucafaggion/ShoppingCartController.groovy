@@ -15,23 +15,33 @@ class ShoppingCartController {
     }
 
     def add(Integer id,Integer quantity){
-        render "productid=" + id + "quantity="+ quantity
+        //render "productid=" + id + "|quantity="+ quantity + "|params="+params
+        def shoppingcart
+        try{
+            orderslogicService.addToUserCart(id,quantity)
+        }catch(Exception e){
+            return response.sendError(500)
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'com.lucafaggion.ShoppingCart.added')
+                redirect(controller:params.lastController,action:params.lastAction,params:params)
+            }
+            '*' { respond shoppingcart, [status: OK] }
+        }
+
     }
 
     def update(Integer id,Integer value){
-        println params.delete
         try{
             if(params.delete){
-                println "adadadadadad"
                 orderslogicService.deleteLineItem(id)
             }else{
-                println "a"
                 orderslogicService.updateCartProduct(id,value)
             }
-            println "tttttttt"
-        }catch (ValidationException e) {
-            respond e, view:'index'
-            return
+        }catch (Exception e) {
+            return response.sendError(500)
         }
 
         request.withFormat {
@@ -48,9 +58,8 @@ class ShoppingCartController {
             def userorder
             try{
                 userorder = orderslogicService.placeUserOrder()
-            }catch (ValidationException e) {
-                respond e, view:'index'
-                return
+            }catch (Exception e) {
+                return response.sendError(500)
             }
             request.withFormat {
                 form multipartForm {
@@ -60,7 +69,11 @@ class ShoppingCartController {
                 '*' { respond userorder, [status: CREATED] }
             }
         }else{
-            orderslogicService.deleteShoppingCart()
+            try{
+                orderslogicService.deleteShoppingCart()
+            }catch (Exception e){
+                return response.sendError(500)
+            }
             request.withFormat {
                 form multipartForm {
                     flash.message = message(code: 'com.lucafaggion.ShoppingCart.orderclear')

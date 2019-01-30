@@ -1,4 +1,4 @@
-<div class="product_list_padding" id="responsible-table">
+<div class="product_list_padding pt-1" id="responsible-table">
 <table class="col-sm-12 table-striped table-condensed cf">
     <thead class="cf">
          <tr>

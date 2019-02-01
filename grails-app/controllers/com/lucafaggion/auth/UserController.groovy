@@ -1,12 +1,16 @@
 package com.lucafaggion.auth
+import com.lucafaggion.*
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured('ROLE_ADMIN')
+@Secured(value="hasRole('ROLE_ADMIN')")
 class UserController { 
 
-    UserService userService 
+    UserService userService
+    ShippingInfoService shippingInfoService
+    PaymentInfoService paymentInfoService
+    UtilityService utilityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -17,30 +21,38 @@ class UserController {
 
     def show(Long id) {
         respond userService.get(id)
-    }
+    } 
 
-    @Secured('permitAll')
+    @Secured(value=["permitAll"])
     def create() {
         respond new User(params)
     }
 
+    @Secured(value=["permitAll"])
     def save(User user) {
         if (user == null) {
             notFound()
             return
         }
-        
+        def shippingInfo = new ShippingInfo(params)
+        shippingInfo.user = user
+        def paymentInfo = new PaymentInfo(params)
+        paymentInfo.user = user
+
         try {
             userService.save(user)
+            shippingInfoService.save(shippingInfo)
+            paymentInfoService.save(paymentInfo)
         } catch (ValidationException e) {
+            println user.errors
             respond user.errors, view:'create'
-            return
+            return 
         }
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect(uri:'/')
             }
             '*' { respond user, [status: CREATED] }
         }

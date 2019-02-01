@@ -47,8 +47,9 @@ class UtilityTagLib {
         def spanclass = attribs['spanclass']
         def append = attribs['append']
         def id = attribs['id']
+        def code = attribs['code']
         def required =  Boolean.valueOf(attribs['required'])
-        out << g.render(template:'/templates/formInput',model:[css:[container:cssclass,prepend:prependclass,span:spanclass],required:required,id:id,body:body(),append:append,type:type])
+        out << g.render(template:'/templates/formInput',model:[css:[container:cssclass,prepend:prependclass,span:spanclass],required:required,id:id,body:body(),append:append,type:type,code:code])
     }
 
     def cartCount = {
@@ -88,5 +89,4 @@ class UtilityTagLib {
             out<< g.render(template:'/templates/toShoppingCart',model:[id:product.id,action:action,controller:controller,max:product.quantity])
         }
     }
-
 }

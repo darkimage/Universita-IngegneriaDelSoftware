@@ -1,4 +1,5 @@
 package com.lucafaggion.auth
+import com.lucafaggion.*
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
@@ -13,6 +14,12 @@ class User implements Serializable {
 
     String username
     String password
+    String name
+    String surname
+    Date birthDate
+    String fiscalCode
+    String email
+
     boolean enabled = true
     boolean accountExpired
     boolean accountLocked

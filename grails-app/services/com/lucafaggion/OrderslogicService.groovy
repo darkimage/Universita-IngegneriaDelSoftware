@@ -11,8 +11,8 @@ class OrderslogicService {
 
     private def getUserShoppingCartOrder(){
         def user = springSecurityService.getCurrentUser()
-        def query = "FROM Orders o WHERE o.state='cart'"
-        def cart = Orders.findAll(query,[max:1])[0]
+        def query = "FROM Orders o WHERE o.state='cart' AND o.user=:user"
+        def cart = Orders.findAll(query,[user:user],[max:1])[0]
         if(cart == null){
            cart = new Orders(user:user,price:0,state:'cart');
            ordersService.save(cart)
@@ -20,7 +20,7 @@ class OrderslogicService {
         return cart
     }
 
-    def getUserShoppingCart(params) {
+    def getUserShoppingCart(params=[:]) {
         def cartorder = getUserShoppingCartOrder()
         def query = "FROM LineItem l inner join fetch l.orderid as o WHERE o.id=:orderID"
         def cartItems
@@ -84,19 +84,23 @@ class OrderslogicService {
     }
 
     def placeUserOrder(){
+        println "PLACED"
         def cart = getUserShoppingCartOrder()
         cart.state = "placed"
-        ordersService.save(cart)
+        def test = getUserShoppingCart()
         for (lineitem in getUserShoppingCart()) {
             int quantity = lineitem.quantity
             Product product = lineitem.subProduct
-            if(product.quantity < quantity){
-                throw new RuntimeException(message(code:'com.lucafaggion.ShoppingCart.productunavaible',args:[product.name]))
+            println "(product.quantity < quantity)"
+            if(product.quantity < quantity){ 
+                println "ERROR"
+                throw new ControllerException(code:'com.lucafaggion.ShoppingCart.productunavaible',args:[product.name])
             }else{
                 product.quantity -=  quantity
                 productService.save(product)
             }
         }
+        ordersService.save(cart)
         return cart
     }
 
@@ -110,3 +114,4 @@ class OrderslogicService {
         ordersService.delete(cart.id)
     }
 }
+ 

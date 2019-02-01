@@ -10,7 +10,7 @@ class UrlMappings {
         }
 
         "/"(view:"/index") //( controller:'Item', action:'index' )
-        "/register"(controller:'User', action:'registerUser')
+        "/register"(controller:'User', action:'create')
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

@@ -1,11 +1,11 @@
 package com.lucafaggion
 import com.lucafaggion.auth.*
 
-class ShippingInfo {
-    int number
-    String address
-    String state
-    int postalzone
+class PaymentInfo {
+    int creditcart
+    String circuit
+    int cvc
+    Date expirationDate
     static belongsTo = [user:User]
     static constraints = {
     }

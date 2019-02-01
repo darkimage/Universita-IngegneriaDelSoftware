@@ -1,3 +1,4 @@
+<label for="${id}" class="form_input_label w-100"> <g:message code='${code}'/>:</label>
 <div class="input-group ${css.container}">
   <div class="input-group-prepend ${css.prepend}">
     <span class="input-group-text ${css.span}" id="${id}">

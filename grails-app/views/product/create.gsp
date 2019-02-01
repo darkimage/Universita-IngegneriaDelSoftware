@@ -23,42 +23,37 @@
                 <div class="container-fluid">
                     <div class="col-md-8">
                     <div class="row ">
-                        <label for="name" class="form_input_label"> <g:message code='com.lucafaggion.Product.Fields.name'/>:</label>
-                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="name">
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="name-input" code='com.lucafaggion.Product.Fields.name'>
                             <input type="text" class="form-control" name="name" id="name" required/>
                         </g:formInput>
                     </div>
                     <div class="row">
-                        <label for="quantity" class="form_input_label" style="white-space:nowrap;"><g:message code='com.lucafaggion.Product.Fields.quantity'/>:</label>
-                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend"  spanclass="ml-auto" required="true" id="quantity">
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend"  spanclass="ml-auto" required="true" id="quantity-input" code='com.lucafaggion.Product.Fields.quantity'>
                             <input type="number" min="0" value="0" class="form-control" name="quantity" id="quantity" required/>
                         </g:formInput>
                     </div>
 
                     <div class="row ">
-                        <label for="category" class="form_input_label"> <g:message code='com.lucafaggion.Product.Fields.category'/>:</label>
-                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description">
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description-input" code='com.lucafaggion.Product.Fields.category'>
                             <g:selectFormInput domain="com.lucafaggion.ProductCategory" property="name" name="category" id="category"/>
                         </g:formInput>
                     </div>
 
                     <div class="row ">
-                        <label for="description" class="form_input_label"> <g:message code='com.lucafaggion.Product.Fields.description'/>:</label>
-                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description">
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description-input" code='com.lucafaggion.Product.Fields.description'>
                             <textarea rows="4" cols="50" name="description" id="Description" required="" placeholder="${message(code: 'com.lucafaggion.Product.Fields.description.placeholder')}" class="form-control"></textarea>
                         </g:formInput>
                     </div>
 
                     <div class="row ">
-                        <label for="price" class="form_input_label"><g:message code="com.lucafaggion.Product.Fields.price"/>:</label>
-                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" append="${message(code:'com.lucafaggion.Product.Fields.currency')}" required="true" id="description">
+                        <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" append="${message(code:'com.lucafaggion.Product.Fields.currency')}" required="true" id="description-input" code="com.lucafaggion.Product.Fields.price">
                             <input type="number" placeholder="9.99" min="0" step="0.01" data-number-to-fixed="2"  data-number-stepfactor="100" class="form-control" name="price" required id="price" />
                         </g:formInput>
                     </div>
 
                     <div class="row ">
-                        <g:formInput type="file" class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description">
-                            <input type="file" name="photo" accept="image/*" id="photo" class="custom-file-input" />
+                        <g:formInput type="file" class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="description-input" code="com.lucafaggion.Product.Fields.imageinput">
+                            <input type="file" name="photo" accept="image/*" id="photo" class="custom-file-input" onChange="displayFileName('#photo')"/>
                             <label for="photo" class="custom-file-label"><g:message code="com.lucafaggion.Product.Fields.imageinput"/></label>
                         </g:formInput>
                     </div>

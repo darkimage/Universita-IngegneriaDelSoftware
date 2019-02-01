@@ -3,5 +3,5 @@
     "files.exclude":{
         "**/bin":true,
     },
-    "java.dependency.packagePresentation": "flat"
+    "java.dependency.packagePresentation": "hierarchical"
 }

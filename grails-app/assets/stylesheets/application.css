@@ -28,10 +28,57 @@
     display:none;
 }
 
+.simpleNavButton:after{
+    display:none;
+}
+
+/* FORM STYLES*/
+.form_set{
+    border-bottom: 1px solid;
+    padding-left: 2em;
+    border-color: #CCCCCC;
+}
+
+#form_column_half{
+    padding-left: 14%;
+}
+
+#form_column_half > #nopadding{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#form_column_half > #nopadding > #nopadding{
+    padding-left: 5%;
+    padding-right: 0;
+}
+
+#form_column_half > #nopadding > #nopadding >*{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media screen and (max-width:800px){
+    #form_column_half{
+        padding-left: 0;
+    }
+}
+
+.no-spinners 
+input::-webkit-inner-spin-button, 
+input::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+
+
 /* SHOPPING CART*/
 
 .shoppingcart_count{
-    top: 0.4em;
+    top: 1.2em;
     right: 0.3em;
     position: absolute;
     background: #f73131;

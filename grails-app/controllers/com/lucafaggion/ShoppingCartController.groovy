@@ -58,10 +58,13 @@ class ShoppingCartController {
             def userorder
             try{
                 userorder = orderslogicService.placeUserOrder()
-            }catch (Exception e) {
-                return response.sendError(500)
+            }catch(ControllerException ce){
+                def error = ce.getExceptionMessage()
+                flash.error = message(code:error.code,args:error.args)
+                redirect(action:'index')
+                return
             }
-            request.withFormat {
+            request.withFormat { 
                 form multipartForm {
                     flash.message = message(code: 'com.lucafaggion.ShoppingCart.ordersucces',args:[userorder.id])
                     redirect(controller:'orders',action:'showUserOrders')

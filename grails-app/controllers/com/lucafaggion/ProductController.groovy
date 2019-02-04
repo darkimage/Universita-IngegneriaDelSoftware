@@ -2,6 +2,11 @@ package com.lucafaggion
 import grails.validation.ValidationException
 import com.bertramlabs.plugins.selfie.AttachmentValueConverter
 import grails.plugin.springsecurity.annotation.Secured
+import com.bertramlabs.plugins.selfie.*
+import org.springframework.web.multipart.*
+import org.springframework.web.multipart.commons.*
+import org.apache.commons.io.FileUtils
+import org.apache.commons.fileupload.disk.DiskFileItem
 
 @Secured('permitAll')
 class ProductController {
@@ -17,6 +22,7 @@ class ProductController {
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
     def listProductCompact(Integer max) {
         params.max = Math.min(max ?: 10, 100)
+        println productService.list(params)
         render(view:"index",model:[productList:productService.list(params),productCount: productService.count(),flash:[message:params.flash]])
     }
 
@@ -33,9 +39,14 @@ class ProductController {
         respond productService.get(id)
     }
 
-    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
+    @Secured(value=["hasAnyRole('ROLE_DIPENDENTE','ROLE_ADMIN')"])
     def create(){
         respond new Product(params)
+    }
+
+    @Secured(value=["hasAnyRole('ROLE_DIPENDENTE','ROLE_ADMIN')"]) 
+    def edit(Long id) {
+        respond productService.get(id)
     }
 
     def delete(Long id) {
@@ -57,6 +68,10 @@ class ProductController {
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def save(Product product) {
+        if(params.update){
+            update(product)
+            return
+        }
         if (product == null) {
             notFound()
             return
@@ -82,4 +97,28 @@ class ProductController {
             '*' { respond product, [status: CREATED] }
         }
     }
+
+    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
+    def update(Product product) {
+        if (product == null) {
+            notFound()
+            return
+        }
+
+        try {
+            productService.save(product)
+        } catch (ValidationException e) {
+            respond product.errors, view:'edit'
+            return
+        }
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'product.label', default: 'Product'), product.id])
+                redirect product
+            }
+            '*'{ respond product, [status: OK] }
+        }
+    }
 }
+ 

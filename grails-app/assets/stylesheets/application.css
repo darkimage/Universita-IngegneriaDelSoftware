@@ -350,3 +350,9 @@ input::-webkit-outer-spin-button {
         padding-left: 10%;
     }
 }
+
+/* USER STYLING */
+.user_header_border{
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem 
+}

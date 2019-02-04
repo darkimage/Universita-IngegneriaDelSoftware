@@ -52,6 +52,7 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h1>Welcome to Grails</h1>
+        <g:displayFlashMsg flash="${flash}"/>
 
         <p>
             Congratulations, you have successfully started your first Grails application! At the moment

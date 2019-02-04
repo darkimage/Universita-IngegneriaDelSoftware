@@ -16,4 +16,13 @@ class PriceFormatterTagLib {
         out << moneyString
     }
 
+    def inputPrice = {attribs ->
+        def value = attribs['value']
+        if(value == ""){
+            out << ''
+        }else{
+            out << priceConverterService.convertPrice(value as Integer,request)
+        }
+    }
+
 }

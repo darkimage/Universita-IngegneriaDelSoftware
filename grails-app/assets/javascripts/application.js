@@ -36,13 +36,23 @@ function formatNumber(event){
    event.target.value = value;
 }
 
-function formatDatePickers(elements){
-   elements.forEach(function(entry) {
-      let dateElements = ['month','day','year']
-      dateElements.forEach(function(append) {
-         $("#" + entry + "_" + append).addClass("form-control");
-      });
-  });
+// function formatDatePickers(elements){
+//    elements.forEach(function(entry) {
+//       let dateElements = ['month','day','year']
+//       dateElements.forEach(function(append) {
+//          $("#" + entry + "_" + append).addClass("form-control");
+//       });
+//   });
+// }
+
+// formatDatePickers(['birthDate','expirationDate'])
+
+
+function setDate(id){
+   $(id+"_year").val($(id).val().split('-')[0])
+   $(id+"_day").val($(id).val().split('-')[2])
+   $(id+"_month").val($(id).val().split('-')[1])
 }
 
-formatDatePickers(['birthDate','expirationDate'])
+setDate('#birthDate')
+setDate('#expirationDate')

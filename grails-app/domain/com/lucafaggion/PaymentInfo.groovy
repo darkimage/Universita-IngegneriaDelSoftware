@@ -2,7 +2,7 @@ package com.lucafaggion
 import com.lucafaggion.auth.*
 
 class PaymentInfo {
-    int creditcart
+    String creditcard
     String circuit
     int cvc
     Date expirationDate

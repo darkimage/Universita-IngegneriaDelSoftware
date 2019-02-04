@@ -56,6 +56,9 @@
                                 <div class="row product_show_right product_show_nopadding">
                                     <div class="col-sm product_show_nopadding">
                                         <g:showProductStatus product="${this.product}"/>
+                                        <div class="py-2 text-nowrap">
+                                            <g:message code="com.lucafaggion.Product.Fields.price"/>:<span class="text-primary font-weight-bold"><g:formatPrice value="${this.product.price}"/></span>
+                                        </div>
                                         <g:toShoppingCart controller="ShoppingCart" action="add" product="${this.product}"/>
                                     </div>
                                 </div>

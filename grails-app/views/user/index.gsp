@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+        <g:set var="entityName" value="${message(code: 'com.lucafaggion.User.DomainName', default: 'User')}" />
+        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.User.DomainNamePlural', default: 'User')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
@@ -14,9 +15,9 @@
             </ul>
         </div>
         <div id="list-user" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+            <h1><g:message code="default.list.label" args="[entityNamePlural]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
-            <f:table collection="${userList}" />
+            <f:table collection="${userList}" code="com.lucafaggion.User.Fields." properties="username,name,surname,email,fiscalCode"/>
 
             <div class="pagination">
                 <g:paginate total="${userCount ?: 0}" />

@@ -10,6 +10,7 @@ class UserController {
     UserService userService
     ShippingInfoService shippingInfoService
     PaymentInfoService paymentInfoService
+    UserlogicService userlogicService
     UtilityService utilityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -19,8 +20,12 @@ class UserController {
         respond userService.list(params), model:[userCount: userService.count()]
     }
 
-    def show(Long id) {
-        respond userService.get(id)
+    def show(Long id) { 
+        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user.id=:user",[user:id])
+        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user.id=:user",[user:id])
+        def user = userService.get(id)
+        def data = [user:user,userShippingInfo:userShipping,userPaymentInfo:userPayment]
+        respond([userData:data])
     } 
 
     @Secured(value=["permitAll"])
@@ -59,19 +64,35 @@ class UserController {
     }
 
     def edit(Long id) {
-        respond userService.get(id)
+        def userEdit = userService.get(id)
+        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user",[user:userEdit])
+        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user",[user:userEdit])
+        def data = [user:userEdit,userShippingInfo:userShipping,userPaymentInfo:userPayment]
+        respond([userData:data])
     }
 
-    def update(User user) {
+    def update = {
+        def user = User.get(params.id)
         if (user == null) {
             notFound()
             return
         }
-
+        if(!params.password){
+            bindData(user,params,[exclude:['password']])
+        }else{
+            bindData(user,params)
+        }
+        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user",[user:user])
+        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user",[user:user])
+        bindData(userPayment, params)
+        bindData(userShipping, params)
         try {
             userService.save(user)
+            shippingInfoService.save(userShipping)
+            paymentInfoService.save(userPayment)   
         } catch (ValidationException e) {
-            respond user.errors, view:'edit'
+            def data = [user:user,userShippingInfo:userShipping,userPaymentInfo:userPayment]
+            respond([userData:data], view:'edit')
             return
         }
 
@@ -89,7 +110,10 @@ class UserController {
             notFound()
             return
         }
-
+        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user.id=:user",[user:id])
+        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user.id=:user",[user:id])
+        userPayment.delete()
+        userShipping.delete()
         userService.delete(id)
 
         request.withFormat {

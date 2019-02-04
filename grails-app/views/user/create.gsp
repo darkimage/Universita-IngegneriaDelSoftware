@@ -19,7 +19,8 @@
             <g:displayFlashMsg flash="${flash}"/>
             <g:displayErrors domain="${this.user}"/>
             <g:form resource="${this.user}" method="POST">
-                <div class="container-fluid">
+                <g:renderForm template="/templates/renderUserForm" instance="${this}" type="create"/>
+                <%-- <div class="container-fluid">
                     <div class="col-md-8">
                         <div class="row">
                             <g:formInput class="mb-3 flex-nowrap" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="name-input" code='com.lucafaggion.User.Fields.name'>
@@ -33,7 +34,7 @@
                         </div>
                         <div class="row">
                             <g:formInput class="mb-3 flex-nowrap no-spinners" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="birthDate-input" code='com.lucafaggion.User.Fields.birthdate'>
-                                <g:datePicker name="birthDate" precision="day" default="none" noSelection="['': '']" />
+                                <g:formDateInput id="birthDate" class="form-control"/>
                             </g:formInput>
                         </div>
                         <div class="row">
@@ -131,10 +132,11 @@
                         </div>
                         <div class="row">
                             <g:formInput class="mb-3 flex-nowrap no-spinners" prependclass="form_input_prepend" spanclass="ml-auto" required="true" id="expirationDate-input" code='com.lucafaggion.User.Fields.expirationDate'>
-                                <g:datePicker name="expirationDate" precision="day" default="none" noSelection="['': '']" />
+                                <g:formDateInput id="expirationDate" class="form-control"/>
                             </g:formInput>
                         </div>          
-                </div>
+                    </div>
+                </div> --%>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>

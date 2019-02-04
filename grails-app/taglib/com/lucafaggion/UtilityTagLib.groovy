@@ -32,11 +32,15 @@ class UtilityTagLib {
     def selectFormInput = { attribs->
         def domain = attribs['domain']
         def property = attribs['property']
+        def domaininstance = attribs['instance']
+        def required = attribs['required']
         def name = attribs['name']
         def id = attribs['id']
         def instance = grailsApplication.getArtefact("Domain",domain)?.getClazz()?.get(1)
         def list = instance.list()
-        out << g.render(template:'/templates/selectFormInput',model:[list:list,name:name,id:id,property:property])
+        println domaininstance[name].id
+        def value = (domaininstance) ? domaininstance[name].id : list[property][0]
+        out << g.render(template:'/templates/selectFormInput',model:[list:list,name:name,id:id,property:property,instance:domaininstance,required:required,value:value])
     }
 
     def formInput = { attribs, body ->
@@ -53,7 +57,7 @@ class UtilityTagLib {
     }
 
     def cartCount = {
-        def count = orderslogicService.getUserShoppingCart(params).size()
+        def count = orderslogicService.getUserShoppingCart().size()
         count = (count <= 9) ? count : "+9"
         out << g.render(template:'/templates/cartCount',model:[count:count])
     }
@@ -88,5 +92,45 @@ class UtilityTagLib {
         if(product.quantity != 0){
             out<< g.render(template:'/templates/toShoppingCart',model:[id:product.id,action:action,controller:controller,max:product.quantity])
         }
+    }
+
+    def formDateInput = { attribs ->
+        def id = attribs['id']
+        def css = attribs['class'] 
+        def required = attribs['required']
+        def value = attribs['value']
+        out << g.render(template:'/templates/formDateInput',model:[css:css,id:id,required:required,value:value])
+    }
+
+    def renderForm = { attribs ->
+        def inst = attribs['instance']
+        def template = attribs['template']
+        def type = attribs['type']
+        out << g.render(template:template,model:[domain_instance:inst,inputtype:type])
+    }
+
+
+    def setValueRequired = { attribs-> 
+        def value = attribs['value']
+        def property = attribs['fieldproperty']
+        def defaultval = attribs['defaultval']
+        out << ((value == null) ? defaultval : value[property])
+    }
+
+    def isInputRequired = { attribs ->
+        def type = attribs['type']
+        def required = attribs['required']
+        out << ((type=="create") ? ((required) ? "required" : "") : "")
+    }
+
+    def formatDateforInput = { attribs ->
+        def value = attribs['value'].toString()
+        try{
+            def date =  Date.parse("yyyy-mm-dd",value)
+            def formdate = date.format("yyyy-mm-dd")
+            out << formdate
+        }catch (Exception e) {
+           out << ""
+       }
     }
 }

@@ -26,6 +26,16 @@
             </g:formInput>
         </div>
 
+        <sec:access expression="hasRole('ROLE_ADMIN')">
+        <div class="row">
+            <div class="alert alert-warning w-100" role="alert">
+                <g:formInput class="mb-3 flex-nowrap no-spinners" prependclass="form_input_prepend" spanclass="ml-auto" required="${isInputRequired(type:inputtype,required:true).toString()}" id="role-input" code='com.lucafaggion.User.Fields.role'>
+                    <g:selectFormInput domain="com.lucafaggion.auth.Role" property="name" name="role" id="role" instance="${(inputtype == "edit") ? domain_instance : null}" required="${isInputRequired(type:inputtype,required:true)}"/> 
+                </g:formInput>
+            </div>
+        </div>
+        </sec:access>
+
         <div class="row" id="form_column_half">
             <div class="col-md-auto w-100" id="nopadding">
                 <div class="form_set"><g:message code="com.lucafaggion.User.Form.login"/></div>

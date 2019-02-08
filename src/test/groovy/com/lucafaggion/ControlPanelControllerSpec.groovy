@@ -3,7 +3,7 @@ package com.lucafaggion
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class LineItemControllerSpec extends Specification implements ControllerUnitTest<LineItemController> {
+class ControlPanelControllerSpec extends Specification implements ControllerUnitTest<ControlPanelController> {
 
     def setup() {
     }

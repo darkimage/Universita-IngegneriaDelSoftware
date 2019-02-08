@@ -3,14 +3,15 @@ import com.lucafaggion.*
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityUtils
 
 @Secured(value="hasRole('ROLE_ADMIN')")
 class UserController { 
-
+    def springSecurityService
     UserService userService
     ShippingInfoService shippingInfoService
     PaymentInfoService paymentInfoService
-    UserlogicService userlogicService
+    UserLogicService userLogicService
     UtilityService utilityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -21,15 +22,11 @@ class UserController {
     }
 
     def show(Long id) { 
-        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user.id=:user",[user:id])
-        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user.id=:user",[user:id])
-        def user = userService.get(id)
-        def data = [user:user,userShippingInfo:userShipping,userPaymentInfo:userPayment]
-        respond([userData:data])
+        respond([userData:userLogicService.getUserDatabyId(id)])
     } 
 
     @Secured(value=["permitAll"])
-    def create() {
+    def create() { 
         respond new User(params)
     }
 
@@ -39,15 +36,22 @@ class UserController {
             notFound()
             return
         }
+
         def shippingInfo = new ShippingInfo(params)
         shippingInfo.user = user
         def paymentInfo = new PaymentInfo(params)
         paymentInfo.user = user
+        def userRole = Role.get(params.role)
 
         try {
             userService.save(user)
             shippingInfoService.save(shippingInfo)
             paymentInfoService.save(paymentInfo)
+            if(SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
+                UserRole.create(user,userRole,true)
+            }else{
+                UserRole.create(user,Role.find("FROM Role as r WHERE r.authority=:role",[role:'ROLE_USER']),true)
+            }
         } catch (ValidationException e) {
             println user.errors
             respond user.errors, view:'create'
@@ -112,8 +116,12 @@ class UserController {
         }
         def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user.id=:user",[user:id])
         def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user.id=:user",[user:id])
+        def roles = UserRole.findAll("FROM UserRole as u WHERE u.user.id=:user",[user:id])
         userPayment.delete()
         userShipping.delete()
+        for (role in roles) {
+            role.delete()
+        }
         userService.delete(id)
 
         request.withFormat {

@@ -2,26 +2,42 @@ package com.lucafaggion
 import grails.plugin.springsecurity.annotation.Secured
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.SpringSecurityUtils
 
 @Secured('isFullyAuthenticated()') 
 class OrdersController {
 
     OrdersService ordersService
-    OrderslogicService orderslogicService 
+    OrderslogicService orderslogicService
+    LineItemLogicService lineItemLogicService
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond ordersService.list(params), model:[ordersCount: ordersService.count()]
+        respond orderslogicService.getOrders(params), model:[ordersCount: ordersService.count()]
     }
 
     def show(Long id) {
-        respond ordersService.get(id)
-    }
+        def order = ordersService.get(id)
+        def items = lineItemLogicService.getAllLineItemsOfOrder(order,params)
+        def hasPermission = false
 
-    def create() {
-        respond new Orders(params)
+        if(SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_DIPENDENTE')){
+            hasPermission = true
+        }
+
+        if(order.user == springSecurityService.getCurrentUser()){
+            hasPermission = true
+        }
+
+        if(hasPermission){
+            respond([orders:order,lineItems:items])
+        }else{
+           render(view: '/login/denied')
+        }
+
     }
 
     def save(Orders orders) {
@@ -44,10 +60,6 @@ class OrdersController {
             }
             '*' { respond orders, [status: CREATED] }
         }
-    }
-
-    def edit(Long id) {
-        respond ordersService.get(id)
     }
 
     def update(Orders orders) {
@@ -77,8 +89,8 @@ class OrdersController {
             notFound()
             return
         }
-
-        ordersService.delete(id)
+        
+        orderslogicService.deleteOrder(id)
 
         request.withFormat {
             form multipartForm {

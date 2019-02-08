@@ -40,7 +40,7 @@
             <li class="dropdown"><g:link class="dropdown-toggle simpleNavButton" controller="login" action="auth" params="[referee:true]">Login</g:link>
             </li>
             <li class="dropdown">
-                <g:link class="dropdown-toggle simpleNavButton" controller='user' action="register">Register</g:link>
+                <g:link class="dropdown-toggle simpleNavButton" controller='user' action="create">Register</g:link>
             </li>
             </sec:ifNotLoggedIn>
  
@@ -48,6 +48,10 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 25px;padding-bottom: 25px;" role="button" aria-haspopup="true" aria-expanded="false"><sec:loggedInUserInfo field='name'/></a>
                     <ul class="dropdown-menu">
+                        <li class="dropdown-item"><g:link controller='profile'><g:message code="com.lucafaggion.Profile.DomainName"/></g:link></li>
+                        <sec:access  expression="hasAnyRole('ROLE_DIPENDENTE','ROLE_ADMIN')">
+                            <li class="dropdown-item"><g:link controller='controlPanel'><g:message code="com.lucafaggion.ControlPanel.ControllerName"/></g:link></li>
+                        </sec:access>
                         <li class="dropdown-item"><g:link controller='logout'>Logout</g:link></li>
                     </ul>
                 </li>

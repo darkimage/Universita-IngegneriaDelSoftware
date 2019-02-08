@@ -16,23 +16,19 @@ class ProductController {
     ProductlogicService productlogicService
 
     def index(Integer max) {
-        redirect(action:'listProductCompact',params:[flash:flash.message])
+        redirect(action:'listProductCompact')
     }
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
     def listProductCompact(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        println productService.list(params)
-        render(view:"index",model:[productList:productService.list(params),productCount: productService.count(),flash:[message:params.flash]])
+        def data = productlogicService.getProductData(params)
+        render(view:"index",model:[categories:data.category,productList:data.list,productCount: data.count,flash:[message:params.flash]])
     }
 
     def listProducts = {
-        def category = ProductCategory.list()
-        def currentCat = (params.cat != null) ? params.cat : category[0].id
-        def productsSize = productlogicService.getCategoryProductCount(currentCat)
-        def products = productlogicService.getProductsOfCategory(currentCat,params)
+        def data = productlogicService.getProductData(params)
         render(view:"listProductCat",model:  
-        [categories: category,productList:products,productCount: productsSize,params:params])
+        [categories: data.category,productList:data.list,productCount: data.count,params:params])
     }
 
     def show(Long id) {

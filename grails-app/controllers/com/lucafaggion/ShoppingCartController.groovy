@@ -15,7 +15,6 @@ class ShoppingCartController {
     }
 
     def add(Integer id,Integer quantity){
-        //render "productid=" + id + "|quantity="+ quantity + "|params="+params
         def shoppingcart
         try{
             orderslogicService.addToUserCart(id,quantity)
@@ -67,7 +66,7 @@ class ShoppingCartController {
             request.withFormat { 
                 form multipartForm {
                     flash.message = message(code: 'com.lucafaggion.ShoppingCart.ordersucces',args:[userorder.id])
-                    redirect(controller:'orders',action:'showUserOrders')
+                    redirect(controller:'orders',action:'show',id:userorder.id)
                 }
                 '*' { respond userorder, [status: CREATED] }
             }

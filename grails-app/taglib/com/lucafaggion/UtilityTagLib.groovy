@@ -37,10 +37,14 @@ class UtilityTagLib {
         def name = attribs['name']
         def id = attribs['id']
         def instance = grailsApplication.getArtefact("Domain",domain)?.getClazz()?.get(1)
-        def list = instance.list()
-        println domaininstance[name].id
+        def list = (instance) ? instance.list() : []
         def value = (domaininstance) ? domaininstance[name].id : list[property][0]
         out << g.render(template:'/templates/selectFormInput',model:[list:list,name:name,id:id,property:property,instance:domaininstance,required:required,value:value])
+    }
+
+    def displayPagination = { attribs ->
+        def count = attribs['count']
+        out << g.render(template:'/templates/displayPagination',model:[count:count])
     }
 
     def formInput = { attribs, body ->
@@ -52,7 +56,7 @@ class UtilityTagLib {
         def append = attribs['append']
         def id = attribs['id']
         def code = attribs['code']
-        def required =  Boolean.valueOf(attribs['required'])
+        def required = (attribs['required'] == 'required') ? true : false
         out << g.render(template:'/templates/formInput',model:[css:[container:cssclass,prepend:prependclass,span:spanclass],required:required,id:id,body:body(),append:append,type:type,code:code])
     }
 
@@ -132,5 +136,16 @@ class UtilityTagLib {
         }catch (Exception e) {
            out << ""
        }
+    }
+
+    def displayRow = { attribs,body -> 
+        def code =  attribs['code']
+        out << g.render(template:'/templates/displayRow',model:[code:code,body:body()])
+    }
+
+    def renderWithTemplate = {attribs ->
+        def value = attribs['value']
+        def template = attribs['template']
+        out << g.render(template:template,model:[value:value])
     }
 }

@@ -8,6 +8,14 @@ class ProductlogicService {
     UtilityService utilityService
     PriceConverterService priceConverterService
 
+    def getProductData(params){
+        def category = ProductCategory.list()
+        def currentCat = (params.cat != null) ? params.cat : ((category.size() > 0) ? category[0].id : 0)
+        def productsSize = getCategoryProductCount(currentCat) 
+        def products = getProductsOfCategory(currentCat,params)
+        return [cat:category,list:products,count:productsSize]
+    }
+
     def getProductsOfCategory(value,params){
         params.max = (params.max != null) ? params.max : 5;
         def sort = (params.sort ? "ORDER BY " + params.sort : "") 

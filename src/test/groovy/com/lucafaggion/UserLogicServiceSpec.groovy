@@ -1,9 +1,9 @@
 package com.lucafaggion
 
-import grails.testing.web.controllers.ControllerUnitTest
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class ProductCategoryControllerSpec extends Specification implements ControllerUnitTest<ProductCategoryController> {
+class UserLogicServiceSpec extends Specification implements ServiceUnitTest<UserLogicService>{
 
     def setup() {
     }

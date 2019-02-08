@@ -49,16 +49,12 @@
             </div>
         
             <%-- PAGINATION --%>
-            <g:if test="${itemsCount > params.max.toInteger()}">
-                <div class="pagination">
-                    <g:paginate controller="ShoppingCart" action="index" total="${itemsCount}" params="${params}" />
-                </div>
-            </g:if>
+            <g:displayPagination count="${itemsCount}"/>
         </g:if>
         <g:else>
             <%-- SHOPPING CART EMPTY --%>
-            <div id="shopping_cart_message">
-                <div class="alert alert-info" role="alert"><g:message code="com.lucafaggiob.ShoppingCart.empty"/></div>
+            <div id="info_message">
+                <div class="alert alert-info" role="alert"><g:message code="com.lucafaggion.ShoppingCart.empty"/></div>
             </div>
         </g:else>
         </div>

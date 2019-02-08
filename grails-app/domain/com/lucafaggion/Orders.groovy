@@ -4,6 +4,7 @@ import com.lucafaggion.auth.*
 class Orders {
     String state
     int price
+    Date submittedDate
     static hasMany = [lineItem: LineItem]
     static belongsTo = [user: User]
     static constraints = {

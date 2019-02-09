@@ -74,7 +74,9 @@ class ShoppingCartController {
             try{
                 orderslogicService.deleteShoppingCart()
             }catch (Exception e){
-                return response.sendError(500)
+                flash.error = message(code:e.getMessage())
+                redirect(action:'index')
+                return
             }
             request.withFormat {
                 form multipartForm {

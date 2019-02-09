@@ -9,6 +9,9 @@
                 <g:displayRow code="com.lucafaggion.User.Fields.email">${value.user.email} </g:displayRow>
                 <g:displayRow code="com.lucafaggion.User.Fields.birthdate"> <g:newformatDate date="${value.user.birthDate}" format="dd-MM-yyyy"/></g:displayRow>
                 <g:displayRow code="com.lucafaggion.User.Fields.fiscalcode"> ${value.user.fiscalCode}</g:displayRow>
+                <sec:access expression="hasAnyRole('ROLE_ADMIN','ROLE_DIPENDENTE')">
+                    <g:displayRow code="com.lucafaggion.User.Fields.role"> ${value.userRole.name}</g:displayRow>
+                </sec:access>
             </ul>
         </div>
         <div class="col-md pt-2">

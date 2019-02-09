@@ -69,9 +69,7 @@ class UserController {
 
     def edit(Long id) {
         def userEdit = userService.get(id)
-        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user",[user:userEdit])
-        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user",[user:userEdit])
-        def data = [user:userEdit,userShippingInfo:userShipping,userPaymentInfo:userPayment]
+        def data = userLogicService.getUserDatabyUser(userEdit)
         respond([userData:data])
     }
 
@@ -86,16 +84,14 @@ class UserController {
         }else{
             bindData(user,params)
         }
-        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user",[user:user])
-        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user",[user:user])
-        bindData(userPayment, params)
-        bindData(userShipping, params)
+        def data = userLogicService.getUserDatabyUser(user)
+        bindData(data.userPaymentInfo, params)
+        bindData(data.userShippingInfo, params)
         try {
             userService.save(user)
-            shippingInfoService.save(userShipping)
-            paymentInfoService.save(userPayment)   
+            shippingInfoService.save(data.userShippingInfo)
+            paymentInfoService.save(data.userPaymentInfo)   
         } catch (ValidationException e) {
-            def data = [user:user,userShippingInfo:userShipping,userPaymentInfo:userPayment]
             respond([userData:data], view:'edit')
             return
         }
@@ -114,14 +110,11 @@ class UserController {
             notFound()
             return
         }
-        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user.id=:user",[user:id])
-        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user.id=:user",[user:id])
-        def roles = UserRole.findAll("FROM UserRole as u WHERE u.user.id=:user",[user:id])
-        userPayment.delete()
-        userShipping.delete()
-        for (role in roles) {
-            role.delete()
-        }
+        def data = userLogicService.getUserDatabyId(id)
+        data.userPaymentInfo.delete()
+        data.userShippingInfo.delete()
+        userLogicService.deleteUserRolesById(id)
+        userLogicService.deleteUserOrdersById(id)
         userService.delete(id)
 
         request.withFormat {

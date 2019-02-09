@@ -8,6 +8,10 @@ class ProductlogicService {
     UtilityService utilityService
     PriceConverterService priceConverterService
 
+    def getfeaturedProducts(){
+        return Product.findAll("FROM Product as p WHERE p.featured = TRUE")
+    }
+
     def getProductData(params){
         def category = ProductCategory.list()
         def currentCat = (params.cat != null) ? params.cat : ((category.size() > 0) ? category[0].id : 0)

@@ -10,7 +10,7 @@ class ControlPanelController {
     }
 
     def manageProducts = {
-        redirect(controller:'product',action:'listProductCompact')
+        redirect(controller:'product',action:'manage')
     }
 
     def manageOrders = {

@@ -9,6 +9,7 @@ class Product {
     int quantity
     int price
     Attachment photo
+    Boolean featured
     
     String toString(){
         "${name}"
@@ -35,6 +36,7 @@ class Product {
         description()
         identifier()
         photo contentType: ['png','jpg'], fileSize:1024*1024 // 1mb
+        featured nullable: true,defaultValue: false
     }
 
 }

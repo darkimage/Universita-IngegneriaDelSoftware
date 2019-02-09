@@ -6,6 +6,9 @@
         <g:if env="development"><asset:stylesheet src="errors.css"/></g:if>
     </head>
     <body>
+        <div id="info_message">
+            <div class="alert alert-danger" role="alert"><g:message code="com.lucafaggon.error500"/></div>
+        </div>
         <g:if env="development">
             <g:if test="${Throwable.isInstance(exception)}">
                 <g:renderException exception="${exception}" />
@@ -22,10 +25,5 @@
                 </ul>
             </g:else>
         </g:if>
-        <g:else>
-            <ul class="errors">
-                <li>An error has occurred</li>
-            </ul>
-        </g:else>
     </body>
 </html>

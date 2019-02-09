@@ -7,13 +7,93 @@
 * You're free to add application-wide styles to this file and they'll appear at the top of the
 * compiled file, but it's generally better to create a new file per style scope.
 *
+*= require font-awesome
 *= require bootstrap
+*= require bootstrap-checkboxes
 *= require responsible-table
 *= require grails
 *= require main
 *= require mobile
 *= require_self
 */
+
+/* SLIDE */
+.featured_slide{
+    background: #a3a3a3;
+}
+
+.featured-caption{
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: left;
+}
+
+.featured-caption h2{
+    text-shadow: 2px 1px 3px #4a4a4a;
+    font-size: 30pt;
+}
+.featured-caption #goto{
+    padding-top: 2em;
+}
+
+.featured-caption #price{
+    color: #ffffff;
+    font-size: 30pt;
+    padding-top: 1em;
+    text-shadow: 2px 1px 3px #17a2b8;
+    width: 100%;
+}
+
+.featured-caption #description{
+    max-height: 150px;
+    overflow: hidden;
+    color: #5c5c5c;
+    width: 70%;
+}
+
+.image_slide{
+    overflow: hidden;
+    position: absolute;
+    top:-50%; 
+    left: 0; 
+    right: 50%; 
+    bottom:-50%;
+    margin: auto;
+    height: 80%;
+    border-radius: 20px;
+}
+
+@media screen and (max-width:768px){
+    .image_slide{
+        right: 0; 
+    }
+
+    .featured-caption{
+        width: 100%;
+        text-align: center;
+        top: 0%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        min-height: 380px;
+    }
+    .featured-caption #price{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media screen and (min-width:768px){
+    .featured-caption h2{
+        max-width: 350px;
+    }
+}
 
 /* SHOP ONLINE */
 

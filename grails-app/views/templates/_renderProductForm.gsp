@@ -35,4 +35,15 @@
             <label for="photo" class="custom-file-label"><g:message code="com.lucafaggion.Product.Fields.imageinput"/></label>
         </g:formInput>
     </div>
+
+    <div class="row ">
+        <div class="form_input_label my-3 flex-nowrap w-50">
+            <g:message code="com.lucafaggion.Product.Fields.featured"/>:
+            <label class="switch">
+                <input type="checkbox" name="featured" class="success" value="${true}" id="featured">
+                <span class="slider round"></span>
+            </label>
+            </div>
+        </div>
+    </div>
 </div> 

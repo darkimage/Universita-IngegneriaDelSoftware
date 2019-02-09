@@ -42,6 +42,18 @@ class UtilityTagLib {
         out << g.render(template:'/templates/selectFormInput',model:[list:list,name:name,id:id,property:property,instance:domaininstance,required:required,value:value])
     }
 
+    def selectUserRoleInput = {attribs ->
+        def domain = attribs['domain']
+        def property = attribs['property']
+        def required = attribs['required']
+        def name = attribs['name']
+        def id = attribs['id']
+        def value = (attribs['value']) ? attribs['value'] : 1
+        def instance = grailsApplication.getArtefact("Domain",domain)?.getClazz()?.get(1)
+        def list = (instance) ? instance.list() : []
+        out << g.render(template:'/templates/selectFormInput',model:[list:list,name:name,id:id,property:property,required:required,value:value])
+    }
+
     def displayPagination = { attribs ->
         def count = attribs['count']
         out << g.render(template:'/templates/displayPagination',model:[count:count])
@@ -125,6 +137,11 @@ class UtilityTagLib {
         def type = attribs['type']
         def required = attribs['required']
         out << ((type=="create") ? ((required) ? "required" : "") : "")
+    }
+
+    def featuredSlide = { attribs ->
+        def collection = attribs['collection']
+        out << g.render(template:'/templates/featuredSlide',model:[collection:collection])
     }
 
     def formatDateforInput = { attribs ->

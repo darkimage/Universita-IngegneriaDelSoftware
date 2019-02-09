@@ -97,10 +97,12 @@ class OrderslogicService {
     }
 
     def deleteShoppingCart(){
-        def lineitems = lineItemLogicService.getAllLineItemsOfOrderById(id)
+        def cart = getUserShoppingCartOrder()
+        def lineitems = lineItemLogicService.getAllLineItemsOfOrderById(cart.id)
         for (lineitem in lineitems) {
             lineitemService.delete(lineitem.id)
         }
+        println "OK4" 
         ordersService.delete(cart.id)
     }
 

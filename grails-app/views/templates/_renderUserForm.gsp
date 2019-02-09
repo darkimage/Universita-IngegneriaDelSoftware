@@ -30,7 +30,7 @@
         <div class="row">
             <div class="alert alert-warning w-100" role="alert">
                 <g:formInput class="mb-3 flex-nowrap no-spinners" prependclass="form_input_prepend" spanclass="ml-auto" required="${isInputRequired(type:inputtype,required:true).toString()}" id="role-input" code='com.lucafaggion.User.Fields.role'>
-                    <g:selectFormInput domain="com.lucafaggion.auth.Role" property="name" name="role" id="role" instance="${(inputtype == "edit") ? domain_instance : null}" required="${isInputRequired(type:inputtype,required:true)}"/> 
+                    <g:selectUserRoleInput domain="com.lucafaggion.auth.Role" property="name" name="role" id="role" value="${(inputtype == "edit") ? domain_instance.userRole.id : 1}" required="${isInputRequired(type:inputtype,required:true)}"/> 
                 </g:formInput>
             </div>
         </div>

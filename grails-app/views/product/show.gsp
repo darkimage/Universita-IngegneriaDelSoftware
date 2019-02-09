@@ -11,7 +11,7 @@
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="home" controller="ControlPanel" action="index"><g:message code="com.lucafaggion.ControlPanel.ControllerName"/></g:link></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="${[message(code:'com.lucafaggion.Product.DomainNamePlural')]}" /></g:link></li>
+                <li><g:link class="list" action="manage"><g:message code="default.list.label" args="${[message(code:'com.lucafaggion.Product.DomainNamePlural')]}" /></g:link></li>
                 <sec:access expression="hasAnyRole('ROLE_DIPENDENTE','ROLE_ADMIN')">
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="${[message(code:'com.lucafaggion.Product.DomainName')]}" /></g:link></li>
                 </sec:access>

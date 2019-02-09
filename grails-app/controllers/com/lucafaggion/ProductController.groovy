@@ -16,19 +16,20 @@ class ProductController {
     ProductlogicService productlogicService
 
     def index(Integer max) {
-        redirect(action:'listProductCompact')
+        def featured = productlogicService.getfeaturedProducts()
+        render(view:'main',model:[featuredList:featured])
     }
-
+    
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
-    def listProductCompact(Integer max) {
+    def manage(Integer max) {
         def data = productlogicService.getProductData(params)
-        render(view:"index",model:[categories:data.category,productList:data.list,productCount: data.count,flash:[message:params.flash]])
+        render(view:"index",model:[categories:data.cat,productList:data.list,productCount: data.count,flash:[message:params.flash]])
     }
 
-    def listProducts = {
+    def list = {
         def data = productlogicService.getProductData(params)
         render(view:"listProductCat",model:  
-        [categories: data.category,productList:data.list,productCount: data.count,params:params])
+        [categories:data.cat,productList:data.list,productCount: data.count,params:params])
     }
 
     def show(Long id) {
@@ -64,6 +65,7 @@ class ProductController {
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def save(Product product) {
+        product.featured = (product.featured) ? product.featured : false
         if(params.update){
             update(product)
             return
@@ -96,6 +98,7 @@ class ProductController {
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def update(Product product) {
+        product.featured = (product.featured) ? product.featured : false
         if (product == null) {
             notFound()
             return
@@ -114,6 +117,16 @@ class ProductController {
                 redirect product
             }
             '*'{ respond product, [status: OK] }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'com.lucafaggion.Product.DomainName', default: 'Product'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*'{ render status: 404 }
         }
     }
 }

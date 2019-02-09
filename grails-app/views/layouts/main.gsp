@@ -28,14 +28,6 @@
                 </li>
             </sec:ifLoggedIn>
 
-           <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:currentLocaleIcon withText="true" request="${request}"/><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item"><g:localeLink locale="it" region="IT"><g:localeIcon withText="true" locale="it"/></g:localeLink></li>
-                        <li class="dropdown-item"><g:localeLink locale="en" region="US"><g:localeIcon withText="true" locale="en"/></g:localeLink></>
-                    </ul>
-            </li>
-
             <sec:ifNotLoggedIn>
             <li class="dropdown"><g:link class="dropdown-toggle simpleNavButton" controller="login" action="auth" params="[referee:true]">Login</g:link>
             </li>
@@ -56,7 +48,13 @@
                     </ul>
                 </li>
             </sec:ifLoggedIn>
-
+          <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:currentLocaleIcon withText="true" request="${request}"/><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><g:localeLink locale="it" region="IT"><g:localeIcon withText="true" locale="it"/></g:localeLink></li>
+                        <li class="dropdown-item"><g:localeLink locale="en" region="US"><g:localeIcon withText="true" locale="en"/></g:localeLink></>
+                    </ul>
+            </li>
 
             <g:pageProperty name="page.nav"/>
         </ul>

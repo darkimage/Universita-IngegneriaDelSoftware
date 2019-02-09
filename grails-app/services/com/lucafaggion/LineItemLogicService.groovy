@@ -16,7 +16,7 @@ class LineItemLogicService {
             query += " ORDER BY " + params.sort + " " + params.order
             items = LineItem.findAll(query,[orderid:id])
         }else{
-            items = LineItem.findAll(query,[orderid:id])
+            items = LineItem.findAll("FROM LineItem as l WHERE l.orderid.id="+id)
         }
         return items
     }

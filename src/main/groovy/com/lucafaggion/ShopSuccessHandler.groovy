@@ -17,7 +17,6 @@ class ShopSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
         HttpSession session = request.getSession()
         if (session != null) {
             String redirectUrl = (String) session.getAttribute("url_prior_login")
-            println redirectUrl
             if (redirectUrl != null) {
                 // rimuovi l'attributo dalla sessione
                 session.removeAttribute("url_prior_login");

@@ -6,6 +6,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class ProductlogicService {
     UtilityService utilityService
+
     PriceConverterService priceConverterService
 
     def getfeaturedProducts(){
@@ -20,6 +21,25 @@ class ProductlogicService {
         return [cat:category,list:products,count:productsSize]
     }
 
+    def getProductsFromSearch(params){
+        if(params.value != null){
+            def countquery = "SELECT COUNT(*) "
+            def query = "FROM Product as p WHERE "
+            def map = ['identifier','name','description','creation_date','quantity','price','category.name']
+            for (Integer i = 0; i < 7; i++) {
+                query += "p." + map[i] + " LIKE " + ":value"
+                if(i != 6){
+                    query += " OR "
+                }
+            }
+            def products = Product.findAll(query,[value:"%"+params.value+"%"],[max:params.max,offset:params.offset])
+            Long productsSize = Product.executeQuery(countquery+query,[value:"%"+params.value+"%"])[0]
+            return [list:products,count:productsSize]
+        }else{
+            return getProductData(params)
+        }
+    }
+
     def getProductsOfCategory(value,params){
         params.max = (params.max != null) ? params.max : 5;
         def sort = (params.sort ? "ORDER BY " + params.sort : "") 
@@ -30,6 +50,11 @@ class ProductlogicService {
 
     def getCategoryProductCount(value){
         def query = "FROM Product as P WHERE P.category = '" + value + "'"
+        return (Product.findAll(query).size())
+    }
+
+    def getCategoryProductCountById(Long id){
+        def query = "FROM Product as P WHERE P.category.id = '" + id + "'"
         return (Product.findAll(query).size())
     }
     

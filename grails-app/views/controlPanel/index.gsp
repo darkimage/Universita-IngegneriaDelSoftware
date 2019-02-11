@@ -7,7 +7,7 @@
     </head>
     <body>
         <a href="#control-panel" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
+        <div class="nav shop-nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
             </ul>
@@ -26,6 +26,9 @@
                     </div>
                     <div class="col-sm pt-2 text-center">
                         <g:link action="manageProducts" class="controller_action p-2 badge badge-primary "><g:message code="com.lucafaggion.ControlPanel.manageproducts"/></g:link>
+                    </div>
+                    <div class="col-sm pt-2 text-center">
+                        <g:link action="manageCategories" class="controller_action p-2 badge badge-primary "><g:message code="com.lucafaggion.ControlPanel.managecategories"/></g:link>
                     </div>
                 </div>
             </div>

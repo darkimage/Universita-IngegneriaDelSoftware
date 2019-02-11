@@ -2,12 +2,12 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'com.lucafaggion.User.DomainName', default: 'User')}" />
-        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.User.DomainNamePlural', default: 'User')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <g:set var="entityName" value="${message(code: 'com.lucafaggion.ProductCategory.DomainName', default: 'Category')}" />
+        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.ProductCategory.DomainNamePlural', default: 'Categories')}" />
+        <title><g:message code="default.list.label" args="[entityNamePlural]" /></title>
     </head>
     <body>
-        <a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+        <a href="#list-productCategory" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav shop-nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -19,7 +19,7 @@
         <g:set var="maxPerPage" value="${(params.max!= null) ? params.max : 5}"/>
         <div class="d-flex justify-content-end m-2 align-items-center" id="list_options">
             <div class="p-2 flex-nowrap">
-                <label ><g:message code="com.lucafaggion.User.maxperPage"/>:</label>
+                <label ><g:message code="com.lucafaggion.ProductCategory.maxperPage"/>:</label>
                 <g:select name="max" from="${[5,10,50,100]}" value="${maxPerPage}" />
             </div>
             <div class="p-2 pr-3 flex-nowrap">
@@ -27,11 +27,11 @@
             </div>
         </div>
         </g:form>
-        <div id="list-user" class="content scaffold-list" role="main">
+        <div id="list-productCategory" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityNamePlural]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
-            <f:table collection="${userList}" code="com.lucafaggion.User.Fields." properties="username,name,surname,email,fiscalCode"/>
-            <g:displayPagination count="${userCount}"/>
+            <f:table collection="${categories.cat}" code="com.lucafaggion.ProductCategory.Fields." counts="${categories.count}" template="table_category" properties="id,name" />
+            <g:displayPagination count="${productCategoryCount}"/>
         </div>
     </body>
 </html>

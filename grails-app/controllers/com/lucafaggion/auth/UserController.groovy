@@ -53,7 +53,6 @@ class UserController {
                 UserRole.create(user,Role.find("FROM Role as r WHERE r.authority=:role",[role:'ROLE_USER']),true)
             }
         } catch (ValidationException e) {
-            println user.errors
             respond user.errors, view:'create'
             return 
         }
@@ -122,7 +121,7 @@ class UserController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
                 redirect action:"index", method:"GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*'{ render status: 200 }
         }
     }
 
@@ -132,7 +131,7 @@ class UserController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*'{ render status: 404 }
         }
     }
 }

@@ -102,7 +102,6 @@ class OrderslogicService {
         for (lineitem in lineitems) {
             lineitemService.delete(lineitem.id)
         }
-        println "OK4" 
         ordersService.delete(cart.id)
     }
 

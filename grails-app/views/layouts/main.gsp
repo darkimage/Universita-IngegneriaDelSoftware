@@ -10,17 +10,30 @@
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 
     <asset:stylesheet src="application.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <g:layoutHead/>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-static-top " role="navigation">
+    <div class="shop-topbar align-middle"><a class="navbar-brand " href="${createLink(uri: '/')}">
+        <asset:image class="d-none d-lg-block" width="250" height="50" src="logo.png" alt="ShopOnline Logo"/>
+        <asset:image class="d-lg-none" width="75" height="75" src="logo_small.png" alt="ShopOnline Logo"/>
+    </a></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" aria-expanded="false" style="height: 0.8px;" id="navbarContent">
         <ul class="nav navbar-nav ml-auto">
+             <li class="dropdown searchbar-li">
+               <g:form controller="product" action="search" method="GET">
+                <div class="searchbar">
+                    <input class="search_input " type="text" name="value" placeholder="${message(code:'com.lucafaggion.Product.searchplaceholder')}"/>
+                    <label for="submitSearch" class="search_icon rounded-circle"><i class="fas fa-search"></i></label>
+                    <input type="submit" id="submitSearch" class="d-none"/>
+                </div>
+                </g:form> 
+            </li>
 
             <sec:ifLoggedIn>
                 <li class="dropdown">
@@ -52,7 +65,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:currentLocaleIcon withText="true" request="${request}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><g:localeLink locale="it" region="IT"><g:localeIcon withText="true" locale="it"/></g:localeLink></li>
-                        <li class="dropdown-item"><g:localeLink locale="en" region="US"><g:localeIcon withText="true" locale="en"/></g:localeLink></>
+                        <li class="dropdown-item"><g:localeLink locale="en" region="US"><g:localeIcon withText="true" locale="en"/></g:localeLink></li>
                     </ul>
             </li>
 

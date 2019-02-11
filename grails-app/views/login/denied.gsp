@@ -5,7 +5,7 @@
         <title><g:message code="com.lucafaggion.denied" /></title>
     </head>
     <body>
-        <div class="nav" role="navigation">
+        <div class="nav shop-nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
             </ul>

@@ -97,7 +97,7 @@ class OrdersController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'orders.label', default: 'Orders'), id])
                 redirect action:"index", method:"GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*'{ render status: 200 }
         }
     }
 
@@ -107,7 +107,7 @@ class OrdersController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'orders.label', default: 'Orders'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*'{ render status: 404 }
         }
     }
 }

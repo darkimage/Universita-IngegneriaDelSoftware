@@ -7,29 +7,48 @@ import org.springframework.web.multipart.*
 import org.springframework.web.multipart.commons.*
 import org.apache.commons.io.FileUtils
 import org.apache.commons.fileupload.disk.DiskFileItem
+import org.springframework.context.MessageSource
+import org.springframework.web.servlet.support.RequestContextUtils
 
 @Secured('permitAll')
 class ProductController {
+    MessageSource messageSource
+
     //static scaffold = Product
     UtilityService utilityService
     ProductService productService
     ProductlogicService productlogicService
+    ProductCategoryLogicService productCategoryLogicService
 
     def index(Integer max) {
+        params.max = Math.min(max  ?: 10, 100)
         def featured = productlogicService.getfeaturedProducts()
-        render(view:'main',model:[featuredList:featured])
+        def productCategories = productCategoryLogicService.getCategories()
+        def newestProducts = []
+        for (category in productCategories.cat) {
+            newestProducts.add(productlogicService.getProductsOfCategory(category.id,[max:3,order:'desc',sort:'creation_date']))
+        }
+        render(view:'main',model:[featuredList:featured,categories:productCategories,newestProducts:newestProducts])
     }
     
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
     def manage(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
         def data = productlogicService.getProductData(params)
         render(view:"index",model:[categories:data.cat,productList:data.list,productCount: data.count,flash:[message:params.flash]])
     }
 
-    def list = {
+    def list(Integer max) {
+        params.max = Math.min(params.max  ?: 10, 100)
         def data = productlogicService.getProductData(params)
-        render(view:"listProductCat",model:  
-        [categories:data.cat,productList:data.list,productCount: data.count,params:params])
+        render(view:"list",model:[categories:data.cat,productList:data.list,productCount: data.count,params:params])
+    }
+
+    def search(Integer max){
+        params.value = (params.value) ? params.value  : messageSource.getMessage('com.lucafaggion.Product.searchnovalue', null, "No Search", RequestContextUtils.getLocale(request))
+        params.max = Math.min(max ?: 10, 100)
+        def data = productlogicService.getProductsFromSearch(params)
+        render(view:"search",model:[productList:data.list,productCount: data.count,params:params])
     }
 
     def show(Long id) {
@@ -59,7 +78,7 @@ class ProductController {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'product.label', default: 'Product'), id])
                 redirect action:"index", method:"GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*'{ render status: 200 }
         }
     }
 

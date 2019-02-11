@@ -1,23 +1,12 @@
-<!DOCTYPE html>
 <html>
-    <head>
+    <head> 
+        <title><g:message code="com.lucafaggion.Product.list" /></title>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'com.lucafaggion.Product.DomainName', default: 'Product')}" />
-        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.Product.DomainNamePlural', default: 'Product')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <asset:javascript src="jquery-3.3.1.min.js"/>
         <g:set var="current_cat" value="${(params.cat!= null) ? params.cat : 1}"/>
         <g:set var="maxPerPage" value="${(params.max!= null) ? params.max : 5}"/>
     </head>
     <body>
-        <a href="#list-product" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav shop-nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="home" controller="ControlPanel" action="index"><g:message code="com.lucafaggion.ControlPanel.ControllerName"/></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-
         <g:form controller="${controllerName}" action="${actionName}" method="GET">
         <div class="d-flex justify-content-end m-2 align-items-center" id="list_options">
             <div class="p-2 flex-nowrap">
@@ -32,12 +21,13 @@
             </div>
         </div>
         </g:form>
-    
-        <div id="list-product" class="content" role="main">
-            <h1><g:message code="default.list.label" args="[entityNamePlural]" /></h1>
+
+        <div id="list-Product" class="content scaffold-list" role="main">
+            <h1><g:message code="default.list.label" args="${[(categories) ? categories.get(current_cat.toInteger()-1).name : message(code:'com.lucafaggion.Product.nocategories')]}" />
+            </h1>
             <g:displayFlashMsg flash="${flash}"/>
             <g:if test="${productList.size()>0}">
-                <f:table collection="${productList}" template="table_product_back" except="['photo','description','id']" />
+                <f:table template="table_product" collection="${productList}" except="featured,id"/>
             </g:if>
             <g:else>
                 <div id="info_message">
@@ -45,7 +35,7 @@
                 </div>
             </g:else>
             
-            <g:displayPagination count="${productCount}"/>
+        <g:displayPagination count="${productCount}"/>
         </div>
     </body>
 </html>

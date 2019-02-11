@@ -16,5 +16,9 @@ class ControlPanelController {
     def manageOrders = {
         redirect(controller:'orders',action:'index')
     }
+
+    def manageCategories = {
+        redirect(controller:'productCategory',action:'index')
+    }
     
 }

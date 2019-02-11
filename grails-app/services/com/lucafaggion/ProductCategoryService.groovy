@@ -1,11 +1,17 @@
 package com.lucafaggion
+import grails.gorm.services.Service
 
-import grails.gorm.transactions.Transactional
+@Service(ProductCategory)
+interface ProductCategoryService {
 
-@Transactional
-class ProductCategoryService {
+    ProductCategory get(Serializable id)
 
-    def getCategoryName(Integer id) {
-        return ProductCategory.read(id).name
-    }
+    List<ProductCategory> list(Map args)
+
+    Long count()
+
+    void delete(Serializable id)
+
+    ProductCategory save(ProductCategory order)
+  
 }

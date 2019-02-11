@@ -83,7 +83,7 @@ class ShoppingCartController {
                     flash.message = message(code: 'com.lucafaggion.ShoppingCart.orderclear')
                     redirect action:"index", method:"GET"
                 }
-                '*'{ render status: NO_CONTENT }
+                '*'{ render status: 404 }
             }
         }
     }

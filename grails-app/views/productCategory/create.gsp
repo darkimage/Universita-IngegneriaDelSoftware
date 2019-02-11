@@ -2,29 +2,29 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'com.lucafaggion.Product.DomainName', default: 'Product')}" />
-        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.Product.DomainNamePlural', default: 'Product')}" />
+        <g:set var="entityName" value="${message(code: 'com.lucafaggion.ProductCategory.DomainName', default: 'Category')}" />
+        <g:set var="entityNamePlural" value="${message(code: 'com.lucafaggion.ProductCategory.DomainNamePlural', default: 'Categories')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-product" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+        <a href="#create-productCategory" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav shop-nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="home" controller="ControlPanel" action="index"><g:message code="com.lucafaggion.ControlPanel.ControllerName"/></g:link></li>
-                <li><g:link class="list" action="manage"><g:message code="default.list.label" args="[entityNamePlural]" /></g:link></li>
+                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityNamePlural]" /></g:link></li>
             </ul>
         </div>
-        <div id="create-product" class="content scaffold-create" role="main">
+        <div id="create-productCategory" class="content scaffold-create" role="main">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
-            <g:displayErrors domain="${this.product}"/>
-            <g:uploadForm resource="${this.product}" method="POST">
-                <g:renderForm instance="${this.product}" type="create" template="/templates/renderProductForm"/>
+            <g:displayErrors domain="${this.productCategory}"/>
+            <g:form resource="${this.productCategory}" method="POST">
+                <g:renderForm instance="${this.productCategory}" type="create" template="/templates/renderCategoryForm"/>
                 <fieldset class="buttons">
                     <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
-            </g:uploadForm>
+            </g:form>
         </div>
     </body>
 </html>

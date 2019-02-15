@@ -18,7 +18,7 @@
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
             <g:displayErrors domain="${this.userData.user}"/>
-            <g:form action="update" method="PUT">
+            <g:form controller="profile" action="update" id="${this.userData.user.id}" method="PUT">
                 <g:hiddenField name="version" value="${this.userData.user?.version}" />
                 <g:renderForm template="/templates/renderUserForm" type="edit" instance="${this.userData}"/>
                 <fieldset class="buttons">

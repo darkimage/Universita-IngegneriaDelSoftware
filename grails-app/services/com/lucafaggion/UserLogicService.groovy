@@ -1,16 +1,26 @@
 package com.lucafaggion
 import com.lucafaggion.auth.*
 
+import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.gorm.transactions.Transactional
 
 @Transactional
 class UserLogicService {
+    def springSecurityService
     UserService userService
     ShippingInfoService shippingInfoService
     PaymentInfoService paymentInfoService
     UtilityService utilityService
     OrderslogicService orderslogicService
-    
+
+    def createUserRole(user,userRole){
+        if(SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
+            UserRole.create(user,userRole,true)
+        }else{
+            UserRole.create(user,Role.find("FROM Role as r WHERE r.authority=:role",[role:'ROLE_USER']),true)
+        }
+    }
+
     def getUserDatabyId(Long id){
         def user = userService.get(id)
         return getUserDatabyUser(user)

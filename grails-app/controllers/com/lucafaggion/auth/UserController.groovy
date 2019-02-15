@@ -6,7 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 import grails.plugin.springsecurity.SpringSecurityUtils
 
 @Secured(value="hasRole('ROLE_ADMIN')")
-class UserController { 
+class UserController {
     def springSecurityService
     UserService userService
     ShippingInfoService shippingInfoService
@@ -21,8 +21,13 @@ class UserController {
         respond userService.list(params), model:[userCount: userService.count()]
     }
 
-    def show(Long id) { 
-        respond([userData:userLogicService.getUserDatabyId(id)])
+    def show(Long id) {
+        def userData = userLogicService.getUserDatabyId(id)
+        if(userData != null) {
+            respond([userData: userData])
+        }else{
+            notFound()
+        }
     } 
 
     @Secured(value=["permitAll"])
@@ -47,11 +52,7 @@ class UserController {
             userService.save(user)
             shippingInfoService.save(shippingInfo)
             paymentInfoService.save(paymentInfo)
-            if(SpringSecurityUtils.ifAllGranted('ROLE_ADMIN')){
-                UserRole.create(user,userRole,true)
-            }else{
-                UserRole.create(user,Role.find("FROM Role as r WHERE r.authority=:role",[role:'ROLE_USER']),true)
-            }
+            userLogicService.createUserRole(user,userRole)
         } catch (ValidationException e) {
             respond user.errors, view:'create'
             return 
@@ -68,8 +69,12 @@ class UserController {
 
     def edit(Long id) {
         def userEdit = userService.get(id)
-        def data = userLogicService.getUserDatabyUser(userEdit)
-        respond([userData:data])
+        if(userEdit != null) {
+            def data = userLogicService.getUserDatabyUser(userEdit)
+            respond([userData: data])
+        }else{
+            notFound()
+        }
     }
 
     def update = {

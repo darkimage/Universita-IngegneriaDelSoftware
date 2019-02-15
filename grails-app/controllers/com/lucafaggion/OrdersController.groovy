@@ -14,6 +14,7 @@ class OrdersController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(value="hasAnyRole('ROLE_ADMIN','ROLE_DIPENDENTE')")
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond orderslogicService.getOrders(params), model:[ordersCount: ordersService.count()]
@@ -62,6 +63,7 @@ class OrdersController {
         }
     }
 
+    @Secured(value="hasAnyRole('ROLE_ADMIN','ROLE_DIPENDENTE')")
     def update(Orders orders) {
         if (orders == null) {
             notFound()
@@ -74,7 +76,6 @@ class OrdersController {
             respond orders.errors, view:'edit'
             return
         }
-
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'orders.label', default: 'Orders'), orders.id])
@@ -82,6 +83,7 @@ class OrdersController {
             }
             '*'{ respond orders, [status: OK] }
         }
+
     }
 
     def delete(Long id) {
@@ -92,12 +94,22 @@ class OrdersController {
         
         orderslogicService.deleteOrder(id)
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'orders.label', default: 'Orders'), id])
-                redirect action:"index", method:"GET"
+        if(SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_DIPENDENTE')){
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.deleted.message', args: [message(code: 'orders.label', default: 'Orders'), id])
+                    redirect action:"index", method:"GET"
+                }
+                '*'{ render status: 200 }
             }
-            '*'{ render status: 200 }
+        }else{
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.deleted.message', args: [message(code: 'orders.label', default: 'Orders'), id])
+                    redirect(controller:'profile',action:'index')
+                }
+                '*'{ render status: 200 }  
+            }
         }
     }
 

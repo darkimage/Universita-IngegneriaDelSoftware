@@ -5,7 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class LineItemLogicService {
 
-    def getAllLineItemsOfOrder(order,params){
+    def getAllLineItemsOfOrder(order,params=[:]){
         return getAllLineItemsOfOrderById(order.id,params)
     }
 
@@ -19,9 +19,5 @@ class LineItemLogicService {
             items = LineItem.findAll("FROM LineItem as l WHERE l.orderid.id="+id)
         }
         return items
-    }
-
-    def getLineItemOfOrder(id){
-        return LineItem.find("FROM LineItem l WHERE l.id = ?",[id])
     }
 }

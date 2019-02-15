@@ -18,12 +18,12 @@ class ProfileController {
         render(view:"index",model:[params:params,userData:userLogicService.getUserDatabyUser(user)])
     }
 
-    def edit = {
-        respond([userData:userLogicService.getUserDatabyUser(user)])
+    def edit(Long id) {
+        respond([userData:userLogicService.getUserDatabyId(id)])
     }
 
-    def update = {
-        def user = User.get(params.id)
+    def update(Long id){
+        def user = User.get(id)
         if (user == null) {
             notFound()
             return
@@ -46,13 +46,23 @@ class ProfileController {
             respond([userData:data], view:'edit')
             return
         }
-
+        println "hello"
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
-                redirect user
+                redirect(action:'index')
             }
             '*'{ respond user, [status: OK] }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*'{ render status: 404 }
         }
     }
 

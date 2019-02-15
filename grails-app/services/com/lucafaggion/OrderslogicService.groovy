@@ -12,13 +12,17 @@ class OrderslogicService {
 
     private def getUserShoppingCartOrder(){
         def user = springSecurityService.getCurrentUser()
-        def query = "FROM Orders o WHERE o.state='cart' AND o.user=:user"
-        def cart = Orders.find( "FROM Orders o WHERE o.state='cart' AND o.user=?",[user])
-        if(cart == null){
-           cart = new Orders(user:user,price:0,state:'cart',submittedDate:new Date());
-           ordersService.save(cart)
+        if(user != null) {
+            def query = "FROM Orders o WHERE o.state='cart' AND o.user=:user"
+            def cart = Orders.find("FROM Orders o WHERE o.state='cart' AND o.user=?", [user])
+            if (cart == null) {
+                cart = new Orders(user: user, price: 0, state: 'cart', submittedDate: new Date());
+                ordersService.save(cart)
+            }
+            return cart
+        }else{
+            return null
         }
-        return cart
     }
 
     def getUserShoppingCart(params=[:]) {
@@ -58,7 +62,7 @@ class OrderslogicService {
     }
  
     def deleteLineItem(Long id){
-        lineitemService.delete(id);
+        lineitemService.delete(id)
     }
 
     def calculateTotalPrice(items){
@@ -70,7 +74,7 @@ class OrderslogicService {
     }
 
     def updateCartProduct(Long id,Integer value){
-        def lineitem = lineItemLogicService.getLineItemOfOrder(id)
+        def lineitem = lineitemService.get(id)
         lineitem.quantity = value
         lineitem.price = calculateLineItemPrice(lineitem.subProduct,value)
         lineitemService.save(lineitem)

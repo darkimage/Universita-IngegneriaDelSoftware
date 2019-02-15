@@ -1,19 +1,102 @@
 package com.lucafaggion.auth
 
-import grails.testing.gorm.DomainUnitTest
+import com.lucafaggion.*
+import grails.testing.gorm.DataTest
 import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
 import spock.lang.*
 
-class UserControllerSpec extends Specification implements ControllerUnitTest<UserController>, DomainUnitTest<User> {
+class UserControllerSpec extends Specification implements ControllerUnitTest<UserController>, DataTest {
+
+    void setupSpec() {
+        mockDomain Role
+        mockDomain User
+    }
+
+    def setup() {
+        new User(username: 'lucafaggion', password: '12345', name:'Luca',surname:'Faggion',birthDate: Date.parse('dd-MM-yyy',"04-12-1995"),fiscalCode:'FGGLCU95T04E463P',email:'luca.faggion@gmail.com').save()
+        def roleUser = new Role(name: 'User', authority: 'ROLE_USER')
+        roleUser.id = 3
+        roleUser.save()
+    }
 
     def populateValidParams(params) {
         assert params != null
 
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        //Populate valid properties like...
+        params.name = 'Test Nome'
+        params.surname = 'Test Cognome'
+        params.birthDate = new Date()
+        params.fiscalCode ='TEST90TESTTT90RT'
+        params.email ='test@test.test'
+        params.role = 3
+        params.username ='UserTest'
+        params.password ='1234Test'
+        params.address ='Via Test'
+        params.number =1
+        params.state ='Test'
+        params.postalzone =2
+        params.creditcard ='4136 0990 9952 4444'
+        params.cvc =212
+        params.circuit ='mastercard'
+        params.expirationDate =new Date()
     }
+
+    def populateValidParamsUpdate(params){
+        assert params != null
+        params.id = 1
+    }
+
+    void "Test the save action correctly persists"() {
+        given:
+        controller.userService = Mock(UserService) {
+            1 * save(_ as User)
+        }
+        controller.shippingInfoService = Mock(ShippingInfoService) {
+            1 * save(_ as ShippingInfo)
+        }
+        controller.userLogicService = Mock(UserLogicService) {
+            1 * createUserRole(_ as Object,_ as Object) >> true
+        }
+        controller.paymentInfoService = Mock(PaymentInfoService) {
+            1 * save(_ as PaymentInfo)
+        }
+
+
+        when:"The save action is executed with a valid instance"
+        response.reset()
+        request.contentType = FORM_CONTENT_TYPE
+        request.method = 'POST'
+        populateValidParams(params)
+        def user = new User(params)
+        user.id = 1
+
+        controller.save(user)
+
+        then:"A redirect is issued to main page"
+        response.redirectedUrl == '/'
+        controller.flash.message != null
+    }
+
+    void "Test the save action with an invalid instance"() {
+        given:
+        controller.userService = Mock(UserService) {
+            1 * save(_ as User) >> { User user ->
+                throw new ValidationException("Invalid instance", user.errors)
+            }
+        }
+
+        when:"The save action is executed with an invalid instance"
+        request.contentType = FORM_CONTENT_TYPE
+        request.method = 'POST'
+        def user = new User()
+        controller.save(user)
+
+        then:"The create view is rendered again with the correct model"
+        model.user != null
+        view == 'create'
+    }
+
 
     void "Test the index action returns the correct model"() {
         given:
@@ -49,50 +132,10 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
         flash.message != null
     }
 
-    void "Test the save action correctly persists"() {
-        given:
-        controller.userService = Mock(UserService) {
-            1 * save(_ as User)
-        }
-
-        when:"The save action is executed with a valid instance"
-        response.reset()
-        request.contentType = FORM_CONTENT_TYPE
-        request.method = 'POST'
-        populateValidParams(params)
-        def user = new User(params)
-        user.id = 1
-
-        controller.save(user)
-
-        then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/user/show/1'
-        controller.flash.message != null
-    }
-
-    void "Test the save action with an invalid instance"() {
-        given:
-        controller.userService = Mock(UserService) {
-            1 * save(_ as User) >> { User user ->
-                throw new ValidationException("Invalid instance", user.errors)
-            }
-        }
-
-        when:"The save action is executed with an invalid instance"
-        request.contentType = FORM_CONTENT_TYPE
-        request.method = 'POST'
-        def user = new User()
-        controller.save(user)
-
-        then:"The create view is rendered again with the correct model"
-        model.user != null
-        view == 'create'
-    }
-
     void "Test the show action with a null id"() {
         given:
-        controller.userService = Mock(UserService) {
-            1 * get(null) >> null
+        controller.userLogicService = Mock(UserLogicService) {
+            1 * getUserDatabyId(null) >> null
         }
 
         when:"The show action is executed with a null domain"
@@ -104,15 +147,15 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
 
     void "Test the show action with a valid id"() {
         given:
-        controller.userService = Mock(UserService) {
-            1 * get(2) >> new User()
+        controller.userLogicService = Mock(UserLogicService) {
+            1 * getUserDatabyId(_ as Long) >> new User()
         }
 
         when:"A domain instance is passed to the show action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
-        model.user instanceof User
+        model.userData instanceof User
     }
 
     void "Test the edit action with a null id"() {
@@ -133,14 +176,16 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
         controller.userService = Mock(UserService) {
             1 * get(2) >> new User()
         }
+        controller.userLogicService = Mock(UserLogicService) {
+            1 * getUserDatabyUser(new User()) >> new User()
+        }
 
         when:"A domain instance is passed to the show action"
         controller.edit(2)
 
         then:"A model is populated containing the domain instance"
-        model.user instanceof User
+        model.userData instanceof User
     }
-
 
     void "Test the update action with a null instance"() {
         when:"Save is called for a domain instance that doesn't exist"
@@ -153,27 +198,6 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
         flash.message != null
     }
 
-    void "Test the update action correctly persists"() {
-        given:
-        controller.userService = Mock(UserService) {
-            1 * save(_ as User)
-        }
-
-        when:"The save action is executed with a valid instance"
-        response.reset()
-        request.contentType = FORM_CONTENT_TYPE
-        request.method = 'PUT'
-        populateValidParams(params)
-        def user = new User(params)
-        user.id = 1
-
-        controller.update(user)
-
-        then:"A redirect is issued to the show action"
-        response.redirectedUrl == '/user/show/1'
-        controller.flash.message != null
-    }
-
     void "Test the update action with an invalid instance"() {
         given:
         controller.userService = Mock(UserService) {
@@ -181,42 +205,22 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
                 throw new ValidationException("Invalid instance", user.errors)
             }
         }
+        controller.userLogicService = Mock(UserLogicService) {
+            1 * getUserDatabyUser(_ as User) >> { User user ->
+                [user:user,userShippingInfo:new ShippingInfo(),userPaymentInfo:new PaymentInfo()]
+            }
+        }
 
         when:"The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
-        controller.update(new User())
+        populateValidParamsUpdate(params)
+        controller.update()
 
         then:"The edit view is rendered again with the correct model"
-        model.user != null
+        model.userData != null
         view == 'edit'
-    }
 
-    void "Test the delete action with a null instance"() {
-        when:"The delete action is called for a null instance"
-        request.contentType = FORM_CONTENT_TYPE
-        request.method = 'DELETE'
-        controller.delete(null)
-
-        then:"A 404 is returned"
-        response.redirectedUrl == '/user/index'
-        flash.message != null
-    }
-
-    void "Test the delete action with an instance"() {
-        given:
-        controller.userService = Mock(UserService) {
-            1 * delete(2)
-        }
-
-        when:"The domain instance is passed to the delete action"
-        request.contentType = FORM_CONTENT_TYPE
-        request.method = 'DELETE'
-        controller.delete(2)
-
-        then:"The user is redirected to index"
-        response.redirectedUrl == '/user/index'
-        flash.message != null
     }
 }
 

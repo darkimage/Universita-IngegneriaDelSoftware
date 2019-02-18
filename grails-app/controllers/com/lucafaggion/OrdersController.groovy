@@ -9,7 +9,6 @@ class OrdersController {
 
     OrdersService ordersService
     OrderslogicService orderslogicService
-    LineItemLogicService lineItemLogicService
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -22,7 +21,7 @@ class OrdersController {
 
     def show(Long id) {
         def order = ordersService.get(id)
-        def items = lineItemLogicService.getAllLineItemsOfOrder(order,params)
+        def items = orderslogicService.lineItemLogicService.getAllLineItemsOfOrder(order,params)
         def hasPermission = false
 
         if(SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_DIPENDENTE')){

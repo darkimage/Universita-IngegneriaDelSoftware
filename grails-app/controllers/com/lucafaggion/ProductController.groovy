@@ -31,7 +31,7 @@ class ProductController {
         render(view:'main',model:[featuredList:featured,categories:productCategories,newestProducts:newestProducts])
     }
     
-    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN']) // change to @Secured('ROLE_DIPENDENTE')
+    @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def manage(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def data = productlogicService.getProductData(params)

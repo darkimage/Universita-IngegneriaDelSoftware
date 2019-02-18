@@ -5,9 +5,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class ProductCategoryLogicService {
 
-    def getCategoryName(Long id) {
-        return ProductCategory.read(id).name
-    }
+    ProductCategoryService productCategoryService
 
     def getCategories(params=[:]){
         def query = "SELECT pc,COUNT(p.id) as productCount FROM ProductCategory as pc LEFT OUTER JOIN Product as p ON pc.id=p.category.id GROUP BY pc.id"

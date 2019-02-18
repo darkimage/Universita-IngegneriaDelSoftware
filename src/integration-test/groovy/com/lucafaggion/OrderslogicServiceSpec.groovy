@@ -18,10 +18,10 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
     def setupData() {
         def cart = Orders.build(state:'cart',user:User.get(1))
         for (int i = 0; i < 3; i++) {
-            Product.build(price:2)
+            Product.build(price:2,quantity:20)
         }
         for (int i = 0; i < 3; i++) {
-            LineItem.build(orderid:cart,price:5,subProduct:Product.list()[i])
+            LineItem.build(orderid:cart,price:5,subProduct:Product.list()[i],quantity:2)
         }
     }
 
@@ -33,8 +33,10 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
         }
         setupData()
 
-        expect:"Return the shopping cart order"
+        when:
         def cart = service.getUserShoppingCartOrder()
+
+        then:"Return the shopping cart order"
         cart != null
         cart.lineItem.size() == 3
     }
@@ -45,8 +47,10 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
             1 * getCurrentUser() >> User.get(1)
         }
 
-        expect:"Return an new cart"
+        when:
         def cart = service.getUserShoppingCartOrder()
+
+        then:
         cart != null
         cart.lineItem == null
     }
@@ -113,14 +117,44 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
         }
         setupData()
 
-        expect:"Return the correct updated values"
+        when:
         def cart = service.getUserShoppingCart()
-        println cart[0].price
+
+        then:"Return the correct updated values"
         def item = cart[0]
         service.updateCartProduct(item.id,5)
         item.quantity == 5
         item.price == 10
     }
 
+    void "Test place an user order with a valid item and user"(){
+        given:
+        service.springSecurityService = Mock(SpringSecurityService) {
+            2 * getCurrentUser() >> User.get(1)
+        }
+        setupData()
+
+        when:
+        def cart = service.placeUserOrder()
+
+        then:"Return the order updated"
+        cart.state == 'placed'
+    }
+
+    void "Test place an user order with a valid user but an invalid item"(){
+        given:
+        service.springSecurityService = Mock(SpringSecurityService) {
+            2 * getCurrentUser() >> User.get(1)
+        }
+        def cart = Orders.build(state:'cart',user:User.get(1))
+        def product = Product.build(price:2,quantity:1)
+        LineItem.build(orderid:cart,price:5,subProduct:product,quantity:300)
+
+        when:
+        service.placeUserOrder()
+
+        then:"Return an ControllerException"
+        ControllerException err = thrown()
+    }
 
 }

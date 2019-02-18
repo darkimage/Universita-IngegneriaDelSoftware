@@ -6,7 +6,7 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class ProductlogicService {
     UtilityService utilityService
-
+    ProductCategoryService productCategoryService
     PriceConverterService priceConverterService
 
     def getfeaturedProducts(){
@@ -14,7 +14,7 @@ class ProductlogicService {
     }
 
     def getProductData(params){
-        def category = ProductCategory.list()
+        def category = productCategoryService.list()
         def currentCat = (params.cat != null) ? params.cat : ((category.size() > 0) ? category[0].id : 0)
         def productsSize = getCategoryProductCount(currentCat) 
         def products = getProductsOfCategory(currentCat,params)

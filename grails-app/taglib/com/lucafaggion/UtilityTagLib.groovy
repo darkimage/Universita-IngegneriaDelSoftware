@@ -4,6 +4,7 @@ class UtilityTagLib {
     static defaultEncodeAs = [taglib:'none']
     OrderslogicService orderslogicService
     ProductCategoryLogicService productCategoryLogicService
+    ProductService productService
     def springSecurityService
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
 
@@ -81,7 +82,7 @@ class UtilityTagLib {
     def productCategoryPath = { attribs ->
         def productid = attribs['productid']
         def separator = attribs['separator']
-        def category = productCategoryLogicService.getCategoryName(Product.get(productid).category.id.toInteger())
+        def category = productCategoryLogicService.productCategoryService.get(productService.get(productid).category.id).name
         out << g.render(template:'/templates/productPath',model:[cat:category,sep:separator.decodeHTML()])
     }
 

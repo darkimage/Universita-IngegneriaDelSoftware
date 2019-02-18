@@ -60,11 +60,7 @@ class OrderslogicService {
     def calculateLineItemPrice(Product product,Integer quantity){
         return product.price * quantity
     }
- 
-    def deleteLineItem(Long id){
-        lineitemService.delete(id)
-    }
-
+    
     def calculateTotalPrice(items){
         def price = 0
         for (item in items) {

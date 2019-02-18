@@ -1,9 +1,9 @@
 package com.lucafaggion
 
-import grails.testing.gorm.DomainUnitTest
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class ShippingInfoSpec extends Specification implements DomainUnitTest<ShippingInfo> {
+class ProductCategoryLogicServiceSpec extends Specification implements ServiceUnitTest<ProductCategoryLogicService>{
 
     def setup() {
     }

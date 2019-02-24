@@ -28,8 +28,15 @@
         <div id="list-orders" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityNamePlural]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
-            <f:table collection="${ordersList}" template="table_orders_user"  code="com.lucafaggion.Orders." properties="id,user, state, price,lineItem,submittedDate"/>
-            <g:displayPagination count="${ordersCount}"/>
+            <g:if test="${ordersCount>0}">
+                <f:table collection="${ordersList}" template="table_orders_user"  code="com.lucafaggion.Orders." properties="id,user, state, price,lineItem,submittedDate"/>
+                <g:displayPagination count="${ordersCount}"/>
+            </g:if>
+            <g:else>
+                <div id="info_message">
+                    <div class="alert alert-info" role="alert"><g:message code="com.lucafaggion.Orders.empty"/></div>
+                </div>
+            </g:else>
         </div>
     </body>
 </html>

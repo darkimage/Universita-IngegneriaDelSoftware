@@ -39,6 +39,29 @@
                     </div>
                 </div>
             </div>
+            <h1><g:message code="com.lucafaggion.Orders.details" /></h1>
+            <div class="container-fluid py-2 pb-4">
+                <div class="row">
+                    <div class="col-md pt-2">
+                        <ul class="list-group">
+                            <li class="list-group-item active text-center"><g:message code="com.lucafaggion.User.Headers.addressinfo"/></li>
+                            <g:displayRow code="com.lucafaggion.User.Fields.address"> ${this.orders.shippingDetails.address},${this.orders.shippingDetails.number}</g:displayRow>
+                            <g:displayRow code="com.lucafaggion.User.Fields.state"> ${this.orders.shippingDetails.state}</g:displayRow>
+                            <g:displayRow bottom="true" code="com.lucafaggion.User.Fields.postalzone"> ${this.orders.shippingDetails.postalzone}</g:displayRow>
+                        </ul>
+                    </div>
+
+                    <div class="col-md pt-2">
+                        <ul class="list-group">
+                            <li class="list-group-item active text-center"><g:message code="com.lucafaggion.User.Headers.paymentinfo"/></li>
+                            <g:displayRow code="com.lucafaggion.User.Fields.creditcard"> ${this.orders.paymentDetails.creditcard}-${this.orders.paymentDetails.cvc}</g:displayRow>
+                            <g:displayRow code="com.lucafaggion.User.Fields.circuit"> ${this.orders.paymentDetails.circuit}</g:displayRow>
+                            <g:displayRow bottom="true" code="com.lucafaggion.User.Fields.expirationDate"><g:newformatDate date="${this.orders.paymentDetails.expirationDate}" format="dd-MM-yyyy"/></g:displayRow>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <g:form resource="${this.orders}" method="DELETE">
                 <fieldset class="buttons">
                     <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

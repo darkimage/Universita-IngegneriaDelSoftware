@@ -6,6 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured('isFullyAuthenticated()')
 class ShoppingCartController {
     OrderslogicService orderslogicService
+    LineitemService lineitemService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -19,7 +20,8 @@ class ShoppingCartController {
         try{
             orderslogicService.addToUserCart(id,quantity)
         }catch(Exception e){
-            return response.sendError(500)
+            notFound()
+            return
         }
 
         request.withFormat {
@@ -33,6 +35,11 @@ class ShoppingCartController {
     }
 
     def update(Integer id,Integer value){
+        def lineItem = lineitemService.get(id)
+        if (lineItem == null) {
+            notFound()
+            return
+        }
         try{
             if(params.delete){
                 orderslogicService.deleteLineItem(id)
@@ -83,8 +90,14 @@ class ShoppingCartController {
                     flash.message = message(code: 'com.lucafaggion.ShoppingCart.orderclear')
                     redirect action:"index", method:"GET"
                 }
-                '*'{ render status: 404 }
+                '*'{ render status: OK }
             }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            '*'{ render status: 404 }
         }
     }
 }

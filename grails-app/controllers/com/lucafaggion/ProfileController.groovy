@@ -4,6 +4,7 @@ import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
 
+
 @Secured(value=["isFullyAuthenticated()"])
 class ProfileController {
     def springSecurityService
@@ -19,7 +20,12 @@ class ProfileController {
     }
 
     def edit(Long id) {
-        respond([userData:userLogicService.getUserDatabyId(id)])
+        def data = userLogicService.getUserDatabyId(id)
+        if(data) {
+            respond([userData:data])
+        }else{
+            notFound()
+        }
     }
 
     def update(Long id){
@@ -33,10 +39,12 @@ class ProfileController {
         }else{
             bindData(user,params)
         }
-        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user",[user:user])
-        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user",[user:user])
-        bindData(userPayment, params)
-        bindData(userShipping, params)
+        def userPayment = new PaymentInfo(params)
+        userPayment.user = user
+        userPayment.version = params.int('version')
+        def userShipping = new ShippingInfo(params)
+        userShipping.user = user
+        userShipping.version = params.int('version')
         try {
             userService.save(user)
             shippingInfoService.save(userShipping)
@@ -46,7 +54,6 @@ class ProfileController {
             respond([userData:data], view:'edit')
             return
         }
-        println "hello"
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])

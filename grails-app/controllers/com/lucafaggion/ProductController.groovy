@@ -14,7 +14,6 @@ import org.springframework.web.servlet.support.RequestContextUtils
 class ProductController {
     MessageSource messageSource
 
-    //static scaffold = Product
     UtilityService utilityService
     ProductService productService
     ProductlogicService productlogicService
@@ -84,15 +83,17 @@ class ProductController {
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def save(Product product) {
+        if (product == null) {
+            notFound()
+            return
+        }
+
         product.featured = (product.featured) ? product.featured : false
         if(params.update){
             update(product)
             return
         }
-        if (product == null) {
-            notFound()
-            return
-        }
+
         product = productlogicService.setUpProduct(product,request,params)
 
         try {
@@ -117,11 +118,11 @@ class ProductController {
 
     @Secured(['ROLE_DIPENDENTE','ROLE_ADMIN'])
     def update(Product product) {
-        product.featured = (product.featured) ? product.featured : false
         if (product == null) {
             notFound()
             return
         }
+        product.featured = (product.featured) ? product.featured : false
 
         try {
             productService.save(product)

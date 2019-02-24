@@ -1,24 +1,28 @@
 package com.lucafaggion
 
-import grails.testing.gorm.DomainUnitTest
 import grails.testing.web.controllers.ControllerUnitTest
 import grails.validation.ValidationException
-import spock.lang.*
+import grails.buildtestdata.BuildDataTest
+import spock.lang.Specification
 
-class ProductCategoryControllerSpec extends Specification implements ControllerUnitTest<ProductCategoryController>, DomainUnitTest<ProductCategory> {
+class ProductCategoryControllerSpec extends Specification implements ControllerUnitTest<ProductCategoryController>, BuildDataTest  {
+
+    void setupSpec() {
+        mockDomain ProductCategory
+        mockDomain Product
+    }
 
     def populateValidParams(params) {
         assert params != null
-
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+        params["name"] = 'TestCategory'
     }
 
     void "Test the index action returns the correct model"() {
         given:
-        controller.productCategoryService = Mock(ProductCategoryService) {
-            1 * list(_) >> []
+        controller.productCategoryLogicService = Mock(ProductCategoryLogicService) {
+            1 * getCategories(_) >> [cat:[],count:[]]
+        }
+        controller.productCategoryService = Mock(ProductCategoryService){
             1 * count() >> 0
         }
 
@@ -26,7 +30,8 @@ class ProductCategoryControllerSpec extends Specification implements ControllerU
         controller.index()
 
         then:"The model is correct"
-        !model.productCategoryList
+        !model.categories.cat
+        !model.categories.count
         model.productCategoryCount == 0
     }
 
@@ -107,12 +112,19 @@ class ProductCategoryControllerSpec extends Specification implements ControllerU
         controller.productCategoryService = Mock(ProductCategoryService) {
             1 * get(2) >> new ProductCategory()
         }
+        controller.productlogicService = Mock(ProductlogicService){
+            1 * getProductsOfCategory(2,_) >> [Product.build(),Product.build(),Product.build()]
+            1 * getCategoryProductCountById(2) >> 3
+        }
+
 
         when:"A domain instance is passed to the show action"
         controller.show(2)
 
         then:"A model is populated containing the domain instance"
         model.productCategory instanceof ProductCategory
+        model.productCount == 3
+        model.productsList.size() == 3
     }
 
     void "Test the edit action with a null id"() {
@@ -219,9 +231,3 @@ class ProductCategoryControllerSpec extends Specification implements ControllerU
         flash.message != null
     }
 }
-
-
-
-
-
-

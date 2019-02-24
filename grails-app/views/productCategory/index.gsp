@@ -30,8 +30,15 @@
         <div id="list-productCategory" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityNamePlural]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
-            <f:table collection="${categories.cat}" code="com.lucafaggion.ProductCategory.Fields." counts="${categories.count}" template="table_category" properties="id,name" />
-            <g:displayPagination count="${productCategoryCount}"/>
+            <g:if test="${productCategoryCount>0}">
+                <f:table collection="${categories.cat}" code="com.lucafaggion.ProductCategory.Fields." counts="${categories.count}" template="table_category" properties="id,name" />
+                <g:displayPagination count="${productCategoryCount}"/>
+            </g:if>
+            <g:else>
+                <div id="info_message">
+                    <div class="alert alert-info" role="alert"><g:message code="com.lucafaggion.ProductCategory.empty"/></div>
+                </div>
+            </g:else>
         </div>
     </body>
 </html>

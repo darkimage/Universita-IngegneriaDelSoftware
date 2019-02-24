@@ -9,6 +9,7 @@ class OrdersController {
 
     OrdersService ordersService
     OrderslogicService orderslogicService
+    LineItemLogicService lineItemLogicService
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -21,7 +22,11 @@ class OrdersController {
 
     def show(Long id) {
         def order = ordersService.get(id)
-        def items = orderslogicService.lineItemLogicService.getAllLineItemsOfOrder(order,params)
+        if(order == null){
+            notFound()
+            return
+        }
+        def items = lineItemLogicService.getAllLineItemsOfOrder(order,params)
         def hasPermission = false
 
         if(SpringSecurityUtils.ifAnyGranted('ROLE_ADMIN,ROLE_DIPENDENTE')){
@@ -36,51 +41,6 @@ class OrdersController {
             respond([orders:order,lineItems:items])
         }else{
            render(view: '/login/denied')
-        }
-
-    }
-
-    def save(Orders orders) {
-        if (orders == null) {
-            notFound()
-            return
-        }
-
-        try {
-            ordersService.save(orders)
-        } catch (ValidationException e) {
-            respond orders.errors, view:'create'
-            return
-        }
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'orders.label', default: 'Orders'), orders.id])
-                redirect orders
-            }
-            '*' { respond orders, [status: CREATED] }
-        }
-    }
-
-    @Secured(value="hasAnyRole('ROLE_ADMIN','ROLE_DIPENDENTE')")
-    def update(Orders orders) {
-        if (orders == null) {
-            notFound()
-            return
-        }
-
-        try {
-            ordersService.save(orders)
-        } catch (ValidationException e) {
-            respond orders.errors, view:'edit'
-            return
-        }
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'orders.label', default: 'Orders'), orders.id])
-                redirect orders
-            }
-            '*'{ respond orders, [status: OK] }
         }
 
     }

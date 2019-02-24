@@ -21,6 +21,7 @@
             <g:displayFlashMsg flash="${flash}"/>
             <g:displayErrors domain="${this.product}"/>
             <g:uploadForm resource="${this.product}" method="POST">
+                <g:hiddenField name="version" value="${this.product?.version + 1}" />
                 <g:renderForm instance="${this.product}" type="edit" template="/templates/renderProductForm"/>
                 <input type="hidden" name="upload" id="upload" value="true">
                 <fieldset class="buttons">

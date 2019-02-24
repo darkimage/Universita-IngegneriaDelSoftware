@@ -21,7 +21,7 @@
             <g:displayFlashMsg flash="${flash}"/>
             <g:displayErrors domain="${this.productCategory}"/>
             <g:form resource="${this.productCategory}" method="PUT">
-                <g:hiddenField name="version" value="${this.productCategory?.version}" />
+                <g:hiddenField name="version" value="${this.productCategory?.version + 1}" />
                 <g:renderForm instance="${this.productCategory}" type="edit" template="/templates/renderCategoryForm"/>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

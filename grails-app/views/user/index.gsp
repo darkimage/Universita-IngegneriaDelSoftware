@@ -30,8 +30,15 @@
         <div id="list-user" class="content scaffold-list" role="main">
             <h1><g:message code="default.list.label" args="[entityNamePlural]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
-            <f:table collection="${userList}" code="com.lucafaggion.User.Fields." properties="username,name,surname,email,fiscalCode"/>
-            <g:displayPagination count="${userCount}"/>
+            <g:if test="${userCount>0}">
+                <f:table collection="${userList}" code="com.lucafaggion.User.Fields." properties="username,name,surname,email,fiscalCode"/>
+                <g:displayPagination count="${userCount}"/>
+            </g:if>
+            <g:else>
+                <div id="info_message">
+                    <div class="alert alert-info" role="alert"><g:message code="com.lucafaggion.Orders.empty"/></div>
+                </div>
+            </g:else>
         </div>
     </body>
 </html>

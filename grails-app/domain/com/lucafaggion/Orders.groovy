@@ -6,7 +6,7 @@ class Orders {
     int price
     Date submittedDate
     static hasMany = [lineItem: LineItem]
-    static belongsTo = [user: User]
+    static belongsTo = [user: User, paymentDetails: PaymentInfo, shippingDetails: ShippingInfo]
     static constraints = {
         state()
         price()

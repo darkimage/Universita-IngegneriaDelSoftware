@@ -1,5 +1,6 @@
 package com.lucafaggion
 
+import com.lucafaggion.auth.User
 import grails.testing.mixin.integration.Integration
 import grails.gorm.transactions.Rollback
 import spock.lang.Specification
@@ -14,8 +15,9 @@ class LineItemLogicServiceSpec extends Specification implements TestDataBuilder{
     LineItemLogicService service
 
     def setupData() {
-        def order1 = Orders.build()
-        def order2 = Orders.build()
+        def user = User.get(1)
+        def order1 = Orders.build(user:user,paymentDetails:PaymentInfo.build(user:user),shippingDetails:ShippingInfo.build(user:user))
+        def order2 = Orders.build(user:user,paymentDetails:PaymentInfo.build(user:user),shippingDetails:ShippingInfo.build(user:user))
         LineItem.build(orderid:order1)
         LineItem.build(orderid:order1)
         LineItem.build(orderid:order2)

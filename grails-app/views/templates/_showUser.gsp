@@ -34,7 +34,7 @@
 </div>
 <h1><g:message code="com.lucafaggion.Orders.DomainNamePlural"/></h1>
 <g:if test="${value.userOrders.size() > 0}">
-    <div class="px-md-5 pt-2"><f:table collection="${value.userOrders}" template="table_orders_user"  code="com.lucafaggion.Orders." except="['user','lineItem']"/></div>
+    <div class="px-md-5 pt-2"><f:table collection="${value.userOrders}" template="table_orders_user"  code="com.lucafaggion.Orders." except="['user','lineItem','paymentDetails','shippingDetails']"/></div>
 </g:if>
 <g:else>
     <div id="info_message">

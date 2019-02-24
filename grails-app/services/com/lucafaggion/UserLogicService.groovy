@@ -8,9 +8,9 @@ import grails.gorm.transactions.Transactional
 class UserLogicService {
     def springSecurityService
     UserService userService
-    ShippingInfoService shippingInfoService
-    PaymentInfoService paymentInfoService
-    UtilityService utilityService
+    //ShippingInfoService shippingInfoService
+    //PaymentInfoService paymentInfoService
+    //UtilityService utilityService
     OrderslogicService orderslogicService
 
     def createUserRole(user,userRole){
@@ -23,16 +23,24 @@ class UserLogicService {
 
     def getUserDatabyId(Long id){
         def user = userService.get(id)
-        return getUserDatabyUser(user)
+        if(user != null) {
+            return getUserDatabyUser(user)
+        }else{
+            null
+        }
     }
 
     def getUserDatabyUser(User user){
-        def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user",[user:user])
-        def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user",[user:user])
-        def userOrders = Orders.findAll("FROM Orders as o WHERE o.user=:user AND o.state<>:state",[user:user,state:'cart'])
-        def role = Role.find('SELECT r FROM Role as r INNER JOIN UserRole as u ON u.role.id=r.id AND u.user.id=?',[user.id])
-        def data = [user:user,userShippingInfo:userShipping,userPaymentInfo:userPayment,userOrders:userOrders,userRole:role]
-        return data
+        if(user != null) {
+            def userPayment = PaymentInfo.find("FROM PaymentInfo as p WHERE p.user=:user AND p.version = (select max(pp.version) from PaymentInfo pp where pp.user=p.user)", [user: user])
+            def userShipping = ShippingInfo.find("FROM ShippingInfo as s WHERE s.user=:user AND s.version = (select max(ss.version) from ShippingInfo ss where ss.user=s.user)", [user: user])
+            def userOrders = Orders.findAll("FROM Orders as o WHERE o.user=:user AND o.state<>:state", [user: user, state: 'cart'])
+            def role = Role.find('SELECT r FROM Role as r INNER JOIN UserRole as u ON u.role.id=r.id AND u.user.id=?', [user.id])
+            def data = [user: user, userShippingInfo: userShipping, userPaymentInfo: userPayment, userOrders: userOrders, userRole: role]
+            return data
+        }else{
+            null
+        }
     }
     
     def getUserRoles(User user){
@@ -62,6 +70,17 @@ class UserLogicService {
         def userOrders = Orders.findAll("FROM Orders as o WHERE o.user.id=:user",[user:id])
         for (order in userOrders) {
             orderslogicService.deleteOrder(order.id)
+        }
+    }
+
+    def deleteUserDetailsById(Long id){
+        def paymentInfos = PaymentInfo.findAll("FROM PaymentInfo as p WHERE p.user.id=:id",[id:id])
+        paymentInfos.each { item ->
+            item.delete()
+        }
+        def shippingInfos = ShippingInfo.findAll("FROM ShippingInfo as s WHERE s.user.id=:id",[id:id])
+        shippingInfos.each { item ->
+            item.delete()
         }
     }
 }

@@ -16,7 +16,8 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
     OrderslogicService service
 
     def setupData() {
-        def cart = Orders.build(state:'cart',user:User.get(1))
+        def user = User.get(1)
+        def cart = Orders.build(state:'cart',user:user,paymentDetails:PaymentInfo.build(user:user),shippingDetails:ShippingInfo.build(user:user))
         for (int i = 0; i < 3; i++) {
             Product.build(price:2,quantity:20)
         }
@@ -130,7 +131,7 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
     void "Test place an user order with a valid item and user"(){
         given:
         service.springSecurityService = Mock(SpringSecurityService) {
-            2 * getCurrentUser() >> User.get(1)
+            3 * getCurrentUser() >> User.get(1)
         }
         setupData()
 
@@ -144,9 +145,10 @@ class OrderslogicServiceSpec extends Specification implements TestDataBuilder{
     void "Test place an user order with a valid user but an invalid item"(){
         given:
         service.springSecurityService = Mock(SpringSecurityService) {
-            2 * getCurrentUser() >> User.get(1)
+            3 * getCurrentUser() >> User.get(1)
         }
-        def cart = Orders.build(state:'cart',user:User.get(1))
+        def user = User.get(1)
+        def cart = Orders.build(state:'cart',user:user,paymentDetails:PaymentInfo.build(user:user),shippingDetails:ShippingInfo.build(user:user))
         def product = Product.build(price:2,quantity:1)
         LineItem.build(orderid:cart,price:5,subProduct:product,quantity:300)
 

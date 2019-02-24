@@ -88,14 +88,18 @@ class UserController {
         }else{
             bindData(user,params)
         }
-        def data = userLogicService.getUserDatabyUser(user)
-        bindData(data.userPaymentInfo, params)
-        bindData(data.userShippingInfo, params)
+        def userPayment = new PaymentInfo(params)
+        userPayment.user = user
+        userPayment.version = params.int('version')
+        def userShipping = new ShippingInfo(params)
+        userShipping.user = user
+        userShipping.version = params.int('version')
         try {
             userService.save(user)
-            shippingInfoService.save(data.userShippingInfo)
-            paymentInfoService.save(data.userPaymentInfo)   
+            shippingInfoService.save(userShipping)
+            paymentInfoService.save(userPayment)
         } catch (ValidationException e) {
+            def data = userLogicService.getUserDatabyUser(user)
             respond([userData:data], view:'edit')
             return
         }
@@ -114,11 +118,9 @@ class UserController {
             notFound()
             return
         }
-        def data = userLogicService.getUserDatabyId(id)
-        data.userPaymentInfo.delete()
-        data.userShippingInfo.delete()
         userLogicService.deleteUserRolesById(id)
         userLogicService.deleteUserOrdersById(id)
+        userLogicService.deleteUserDetailsById(id)
         userService.delete(id)
 
         request.withFormat {

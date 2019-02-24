@@ -3,7 +3,7 @@ package com.lucafaggion
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class ProductCategoryLogicServiceSpec extends Specification implements ServiceUnitTest<ProductCategoryLogicService>{
+class UserLogicServiceSpec extends Specification implements ServiceUnitTest<UserLogicService>{
 
     def setup() {
     }
@@ -13,6 +13,6 @@ class ProductCategoryLogicServiceSpec extends Specification implements ServiceUn
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }

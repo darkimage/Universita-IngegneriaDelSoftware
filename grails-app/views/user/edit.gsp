@@ -21,7 +21,7 @@
             <g:displayFlashMsg flash="${flash}"/>
             <g:displayErrors domain="${this.userData.user}"/>
             <g:form resource="${this.userData.user}" method="PUT">
-                <g:hiddenField name="version" value="${this.userData.user?.version}" />
+                <g:hiddenField name="version" value="${this.userData.user?.version + 1}" />
                 <g:renderForm template="/templates/renderUserForm" type="edit" instance="${this.userData}"/>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

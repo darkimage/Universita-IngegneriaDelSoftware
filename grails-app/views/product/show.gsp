@@ -10,10 +10,10 @@
         <div class="nav shop-nav" role="navigation">
             <ul>
                 <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="home" controller="ControlPanel" action="index"><g:message code="com.lucafaggion.ControlPanel.ControllerName"/></g:link></li>
-                <li><g:link class="list" action="manage"><g:message code="default.list.label" args="${[message(code:'com.lucafaggion.Product.DomainNamePlural')]}" /></g:link></li>
                 <sec:access expression="hasAnyRole('ROLE_DIPENDENTE','ROLE_ADMIN')">
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="${[message(code:'com.lucafaggion.Product.DomainName')]}" /></g:link></li>
+                    <li><g:link class="home" controller="ControlPanel" action="index"><g:message code="com.lucafaggion.ControlPanel.ControllerName"/></g:link></li>
+                    <li><g:link class="list" action="manage"><g:message code="default.list.label" args="${[message(code:'com.lucafaggion.Product.DomainNamePlural')]}" /></g:link></li>
+                    <li><g:link class="create" action="create"><g:message code="default.new.label" args="${[message(code:'com.lucafaggion.Product.DomainName')]}" /></g:link></li>
                 </sec:access>
             </ul>
         </div>
@@ -24,15 +24,16 @@
             <div class="container-fluid py-3">
                 <!-- IMAGES -->
                 <div class="row product_show_nopadding">
-                    <div class="col-sm-4 product_show_image_container product_show_nopadding">                      <div class="product_image_container">
-                        <div class="product_show_image">
-                            <g:if test="${this.product.photo.cloudFile != null}">
-                                <img class="product_image_large" src="${this.product.photo.url('large')}">
-                            </g:if>
-                            <g:if test="${this.product.photo.cloudFile != null}">
-                                <img class="product_image_medium" src="${this.product.photo.url('medium')}">
-                            </g:if>
-                        </div>
+                    <div class="col-sm-4 product_show_image_container product_show_nopadding">
+                        <div class="product_image_container">
+                            <div class="product_show_image">
+                                <g:if test="${this.product.photo.cloudFile != null}">
+                                    <img class="product_image_large" src="${this.product.photo.url('large')}">
+                                </g:if>
+                                <g:if test="${this.product.photo.cloudFile != null}">
+                                    <img class="product_image_medium" src="${this.product.photo.url('medium')}">
+                                </g:if>
+                            </div>
                         </div>
                     </div>
                     <!-- DETAILS -->

@@ -61,7 +61,7 @@ class ProductlogicService {
     void generateIdentifier(Product product){
         def randChars = ""
         for(Integer i=0 ; i<3 ; i++) {
-            randChars+= product.name.replaceAll("\\s","")[utilityService.getRandomNumber(product.name.size())]
+            randChars+= product.name.replaceAll("\\s","")[utilityService.getRandomNumber(product.name.replaceAll("\\s","").size())]
         }
         product.identifier = ProductCategory.findAll("SELECT name FROM ProductCategory Where id="+product.category.id)[0].substring(0,3).toUpperCase()+product.id+randChars.toUpperCase()
     }

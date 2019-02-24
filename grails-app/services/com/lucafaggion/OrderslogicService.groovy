@@ -9,14 +9,16 @@ class OrderslogicService {
     OrdersService ordersService
     ProductService productService
     LineItemLogicService lineItemLogicService
+    UserLogicService userLogicService
 
     private def getUserShoppingCartOrder(){
         def user = springSecurityService.getCurrentUser()
+        def userData = userLogicService.getUserDatabyUser(user)
         if(user != null) {
             def query = "FROM Orders o WHERE o.state='cart' AND o.user=:user"
             def cart = Orders.find("FROM Orders o WHERE o.state='cart' AND o.user=?", [user])
             if (cart == null) {
-                cart = new Orders(user: user, price: 0, state: 'cart', submittedDate: new Date());
+                cart = new Orders(user: user, price: 0, state: 'cart', submittedDate: new Date(),shippingDetails: userData.userShippingInfo,paymentDetails: userData.userPaymentInfo);
                 ordersService.save(cart)
             }
             return cart
@@ -78,6 +80,9 @@ class OrderslogicService {
 
     def placeUserOrder(){
         def cart = getUserShoppingCartOrder()
+        def userData = userLogicService.getUserDatabyUser(springSecurityService.getCurrentUser())
+        cart.paymentDetails = userData.userPaymentInfo
+        cart.shippingDetails = userData.userShippingInfo
         cart.state = "placed"
         def items = getUserShoppingCart()
         for (lineitem in items) {

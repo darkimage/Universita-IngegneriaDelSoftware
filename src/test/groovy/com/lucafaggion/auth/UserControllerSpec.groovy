@@ -23,7 +23,6 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
     def populateValidParams(params) {
         assert params != null
 
-        //Populate valid properties like...
         params.name = 'Test Nome'
         params.surname = 'Test Cognome'
         params.birthDate = new Date()

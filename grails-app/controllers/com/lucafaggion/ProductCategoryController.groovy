@@ -15,14 +15,19 @@ class ProductCategoryController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def categories = productCategoryLogicService.getCategories(params)
-        render(view:'index',model:[categories:categories,productCategoryCount: productCategoryService.count()]) 
+        def count = productCategoryService.count()
+        render(view:'index',model:[categories:categories,productCategoryCount:count])
     }
 
-    def show(Long id) { 
-        def products = productlogicService.getProductsOfCategory(id,params)
-        def count = productlogicService.getCategoryProductCountById(id)
+    def show(Long id) {
         def categoryData = productCategoryService.get(id)
-        respond([productCategory:categoryData,productCount:count,productsList:products])
+        if(categoryData != null) {
+            def products = productlogicService.getProductsOfCategory(id, params)
+            def count = productlogicService.getCategoryProductCountById(id)
+            respond([productCategory: categoryData, productCount: count, productsList: products])
+        }else{
+            notFound()
+        }
     } 
 
     def create() {

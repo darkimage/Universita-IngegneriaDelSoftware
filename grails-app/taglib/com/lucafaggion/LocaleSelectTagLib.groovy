@@ -25,6 +25,6 @@ class LocaleSelectTagLib {
         def locale = attribs['locale']
         def region = attribs['region']
         params.lang = locale + "_" + region
-        out << g.render(template:'/templates/localeLink',model:[params:params,actionName:actionName,text:locale.toUpperCase(),body:body()])
+        out << g.render(template:'/templates/localeLink',model:[params:params,controllerName:controllerName,actionName:actionName,text:locale.toUpperCase(),body:body()])
     }
 }

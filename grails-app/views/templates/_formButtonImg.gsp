@@ -1,2 +1,2 @@
-<label for="${data.name}" class="noStyle"><asset:image dir="${image.path}" src="${image.name}" width="${image.w}" height="${image.h}"/></label>
-<input type="submit" name="${data.name}" id="${data.name}" value="${data.value}" style="display:none"/>
+<label for="${data.id}" class="noStyle"><asset:image dir="${image.path}" src="${image.name}" width="${image.w}" height="${image.h}"/></label>
+<input type="submit" name="${data.name}" id="${data.id}" value="${data.value}" style="display:none"/>

@@ -20,7 +20,7 @@
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:displayFlashMsg flash="${flash}"/>
             <g:displayErrors domain="${this.product}"/>
-            <g:uploadForm resource="${this.product}" method="POST">
+            <g:uploadForm resource="${this.product}" method="PUT">
                 <g:hiddenField name="version" value="${this.product?.version + 1}" />
                 <g:renderForm instance="${this.product}" type="edit" template="/templates/renderProductForm"/>
                 <input type="hidden" name="upload" id="upload" value="true">

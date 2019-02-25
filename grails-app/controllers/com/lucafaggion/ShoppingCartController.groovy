@@ -34,7 +34,7 @@ class ShoppingCartController {
 
     }
 
-    def update(Integer id,Integer value){
+    def update(Long id,Integer value){
         def lineItem = lineitemService.get(id)
         if (lineItem == null) {
             notFound()
@@ -42,7 +42,7 @@ class ShoppingCartController {
         }
         try{
             if(params.delete){
-                orderslogicService.deleteLineItem(id)
+                lineitemService.delete(id)
             }else{
                 orderslogicService.updateCartProduct(id,value)
             }

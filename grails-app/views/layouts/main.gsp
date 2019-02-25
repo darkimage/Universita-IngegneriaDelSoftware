@@ -18,7 +18,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top " role="navigation">
     <div class="shop-topbar align-middle"><a class="navbar-brand " href="${createLink(uri: '/')}">
         <asset:image width="250" height="50" src="logo.png" alt="ShopOnline Logo"/>
-        <%-- <asset:image class="d-lg-none" width="75" height="75" src="logo_small.png" alt="ShopOnline Logo"/> --%>
     </a></div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -42,10 +41,10 @@
             </sec:ifLoggedIn>
 
             <sec:ifNotLoggedIn>
-            <li class="dropdown"><g:link class="dropdown-toggle simpleNavButton" controller="login" action="auth" params="[referee:true]">Login</g:link>
+            <li class="dropdown"><g:link class="dropdown-toggle simpleNavButton" controller="login" action="auth" params="[referee:true]"><g:message code="com.lucafaggion.login"/></g:link>
             </li>
             <li class="dropdown">
-                <g:link class="dropdown-toggle simpleNavButton" controller='user' action="create">Register</g:link>
+                <g:link class="dropdown-toggle simpleNavButton" controller='user' action="create"><g:message code="com.lucafaggion.register"/> </g:link>
             </li>
             </sec:ifNotLoggedIn>
  

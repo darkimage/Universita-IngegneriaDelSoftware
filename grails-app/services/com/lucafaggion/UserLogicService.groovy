@@ -8,9 +8,6 @@ import grails.gorm.transactions.Transactional
 class UserLogicService {
     def springSecurityService
     UserService userService
-    //ShippingInfoService shippingInfoService
-    //PaymentInfoService paymentInfoService
-    //UtilityService utilityService
     OrderslogicService orderslogicService
 
     def createUserRole(user,userRole){
@@ -42,13 +39,23 @@ class UserLogicService {
             null
         }
     }
-    
-    def getUserRoles(User user){
-        return getUserRolesById(user.id)
-    }
 
     def getUserRolesById(Long id){
-        return UserRole.findAll("FROM UserRole as u WHERE u.user.id=:user",[user:id])
+        def user = userService.get(id)
+        if(user != null) {
+            return getUserRoles(user)
+        }else{
+            return null
+        }
+    }
+
+
+    def getUserRoles(User user){
+        if(user != null) {
+            return UserRole.findAll("FROM UserRole as u WHERE u.user=:user", [user: user])
+        }else{
+            return null
+        }
     }
 
     def deleteUserRoles(User user) {
@@ -76,11 +83,11 @@ class UserLogicService {
     def deleteUserDetailsById(Long id){
         def paymentInfos = PaymentInfo.findAll("FROM PaymentInfo as p WHERE p.user.id=:id",[id:id])
         paymentInfos.each { item ->
-            item.delete()
+            item.delete(flush: true)
         }
         def shippingInfos = ShippingInfo.findAll("FROM ShippingInfo as s WHERE s.user.id=:id",[id:id])
         shippingInfos.each { item ->
-            item.delete()
+            item.delete(flush: true)
         }
     }
 }

@@ -15,7 +15,7 @@ class ProductlogicService {
 
     def getProductData(params){
         def category = productCategoryService.list()
-        def currentCat = (params.cat != null) ? params.cat : ((category.size() > 0) ? category[0].id : 0)
+        def currentCat = (params.cat != null) ? params.cat : ((category.size() > 0) ? category[0].id : 1)
         def productsSize = getCategoryProductCount(currentCat) 
         def products = getProductsOfCategory(currentCat,params)
         return [cat:category,list:products,count:productsSize]
@@ -41,7 +41,8 @@ class ProductlogicService {
     }
 
     def getProductsOfCategory(value,params){
-        params.max = (params.max != null) ? params.max : 5;
+        params.max = (params.max != null) ? params.max : 5
+        params.offset = (params.offset != null) ? params.offset : 0
         def sort = (params.sort ? "ORDER BY " + params.sort : "") 
         def order = (params.order ? params.order : "")
         def query = "FROM Product as P WHERE P.category = '" + value + "' " + sort + " " + order

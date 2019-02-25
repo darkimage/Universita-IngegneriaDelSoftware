@@ -13,10 +13,11 @@ class UtilityTagLib {
         def value = attribs['value']
         def image = attribs['image']
         def dir = attribs['dir']
+        def id = attribs['id']
         def width= attribs['width'] ? attribs['width'] : 16
         def height = attribs['height'] ? attribs['height'] : 16
         def imageAttribs = [name:image,path:dir,w:width,h:height]
-        def button = [value:value,name:name]
+        def button = [value:value,name:name,id:id]
         out << g.render(template:'/templates/formButtonImg',model:[data:button,image:imageAttribs])
     }
 

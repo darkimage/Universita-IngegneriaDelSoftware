@@ -1,5 +1,9 @@
 ---
 grails:
+    controllers:
+        upload:
+            maxFileSize: 10485760
+            maxRequestSize: 10485760
     profile: web
     codegen:
         defaultPackage: com.lucafaggion

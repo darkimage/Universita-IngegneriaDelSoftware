@@ -21,8 +21,8 @@ class Product {
         photo: [
         styles: [
             thumb: [width: 50, height: 50, mode: 'fit'],
-            medium: [width: 200, height: 200, mode: 'scale'],
-            large: [width: 400, height: 400, mode: 'scale']
+            medium: [width: 200, height: 200, mode: 'fill'],
+            large: [width: 400, height: 400, mode: 'fill']
             ]
         ]
     ]

@@ -107,6 +107,12 @@ class UtilityTagLib {
         def product = attribs['product']
         def action = attribs['action']
         def controller = attribs['controller']
+        params.remove('lastController')
+        //params.remove('id')
+        params.remove('quantity')
+        params.remove('lastAction')
+        params.remove('format')
+        params.remove('addtocart')
         if(product.quantity != 0){
             out<< g.render(template:'/templates/toShoppingCart',model:[id:product.id,action:action,controller:controller,max:product.quantity])
         }

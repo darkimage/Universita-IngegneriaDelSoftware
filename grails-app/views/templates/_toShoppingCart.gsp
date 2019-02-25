@@ -1,4 +1,4 @@
-<g:form controller="${controller}" action="${action}" params="${[params]}" method="POST">
+<g:form controller="${controller}" action="${action}" params="${params}" method="POST">
     <div class="input-group mb-3 products_addtocart_quantity">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><g:message code="com.lucafaggion.Product.addtocart.quantity"/>:</span>

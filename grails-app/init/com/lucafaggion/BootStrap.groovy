@@ -36,6 +36,10 @@ class BootStrap {
             it.clear()
         }
 
+        //Categoria di default
+        if(ProductCategory.list().size() == 0) {
+            new ProductCategory(id: 1, name: "No Category").save()
+        }
     }
 
     def destroy = {

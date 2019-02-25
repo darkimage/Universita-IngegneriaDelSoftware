@@ -27,8 +27,8 @@ class ProductCategoryLogicServiceSpec extends Specification implements TestDataB
 
         expect:"fix me"
             def result = service.getCategories()
-            result.cat.size() == 5
-            result.count.size() == 5
+            result.cat.size() == 6
+            result.count.size() == 6
             result.count[0] == 10
     }
 

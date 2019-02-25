@@ -1,5 +1,5 @@
 <g:if test="${ (collection) ? collection.size() > 0 : collection }">
-<div id="itemsindicator" class="carousel slide featured_slide" data-ride="carousel">
+<div id="itemsindicator" class="carousel slide featured_slide pb-2" data-ride="carousel">
   <ol class="carousel-indicators">
     <g:each var="product" in="${collection}" status="i">
       	<g:if test="${ i == 0 }">

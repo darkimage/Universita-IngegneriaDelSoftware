@@ -26,4 +26,13 @@ class ProductCategoryLogicService {
         }
         return [cat:categories,count:counts]
     }
+
+    def deleteCategory(long id){
+        def products = Product.findAll("FROM Product as p WHERE p.category.id=:id",[id:id])
+        products.each { prod ->
+            prod.category = productCategoryService.get(1)
+            prod.save()
+        }
+        productCategoryService.delete(id)
+    }
 }

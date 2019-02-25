@@ -49,7 +49,7 @@ class ProductCategoryController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'productCategory.label', default: 'ProductCategory'), productCategory.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'com.lucafaggion.ProductCategory.DomainName', default: 'ProductCategory'), productCategory.id])
                 redirect productCategory
             }
             '*' { respond productCategory, [status: CREATED] }
@@ -75,7 +75,7 @@ class ProductCategoryController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'productCategory.label', default: 'ProductCategory'), productCategory.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'com.lucafaggion.ProductCategory.DomainName', default: 'ProductCategory'), productCategory.id])
                 redirect productCategory
             }
             '*'{ respond productCategory, [status: OK] }
@@ -88,11 +88,11 @@ class ProductCategoryController {
             return
         }
 
-        productCategoryService.delete(id)
+        productCategoryLogicService.deleteCategory(id)
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'productCategory.label', default: 'ProductCategory'), id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'com.lucafaggion.ProductCategory.DomainName', default: 'ProductCategory'), id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: 200 }
@@ -102,7 +102,7 @@ class ProductCategoryController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'productCategory.label', default: 'ProductCategory'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'com.lucafaggion.ProductCategory.DomainName', default: 'ProductCategory'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: 404 }

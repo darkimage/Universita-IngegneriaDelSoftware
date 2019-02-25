@@ -16,6 +16,12 @@ class ShoppingCartController {
     }
 
     def add(Integer id,Integer quantity){
+        def nparams = [:] << params
+        nparams.remove('lastController')
+        nparams.remove('quantity')
+        nparams.remove('lastAction')
+        nparams.remove('format')
+        nparams.remove('addtocart')
         def shoppingcart
         try{
             orderslogicService.addToUserCart(id,quantity)
@@ -27,7 +33,7 @@ class ShoppingCartController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'com.lucafaggion.ShoppingCart.added')
-                redirect(controller:params.lastController,action:params.lastAction,params:params)
+                redirect(controller:params.lastController,action:params.lastAction,params:nparams)
             }
             '*' { respond shoppingcart, [status: OK] }
         }

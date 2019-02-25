@@ -23,7 +23,7 @@
         </g:form>
 
         <div id="list-Product" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="${[(categories) ? categories.get(current_cat.toInteger()-1).name : message(code:'com.lucafaggion.Product.nocategories')]}" />
+            <h1><g:message code="default.list.label" args="${[(categories) ? categories.find{ cat -> cat.id==current_cat.toInteger()}.name : message(code:'com.lucafaggion.Product.nocategories')]}" />
             </h1>
             <g:displayFlashMsg flash="${flash}"/>
             <g:if test="${productList.size()>0}">

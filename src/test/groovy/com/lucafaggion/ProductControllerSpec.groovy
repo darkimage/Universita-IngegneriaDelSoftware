@@ -225,8 +225,8 @@ class ProductControllerSpec extends Specification implements ControllerUnitTest<
 
     void "Test the delete action with an instance"() {
         given:
-        controller.productService = Mock(ProductService) {
-            1 * delete(2)
+        controller.productlogicService = Mock(ProductlogicService) {
+            1 * deleteProduct(2)
         }
 
         when:"The domain instance is passed to the delete action"

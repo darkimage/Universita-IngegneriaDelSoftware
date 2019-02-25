@@ -21,6 +21,7 @@ class ProductController {
 
     def index(Integer max) {
         params.max = Math.min(max  ?: 10, 100)
+        params.offset = (params.offset) ? params.offset : 0
         def featured = productlogicService.getfeaturedProducts()
         def productCategories = productCategoryLogicService.getCategories()
         def newestProducts = []
@@ -38,7 +39,7 @@ class ProductController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(params.max  ?: 10, 100)
+        params.max = Math.min(max  ?: 10, 100)
         def data = productlogicService.getProductData(params)
         render(view:"list",model:[categories:data.cat,productList:data.list,productCount: data.count,params:params])
     }
@@ -70,7 +71,7 @@ class ProductController {
             return
         }
 
-        productService.delete(id)
+        productlogicService.deleteProduct(id)
 
         request.withFormat {
             form multipartForm {

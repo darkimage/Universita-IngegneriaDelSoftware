@@ -8,6 +8,7 @@ class ProductlogicService {
     UtilityService utilityService
     ProductCategoryService productCategoryService
     PriceConverterService priceConverterService
+    ProductService productService
 
     def getfeaturedProducts(){
         return Product.findAll("FROM Product as p WHERE p.featured = TRUE")
@@ -64,7 +65,7 @@ class ProductlogicService {
         for(Integer i=0 ; i<3 ; i++) {
             randChars+= product.name.replaceAll("\\s","")[utilityService.getRandomNumber(product.name.replaceAll("\\s","").size())]
         }
-        product.identifier = ProductCategory.findAll("SELECT name FROM ProductCategory Where id="+product.category.id)[0].substring(0,3).toUpperCase()+product.id+randChars.toUpperCase()
+        product.identifier = ProductCategory.findAll("SELECT name FROM ProductCategory Where id="+product.category.id)[0].replaceAll("\\s","").substring(0,3).toUpperCase()+product.id+randChars.toUpperCase()
     }
 
     Product setUpProduct(Product product,request,params){
@@ -74,5 +75,13 @@ class ProductlogicService {
         }
         product.price = priceConverterService.convertPriceToStore(params.price,request)
         return product
+    }
+
+    def deleteProduct(Long id){
+        def lineItems = LineItem.findAll("FROM LineItem as l WHERE l.subProduct.id=:id",[id:id])
+        lineItems.each { item ->
+            item.delete()
+        }
+        productService.delete(id)
     }
 }

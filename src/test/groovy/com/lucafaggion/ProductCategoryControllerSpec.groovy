@@ -217,8 +217,8 @@ class ProductCategoryControllerSpec extends Specification implements ControllerU
 
     void "Test the delete action with an instance"() {
         given:
-        controller.productCategoryService = Mock(ProductCategoryService) {
-            1 * delete(2)
+        controller.productCategoryLogicService = Mock(ProductCategoryLogicService) {
+            1 * deleteCategory(2)
         }
 
         when:"The domain instance is passed to the delete action"

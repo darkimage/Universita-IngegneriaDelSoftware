@@ -47,10 +47,10 @@ class ProductlogicServiceSpec extends Specification implements TestDataBuilder{
         setupData()
 
         when:
-        def data = service.getProductData([cat:ProductCategory.list()[0].id])
+        def data = service.getProductData([cat:ProductCategory.list()[1].id])
 
         then:"The correct data is returned"
-        data.cat.size() == 2
+        data.cat.size() == 3
         data.list.size() == 3
         data.count == 3
     }
@@ -94,7 +94,7 @@ class ProductlogicServiceSpec extends Specification implements TestDataBuilder{
         setupData()
 
         when:
-        def data = service.getProductsOfCategory(ProductCategory.list()[0].id,[max:2])
+        def data = service.getProductsOfCategory(ProductCategory.list()[1].id,[max:2])
 
         then:"The correct data is returned"
         data.size() == 2
@@ -116,7 +116,7 @@ class ProductlogicServiceSpec extends Specification implements TestDataBuilder{
         setupData()
 
         when:
-        def count = service.getCategoryProductCount(ProductCategory.list()[0].id)
+        def count = service.getCategoryProductCount(ProductCategory.list()[1].id)
 
         then:"The correct data is returned"
         count == 3

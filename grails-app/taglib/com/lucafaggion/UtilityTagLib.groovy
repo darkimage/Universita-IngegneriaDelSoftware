@@ -108,7 +108,7 @@ class UtilityTagLib {
         def action = attribs['action']
         def controller = attribs['controller']
         params.remove('lastController')
-        //params.remove('id')
+        params.remove('id')
         params.remove('quantity')
         params.remove('lastAction')
         params.remove('format')

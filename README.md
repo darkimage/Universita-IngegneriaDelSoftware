@@ -6,7 +6,7 @@ Il principale scopo del progetto e' di ottenere una dimestichezza nello sviluppo
 
 La **relazione completa** e' disponibile [qui](https://github.com/darkimage/Universita-IngegneriaDelSoftware/raw/master/documents/SistemadiVenditaOnline_LucaFaggion_274857.pdf).
 Il **documento d'uso** e' disponibile [qui](https://github.com/darkimage/Universita-IngegneriaDelSoftware/raw/master/documents/Istruzioni-Uso-e-Installazione-274857-Faggion-Luca.pdf)
-Il **report dei test** e consultabile [qui](https://darkimage.github.io/Universita-IngegneriaDelSoftware/) (101 Unit e Integration tests, il codice dei test e definito qui).
+Il **report dei test** e consultabile [qui](https://darkimage.github.io/Universita-IngegneriaDelSoftware/) (101 Unit e Integration tests, il codice dei test e' definito [qui](https://github.com/darkimage/Universita-IngegneriaDelSoftware/tree/master/src/test/groovy/com/lucafaggion)).
 
 Traccia Progetto
 ---------------------
@@ -95,5 +95,5 @@ con il sistema e vengono illustrati degli esempi in dettaglio utilizzando diagra
   > 
 	> ![mockup_example](https://github.com/darkimage/Universita-IngegneriaDelSoftware/raw/master/documents/esempio_mock.png)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE1NzE3NTEyXX0=
+eyJoaXN0b3J5IjpbLTEzMTA2NTc0NzhdfQ==
 -->

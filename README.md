@@ -1,6 +1,6 @@
 ## Progetto Ingegneria del Software [![relazione](https://img.shields.io/badge/relazione-disponibile%20in%20pdf-brightgreen)](https://github.com/darkimage/Universita-IngegneriaDelSoftware/raw/master/documents/SistemadiVenditaOnline_LucaFaggion_274857.pdf)[ ![installazione](https://img.shields.io/badge/guida_uso_ed_installazione-disponibile%20in%20pdf-brightgreen)](https://github.com/darkimage/Universita-IngegneriaDelSoftware/raw/master/documents/Istruzioni-Uso-e-Installazione-274857-Faggion-Luca.pdf)
 
-Progetto realizzato utilizzando il framework Java [Grails](https://grails.org/).
+Progetto realizzato utilizzando il framework Groovy [Grails](https://grails.org/).
 
 Il principale scopo del progetto e' di ottenere una dimestichezza nello sviluppo di progetti utilizzando il metodo di **iterazione continua di sviluppo e test** tramite la metodologia [AGILE]([https://it.wikipedia.org/wiki/Metodologia_agile](https://it.wikipedia.org/wiki/Metodologia_agile)). 
 
@@ -97,5 +97,5 @@ con il sistema e vengono illustrati degli esempi in dettaglio utilizzando diagra
   > 
 	> ![mockup_example](https://github.com/darkimage/Universita-IngegneriaDelSoftware/raw/master/documents/esempio_mock.png)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMyNDUyOTUwNl19
+eyJoaXN0b3J5IjpbLTEwMzQ2OTIxMTAsLTMyNDUyOTUwNl19
 -->
